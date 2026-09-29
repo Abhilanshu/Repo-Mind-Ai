@@ -1,0 +1,12 @@
+__pycache__
+.assets
+.claude
+.caches
+.idea
+.jobs
+.venv
+*.log
+scratch/
+node_modules/
+dist/
+.DS_Store

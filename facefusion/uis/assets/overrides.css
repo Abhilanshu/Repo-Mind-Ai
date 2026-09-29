@@ -1,0 +1,319 @@
+/* ==========================================================================
+   AETHER SWAP — PREMIUM PRODUCTION AI STUDIO THEME
+   Powered by FaceFusion Core Architecture
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --as-bg: #09090b;
+  --as-surface-1: #121215;
+  --as-surface-2: #18181c;
+  --as-surface-3: #222228;
+  --as-border: #27272a;
+  --as-border-hover: #3f3f46;
+  --as-accent: #6366f1;
+  --as-accent-hover: #4f46e5;
+  --as-accent-glow: rgba(99, 102, 241, 0.25);
+  --as-purple: #8b5cf6;
+  --as-text-main: #f4f4f5;
+  --as-text-muted: #a1a1aa;
+  --as-text-dim: #71717a;
+  --as-success: #10b981;
+  --as-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --as-mono: 'JetBrains Mono', monospace;
+}
+
+/* Global Container & Typography */
+body, .gradio-container {
+  background-color: var(--as-bg) !important;
+  color: var(--as-text-main) !important;
+  font-family: var(--as-font) !important;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+:root:root:root:root main {
+  max-width: 125rem !important;
+  padding: 1rem 1.5rem !important;
+}
+
+/* Header & Banner Component */
+.aetherswap-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(180deg, rgba(24, 24, 28, 0.9) 0%, rgba(18, 18, 21, 0.8) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--as-border);
+  border-radius: 0.875rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.aetherswap-header .brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.aetherswap-header .brand-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  background: linear-gradient(135deg, var(--as-accent), var(--as-purple));
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  box-shadow: 0 0 15px var(--as-accent-glow);
+}
+
+.aetherswap-header .brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aetherswap-header .brand-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.55rem;
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 0.375rem;
+  text-transform: uppercase;
+}
+
+.aetherswap-header .header-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.aetherswap-header .gpu-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  background: var(--as-surface-2);
+  border: 1px solid var(--as-border);
+  border-radius: 2rem;
+  color: var(--as-text-muted);
+}
+
+.aetherswap-header .gpu-pill .status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--as-success);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--as-success);
+}
+
+/* Card Section Containers */
+.as-card {
+  background-color: var(--as-surface-1) !important;
+  border: 1px solid var(--as-border) !important;
+  border-radius: 0.875rem !important;
+  padding: 1.25rem !important;
+  margin-bottom: 1rem !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.as-card:hover {
+  border-color: var(--as-border-hover) !important;
+}
+
+.as-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--as-border);
+}
+
+.as-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--as-text-main);
+}
+
+.as-step-number {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  background: linear-gradient(135deg, var(--as-accent), var(--as-purple));
+  color: #ffffff;
+  border-radius: 0.375rem;
+}
+
+.as-card-subtitle {
+  font-size: 0.75rem;
+  color: var(--as-text-muted);
+  font-weight: 400;
+}
+
+/* Buttons & Controls */
+button.primary, .gr-button-primary {
+  background: linear-gradient(135deg, var(--as-accent) 0%, var(--as-purple) 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700 !important;
+  border-radius: 0.625rem !important;
+  box-shadow: 0 4px 14px var(--as-accent-glow) !important;
+  transition: all 0.2s ease !important;
+}
+
+button.primary:hover, .gr-button-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px var(--as-accent-glow) !important;
+  opacity: 0.95 !important;
+}
+
+/* Tabs Styling */
+.tabs {
+  background: transparent !important;
+  border: none !important;
+}
+
+.tab-nav {
+  background: var(--as-surface-1) !important;
+  border: 1px solid var(--as-border) !important;
+  border-radius: 0.75rem !important;
+  padding: 0.25rem !important;
+  gap: 0.25rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.tab-nav button {
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  font-size: 0.8125rem !important;
+  color: var(--as-text-muted) !important;
+  border: none !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.tab-nav button.selected {
+  background: var(--as-surface-3) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Accordions */
+.accordion {
+  background: var(--as-surface-2) !important;
+  border: 1px solid var(--as-border) !important;
+  border-radius: 0.625rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.accordion-header {
+  font-weight: 600 !important;
+  font-size: 0.8125rem !important;
+  color: var(--as-text-main) !important;
+}
+
+/* Input Fields & Forms */
+input[type="text"], input[type="number"], select, textarea {
+  background-color: var(--as-surface-2) !important;
+  border: 1px solid var(--as-border) !important;
+  color: var(--as-text-main) !important;
+  border-radius: 0.5rem !important;
+  font-family: var(--as-font) !important;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+  border-color: var(--as-accent) !important;
+  box-shadow: 0 0 0 2px var(--as-accent-glow) !important;
+}
+
+/* Landing Page Section Styling */
+.landing-hero {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 60%);
+  border: 1px solid var(--as-border);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.landing-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.75rem;
+}
+
+.landing-subtitle {
+  font-size: 1.125rem;
+  color: var(--as-text-muted);
+  max-width: 42rem;
+  margin: 0 auto 1.5rem auto;
+  line-height: 1.6;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.feature-card {
+  background: var(--as-surface-1);
+  border: 1px solid var(--as-border);
+  border-radius: 0.875rem;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.feature-card .icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: var(--as-text-main);
+}
+
+.feature-card p {
+  font-size: 0.8125rem;
+  color: var(--as-text-muted);
+  line-height: 1.5;
+}
+
+/* Footer & Attribution */
+.aetherswap-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--as-text-dim);
+  border-top: 1px solid var(--as-border);
+  margin-top: 2rem;
+}
+
+.aetherswap-footer a {
+  color: var(--as-accent);
+  text-decoration: none;
+}
