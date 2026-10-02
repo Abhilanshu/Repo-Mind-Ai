@@ -1,6 +1,6 @@
-# 🧠 RepoMind AI — Software Repository Intelligence & Technical Debt Analyzer
+# 🧠 RepoMind AI — AI Software Repository Intelligence & Technical Debt Analyzer
 
-> **Turn complex codebases into actionable engineering intelligence.**
+> **Turn complex software codebases into actionable engineering intelligence.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE.md)
 [![React](https://img.shields.io/badge/React-19.0-61dafb.svg)](https://react.dev/)
@@ -12,60 +12,66 @@
 
 ## 📌 Executive Overview
 
-**RepoMind AI** is a modern, production-grade SaaS engineering intelligence platform designed for software engineers, tech leads, engineering managers, and dev teams. It analyzes codebases using **Python AST static parsing**, **dependency topology mapping**, and **AI-powered risk prioritization** to answer five critical questions for engineering teams:
+**RepoMind AI** is a modern, production-grade SaaS engineering intelligence platform designed for software engineers, tech leads, engineering managers, and dev teams. It transforms thousands of lines of code into clear, prioritized technical debt remediations and architectural insights.
 
+It systematically evaluates five critical dimensions of any software repository:
 1. **What is wrong** with the codebase?
-2. **Why does it matter** (business & technical impact)?
+2. **Why does it matter** (business & engineering impact)?
 3. **How serious is it** (critical, high, medium, low risk)?
-4. **What should the developer fix first** (algorithmic ROI ranking)?
-5. **How much effort will it take** (estimated payback hours)?
+4. **What should the team fix first** (algorithmic ROI ranking)?
+5. **How much effort will it take** (estimated payback engineering hours)?
 
 ---
 
 ## ✨ Core Features & Platform Modules
 
-```text
-Repository ➔ Code Intelligence Engine ➔ AST & Security Scan ➔ Technical Debt Detection ➔ AI Prioritization ➔ Action Plan
+```
+Repository ➔ Code Intelligence Engine ➔ AST & Security Scan ➔ Debt Detection ➔ ROI Ranking ➔ Action Plan
 ```
 
-* 🟣 **Futuristic AI Preloader**: Neural AI Core ring animation with real-time status text telemetry.
-* 🏆 **Repository Health Scorecard**: 0-100 stability index broken down across 6 key pillars (*Code Quality, Architecture, Security, Testing, Dependencies, Documentation*).
-* ⚠️ **Technical Debt Explorer**: Filterable 147-issue catalog with severity tags, category filters, and effort estimates.
+* 🟣 **Futuristic AI Preloader**: Cyberpunk HUD neural core animation with real-time telemetry loading.
+* 🏆 **Repository Health Scorecard**: 0–100 stability index with 6-pillar breakdown (*Code Quality, Architecture, Security, Testing, Dependencies, Documentation*).
+* ⚠️ **Technical Debt Explorer**: Searchable 147-issue catalog with severity pills, category filters, and effort estimates.
 * 🔥 **AI Prioritization Engine**: Algorithmic ranking formula:
   $$\text{ROI Score} = \frac{(\text{Impact} \times 0.35) + (\text{Risk} \times 0.35) + (\text{Frequency} \times 0.15)}{\text{Effort}}$$
-* 🏗️ **Architecture Intelligence**: Layer topology graph featuring circular dependency detection (`job_manager ⇄ core_engine`).
-* 🕸️ **Dependency Call Graph**: Interactive node network mapping module complexity & maintainability clusters.
-* 🔐 **Security Center**: Vulnerability scanner (e.g. command injection checks in subprocess execution patterns) with automated AI fix patch triggers.
-* 🤖 **Ask Your Codebase (AI Assistant)**: Senior AI Architect chat interface with prompt chips, typing animations, and code snippet copy blocks.
-* 📅 **AI Sprint Planner**: Interactive sprint task board with effort indicators and export to Jira / GitHub Issues.
-* 📄 **Executive Report Generator**: Generates exportable PDF, JSON, and Markdown health reports for stakeholders.
+* 🏗️ **Architecture Intelligence**: Interactive layer topology diagram featuring circular dependency detection.
+* 🕸️ **Codebase Dependency Graph**: Interactive file call graph and maintainability cluster matrix.
+* 🔐 **Security Center**: Static vulnerability scanner (e.g. command injection patterns) with automated AI fix patch generator.
+* 🤖 **Ask Your Codebase (AI Assistant)**: Senior AI Architect chat UI with prompt chips, code snippet responses, and copy blocks.
+* 📅 **AI Sprint Planner**: Backlog task board with effort indicators and export to Jira / GitHub Issues.
+* 📄 **Executive Health Report Generator**: Exportable PDF, JSON, and Markdown report generator for stakeholders.
 * ⌘ **Global Command Palette**: Instant `Ctrl+K` / `⌘K` keyboard search modal.
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ System Architecture & Data Flow
 
-```mermaid
-graph TD
-    A["Vite + React 19 Frontend Dashboard"] --> B["Command Palette & Navigation State"]
-    A --> C["Python REST API Server (repomind_server.py)"]
-    C --> D["AST Static Parsing Engine (analyze_repo.py)"]
-    D --> E["Metrics: LOC, Cyclomatic Complexity, Maintainability Index"]
-    C --> F["AI Architect Engine (GPT-4o / Claude 3.5)"]
-
-    classDef primary fill:#4c1d95,stroke:#a855f7,color:#fff;
-    classDef secondary fill:#1e1b4b,stroke:#818cf8,color:#fff;
-    class A,C primary;
-    class D,E,F secondary;
+```
++-------------------------------------------------------------------------+
+|                  Vite + React 19 Glassmorphic Dashboard                 |
+|       (Header, Sidebar, Preloader, Health Scorecard, Command Palette)   |
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+|                Python REST API Server (repomind_server.py)               |
+|            Serves endpoints: /api/repositories, /api/ai/chat            |
++-------------------------------------------------------------------------+
+                                    |
+                                    v
++-------------------------------------------------------------------------+
+|                AST Static Parsing Engine (analyze_repo.py)              |
+|        Computes: LOC, Cyclomatic Complexity, Maintainability Index      |
++-------------------------------------------------------------------------+
 ```
 
 ---
 
-## ⚡ Quickstart & Local Installation
+## ⚡ Local Installation & Usage Guide
 
 ### Prerequisites
-* **Node.js**: `>= 18.0.0`
-* **Python**: `>= 3.10`
+- **Node.js**: `>= 18.0.0`
+- **Python**: `>= 3.10`
 
 ### 1. Clone the Repository
 ```bash
@@ -73,7 +79,7 @@ git clone https://github.com/Abhilanshu/Repo-Mind-Ai.git
 cd Repo-Mind-Ai
 ```
 
-### 2. Install Dependencies
+### 2. Install Node Dependencies
 ```bash
 npm install
 ```
@@ -84,36 +90,31 @@ npm run dev
 ```
 Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-### 4. Run Production Build
+### 4. Build for Production
 ```bash
 npm run build
 ```
 
-### 5. Start Backend REST API Server (Optional)
+### 5. Start Python REST API Backend (Optional)
 ```bash
 python repomind_server.py
 ```
-API endpoints will serve on **[http://localhost:5000](http://localhost:5000)**.
-
-### 6. Run Python AST Static Scanner
-```bash
-python scratch/analyze_repo.py
-```
+Backend API will listen on **[http://localhost:5000](http://localhost:5000)**.
 
 ---
 
 ## 👥 Group Project Team Work Distribution (4 Members)
 
-| Team Member | Role | Files Owned | Key Deliverables |
+| Team Member | Role / Domain | Primary Files Owned | Core Responsibilities |
 | :--- | :--- | :--- | :--- |
-| **Member 1** | **Frontend Architect & UI Lead** | `Preloader.tsx`, `LandingPage.tsx`, `Header.tsx`, `Sidebar.tsx`, `CommandPalette.tsx`, `HealthScoreCard.tsx` | Design system, AI Preloader, responsive layouts & dashboard navigation |
-| **Member 2** | **Static Analysis Lead** | `analyze_repo.py`, `CodeQualityView.tsx`, `DependencyGraphView.tsx`, `FileIntelligenceModal.tsx` | Python AST parser, cyclomatic complexity metrics & maintainability index |
+| **Member 1** | **Frontend Architect & UI Lead** | `Preloader.tsx`, `LandingPage.tsx`, `Header.tsx`, `Sidebar.tsx`, `CommandPalette.tsx`, `HealthScoreCard.tsx` | Design system, AI Preloader, responsive glassmorphism layout & dashboard navigation |
+| **Member 2** | **Static Analysis Lead** | `analyze_repo.py`, `CodeQualityView.tsx`, `DependencyGraphView.tsx`, `FileIntelligenceModal.tsx` | Python AST parser, cyclomatic complexity metrics & Maintainability Index |
 | **Member 3** | **Security & Debt Lead** | `SecurityDashboard.tsx`, `TechnicalDebtExplorer.tsx`, `PrioritizationEngine.tsx`, `SprintPlannerView.tsx` | Static vulnerability scanner, ROI prioritization formula & sprint planning |
 | **Member 4** | **AI & Backend Lead** | `ArchitectureView.tsx`, `AICodebaseAssistant.tsx`, `ReportGeneratorModal.tsx`, `repomind_server.py` | Architecture topology graph, Senior AI Assistant chat & REST API server |
 
 ---
 
-## 📄 License & Credits
+## 📄 License & Author
 
 Developed by **Abhilanshu Vittolia & Team**.  
 Licensed under the [MIT License](LICENSE.md).
