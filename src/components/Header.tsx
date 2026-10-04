@@ -15,7 +15,8 @@ import {
   Package,
   ShieldCheck,
   Bot,
-  Plus
+  Plus,
+  Globe
 } from 'lucide-react';
 import { RepositoryMetadata } from '../types/repomind';
 
@@ -26,6 +27,7 @@ interface HeaderProps {
   onOpenRepoInput: () => void;
   onOpenReportModal: () => void;
   onOpenWhatsAppModal: () => void;
+  onOpenLandingPage?: () => void;
   onNavigateTab?: (tab: any) => void;
 }
 
@@ -36,6 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenRepoInput,
   onOpenReportModal,
   onOpenWhatsAppModal,
+  onOpenLandingPage,
   onNavigateTab
 }) => {
   const [showRepoDropdown, setShowRepoDropdown] = useState(false);
@@ -164,6 +167,17 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Right: Actions, Notifications, User Menu */}
       <div className="flex items-center space-x-3">
         
+        {/* Landing Page Button */}
+        {onOpenLandingPage && (
+          <button
+            onClick={onOpenLandingPage}
+            className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#F7F7F4] hover:bg-[#F1F1ED] border border-[#E4E4DE] text-[#181816] text-xs font-semibold transition"
+          >
+            <Globe className="w-3.5 h-3.5 text-[#171717]" />
+            <span>Landing Page</span>
+          </button>
+        )}
+
         {/* WhatsApp Notifier Button */}
         <button
           onClick={onOpenWhatsAppModal}

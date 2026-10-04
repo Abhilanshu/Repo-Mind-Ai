@@ -166,6 +166,7 @@ export function App() {
             onOpenRepoInput={() => setRepoInputModalOpen(true)}
             onOpenReportModal={() => setReportModalOpen(true)}
             onOpenWhatsAppModal={() => setWhatsAppModalOpen(true)}
+            onOpenLandingPage={() => setViewMode('landing')}
             onNavigateTab={(tab) => setActiveTab(tab)}
           />
 
