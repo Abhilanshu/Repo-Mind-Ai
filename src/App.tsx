@@ -258,7 +258,7 @@ export function App() {
 
               {/* TAB 7: TESTING HEALTH */}
               {activeTab === 'testing' && (
-                <TestingIntelligenceView />
+                <TestingIntelligenceView onSelectFile={(f) => setSelectedFileForModal(f)} />
               )}
 
               {/* TAB 8: AI CODEBASE ASSISTANT (ANTIGRAVITY PAIR PROGRAMMER) */}

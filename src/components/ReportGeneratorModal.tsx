@@ -18,17 +18,59 @@ export const ReportGeneratorModal: React.FC<ReportGeneratorModalProps> = ({
   if (!isOpen) return null;
 
   const handleExport = (format: 'pdf' | 'json' | 'md') => {
+    const filename = `repomind-health-report-${repo.name.replace('/', '-')}`;
+    
     if (format === 'json') {
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(repo, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `repomind-health-report-${repo.name.replace('/', '-')}.json`);
+      downloadAnchor.setAttribute("download", `${filename}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    } else if (format === 'md') {
+      const mdContent = `# RepoMind AI Engineering Health Report\n\n` +
+        `**Repository:** ${repo.name}\n` +
+        `**Branch:** ${repo.branch}\n` +
+        `**Health Score:** ${repo.healthScore}/100\n` +
+        `**Total LOC:** ${repo.totalLoc}\n` +
+        `**Total Issues:** ${repo.totalIssues}\n` +
+        `**Estimated Debt Payback:** ${repo.totalDebtHours} hours\n\n` +
+        `## Senior AI Architect Executive Summary\n\n> ${repo.aiSummary}\n\n` +
+        `## Health Breakdown\n` +
+        `- Code Quality: ${repo.healthBreakdown.codeQuality}/100\n` +
+        `- Architecture Topology: ${repo.healthBreakdown.architecture}/100\n` +
+        `- Security & Risk: ${repo.healthBreakdown.security}/100\n` +
+        `- Testing Coverage: ${repo.healthBreakdown.testing}/100\n` +
+        `- Supply Chain Dependencies: ${repo.healthBreakdown.dependencies}/100\n` +
+        `- Documentation: ${repo.healthBreakdown.documentation}/100\n\n` +
+        `_Report generated automatically by RepoMind AI Engine_`;
+
+      const dataStr = "data:text/markdown;charset=utf-8," + encodeURIComponent(mdContent);
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `${filename}.md`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    } else if (format === 'pdf') {
+      // Trigger browser print to PDF or download formatted HTML document
+      const htmlContent = `<html><head><title>${filename}</title><style>body{font-family:sans-serif;padding:30px;color:#111;}h1{color:#4c1d95;}</style></head><body>` +
+        `<h1>RepoMind AI Engineering Health Report</h1>` +
+        `<p><strong>Repository:</strong> ${repo.name} (${repo.branch})</p>` +
+        `<p><strong>Health Score:</strong> ${repo.healthScore} / 100</p>` +
+        `<hr><p>${repo.aiSummary}</p></body></html>`;
+      const dataStr = "data:text/html;charset=utf-8," + encodeURIComponent(htmlContent);
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `${filename}.html`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
     }
+
     setDownloaded(format.toUpperCase());
-    setTimeout(() => setDownloaded(null), 2500);
+    setTimeout(() => setDownloaded(null), 3000);
   };
 
   const sections = [
@@ -63,7 +105,7 @@ export const ReportGeneratorModal: React.FC<ReportGeneratorModalProps> = ({
           </div>
           <div>
             <h2 className="text-lg font-extrabold text-white">📄 Engineering Health Report Generator</h2>
-            <p className="text-xs text-slate-300">Generate executive PDF, JSON, or Markdown reports for stakeholders & tech leads.</p>
+            <p className="text-xs text-slate-300">Generate executive PDF/HTML, JSON, or Markdown reports for stakeholders & tech leads.</p>
           </div>
         </div>
 
@@ -90,7 +132,7 @@ export const ReportGeneratorModal: React.FC<ReportGeneratorModalProps> = ({
             className="py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-extrabold text-xs transition shadow-lg shadow-purple-600/30 flex items-center justify-center space-x-1.5"
           >
             <FileText className="w-4 h-4" />
-            <span>Export PDF</span>
+            <span>Export HTML/PDF</span>
           </button>
 
           <button
@@ -112,7 +154,7 @@ export const ReportGeneratorModal: React.FC<ReportGeneratorModalProps> = ({
 
         {downloaded && (
           <div className="mt-4 p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs text-center font-mono animate-in fade-in duration-150">
-            ✓ Report exported in {downloaded} format!
+            ✓ Downloaded report in {downloaded} format!
           </div>
         )}
 

@@ -1,46 +1,72 @@
 # 🧠 RepoMind AI — AI Software Repository Intelligence & Technical Debt Analyzer
 
-> **Turn complex software codebases into actionable engineering intelligence.**
+> **Turn complex software codebases into actionable engineering intelligence with Antigravity Agentic AI & Real Mobile WhatsApp Alerts.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE.md)
 [![React](https://img.shields.io/badge/React-19.0-61dafb.svg)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-6.2-646cff.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38bdf8.svg)](https://tailwindcss.com/)
-[![Python AST Engine](https://img.shields.io/badge/Python_AST-3.12-3776ab.svg)](https://docs.python.org/3/library/ast.html)
+[![Python REST API](https://img.shields.io/badge/Python_Backend-3.12-3776ab.svg)](repomind_server.py)
+[![WhatsApp API](https://img.shields.io/badge/WhatsApp_Notifier-CallMeBot-25D366.svg)](src/components/WhatsAppNotificationModal.tsx)
 
 ---
 
 ## 📌 Executive Overview
 
-**RepoMind AI** is a modern, production-grade SaaS engineering intelligence platform designed for software engineers, tech leads, engineering managers, and dev teams. It transforms thousands of lines of code into clear, prioritized technical debt remediations and architectural insights.
-
-It systematically evaluates five critical dimensions of any software repository:
-1. **What is wrong** with the codebase?
-2. **Why does it matter** (business & engineering impact)?
-3. **How serious is it** (critical, high, medium, low risk)?
-4. **What should the team fix first** (algorithmic ROI ranking)?
-5. **How much effort will it take** (estimated payback engineering hours)?
+**RepoMind AI** is a modern, production-grade SaaS engineering intelligence platform designed for software engineers, tech leads, engineering managers, and dev teams. It transforms thousands of lines of code into clear, prioritized technical debt remediations, architectural insights, and automated AI fix patches.
 
 ---
 
-## ✨ Core Features & Platform Modules
+## ✅ WORK COMPLETED (Finished Capabilities)
 
-```
-Repository ➔ Code Intelligence Engine ➔ AST & Security Scan ➔ Debt Detection ➔ ROI Ranking ➔ Action Plan
-```
+Here is the complete breakdown of all completed features, modules, and infrastructure in the project:
 
-* 🟣 **Futuristic AI Preloader**: Cyberpunk HUD neural core animation with real-time telemetry loading.
-* 🏆 **Repository Health Scorecard**: 0–100 stability index with 6-pillar breakdown (*Code Quality, Architecture, Security, Testing, Dependencies, Documentation*).
-* ⚠️ **Technical Debt Explorer**: Searchable 147-issue catalog with severity pills, category filters, and effort estimates.
-* 🔥 **AI Prioritization Engine**: Algorithmic ranking formula:
+### 1. 🧠 Dynamic Repository Intelligence & AST Parser
+- [x] **Dynamic Multi-Repo Input**: Supports analyzing any custom GitHub URL or repository (`Abhilanshu/Repo-Mind-Ai`, `facebook/react`, `expressjs/express`, custom ZIP files).
+- [x] **Python AST Analysis Engine (`analyze_repo.py`)**: Computes empirical metrics:
+  - Lines of Code (LOC, SLOC)
+  - Cyclomatic Complexity per function
+  - Maintainability Index (0–100)
+  - Bare exception detection & missing docstrings.
+
+### 2. 🤖 Antigravity Agentic AI Pair Programmer
+- [x] **Permission Request Workflow**: Asks for explicit user approval (`[✅ Approve & Apply Fix]`) before modifying codebase files.
+- [x] **Empirical Error Diagnosis**: Inspects trace logs and generates refactoring patches.
+- [x] **Commit History & Change Reporting**: Accurately answers query prompts like *"What changes did you make?"* and lists full commit history.
+
+### 3. 📱 Real Mobile WhatsApp AI Chatbot Notifier
+- [x] **CallMeBot API Integration**: Delivers real WhatsApp notification alerts directly to the user's mobile phone number.
+- [x] **WhatsApp Web Deep-Link Dispatch**: Prefills WhatsApp messages for instant 1-click delivery.
+- [x] **Notification Triggers**: Instant alerts when:
+  - 🟢 Repository analysis completes
+  - 🔴 Critical security vulnerabilities are detected
+  - 🧹 Code fix patches are applied by AI
+  - 📅 Sprint Action Plan is generated.
+
+### 4. 🎨 SaaS Engineering Intelligence Dashboard
+- [x] **Cyberpunk Preloader**: Neural core HUD animation with telemetry loading sequence.
+- [x] **Health Scorecard**: 0–100 stability index with 6-pillar breakdown (*Code Quality, Architecture, Security, Testing, Dependencies, Documentation*).
+- [x] **Technical Debt Explorer**: Searchable issue catalog with severity filters, category selectors, and effort hours.
+- [x] **AI Prioritization Engine**: Algorithmic ROI ranking formula:
   $$\text{ROI Score} = \frac{(\text{Impact} \times 0.35) + (\text{Risk} \times 0.35) + (\text{Frequency} \times 0.15)}{\text{Effort}}$$
-* 🏗️ **Architecture Intelligence**: Interactive layer topology diagram featuring circular dependency detection.
-* 🕸️ **Codebase Dependency Graph**: Interactive file call graph and maintainability cluster matrix.
-* 🔐 **Security Center**: Static vulnerability scanner (e.g. command injection patterns) with automated AI fix patch generator.
-* 🤖 **Ask Your Codebase (AI Assistant)**: Senior AI Architect chat UI with prompt chips, code snippet responses, and copy blocks.
-* 📅 **AI Sprint Planner**: Backlog task board with effort indicators and export to Jira / GitHub Issues.
-* 📄 **Executive Health Report Generator**: Exportable PDF, JSON, and Markdown report generator for stakeholders.
-* ⌘ **Global Command Palette**: Instant `Ctrl+K` / `⌘K` keyboard search modal.
+- [x] **Architecture Topology & Call Graph**: Visual node graph featuring circular dependency detection (`job_manager ⇄ core_engine`).
+- [x] **Security Center**: Static scanner for command injection & vulnerability remediation.
+- [x] **Supply Chain Dependency Matrix**: Tracks outdated, vulnerable, and unused packages with 1-click upgrade commands.
+- [x] **Testing Health Center**: Displays unit, integration, and E2E coverage gaps with automated Pytest mock generation.
+- [x] **AI Sprint Planner**: Interactive task backlog with Jira / GitHub Issues CSV export.
+- [x] **Report Generator Modal**: Instant export to downloadable PDF/HTML, JSON, and Markdown formats.
+- [x] **Global Command Palette**: Keyboard search triggered via `Ctrl+K` / `⌘K`.
+
+---
+
+## ⏳ WHAT IS LEFT (Future Roadmap & Outstanding Tasks)
+
+The following items represent the planned roadmap enhancements for future releases:
+
+1. 🔄 **Multi-LLM Backend Provider Options**: Add support for switching AI model backends between Ollama (local offline LLM), Anthropic Claude 3.5 Sonnet, and OpenAI GPT-4o in `SettingsView.tsx`.
+2. 🪝 **Real-time GitHub Webhook Integration**: Auto-trigger repository analysis on `git push` or Pull Request creation via GitHub Webhooks.
+3. 👥 **Role-Based Access Control (RBAC)**: Enterprise team permissions (Admin, Lead Engineer, Developer, Viewer).
+4. ⚙️ **Custom Static Linting Rule Engine**: Allow teams to write custom AST rules and project-specific linting policies in Python/TypeScript.
 
 ---
 
@@ -55,19 +81,19 @@ Repository ➔ Code Intelligence Engine ➔ AST & Security Scan ➔ Debt Detecti
                                     v
 +-------------------------------------------------------------------------+
 |                Python REST API Server (repomind_server.py)               |
-|            Serves endpoints: /api/repositories, /api/ai/chat            |
+|    Endpoints: /api/repositories, /api/ai/chat, /api/whatsapp/send       |
 +-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-|                AST Static Parsing Engine (analyze_repo.py)              |
-|        Computes: LOC, Cyclomatic Complexity, Maintainability Index      |
-+-------------------------------------------------------------------------+
+                |                                       |
+                v                                       v
++-------------------------------+       +-------------------------------+
+|  AST Parsing Engine           |       |  CallMeBot WhatsApp Push API  |
+|  (analyze_repo.py)            |       |  Sends alerts to Mobile Phone |
++-------------------------------+       +-------------------------------+
 ```
 
 ---
 
-## ⚡ Local Installation & Usage Guide
+## ⚡ Local Installation & Run Commands
 
 ### Prerequisites
 - **Node.js**: `>= 18.0.0`
@@ -90,12 +116,7 @@ npm run dev
 ```
 Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-### 4. Build for Production
-```bash
-npm run build
-```
-
-### 5. Start Python REST API Backend (Optional)
+### 4. Start Python REST API Backend (Includes WhatsApp Push Server)
 ```bash
 python repomind_server.py
 ```
@@ -110,11 +131,11 @@ Backend API will listen on **[http://localhost:5000](http://localhost:5000)**.
 | **Member 1** | **Frontend Architect & UI Lead** | `Preloader.tsx`, `LandingPage.tsx`, `Header.tsx`, `Sidebar.tsx`, `CommandPalette.tsx`, `HealthScoreCard.tsx` | Design system, AI Preloader, responsive glassmorphism layout & dashboard navigation |
 | **Member 2** | **Static Analysis Lead** | `analyze_repo.py`, `CodeQualityView.tsx`, `DependencyGraphView.tsx`, `FileIntelligenceModal.tsx` | Python AST parser, cyclomatic complexity metrics & Maintainability Index |
 | **Member 3** | **Security & Debt Lead** | `SecurityDashboard.tsx`, `TechnicalDebtExplorer.tsx`, `PrioritizationEngine.tsx`, `SprintPlannerView.tsx` | Static vulnerability scanner, ROI prioritization formula & sprint planning |
-| **Member 4** | **AI & Backend Lead** | `ArchitectureView.tsx`, `AICodebaseAssistant.tsx`, `ReportGeneratorModal.tsx`, `repomind_server.py` | Architecture topology graph, Senior AI Assistant chat & REST API server |
+| **Member 4** | **AI & Backend Lead** | `ArchitectureView.tsx`, `AICodebaseAssistant.tsx`, `WhatsAppNotificationModal.tsx`, `ReportGeneratorModal.tsx`, `repomind_server.py` | Antigravity AI Agent permission system, WhatsApp Bot backend API & PDF report generator |
 
 ---
 
 ## 📄 License & Author
 
-Developed by **Abhilanshu Vittolia & Team**.  
+Developed by **Abhilanshu Vittolia & Group Project Team**.  
 Licensed under the [MIT License](LICENSE.md).

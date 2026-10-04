@@ -140,6 +140,7 @@ export interface ChatMessage {
 
 export interface WhatsAppConfig {
   phoneNumber: string;
+  apiKey?: string;
   enabled: boolean;
   notifyOnAnalysis: boolean;
   notifyOnCriticalSec: boolean;
