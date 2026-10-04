@@ -31,13 +31,15 @@ import { generateDynamicRepoData } from './mockData/repoData';
 
 export function App() {
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<'landing' | 'analyzing' | 'dashboard'>('landing');
+  
+  // Instant Dashboard Opening Requirement (Default to 'dashboard' so app is immediately usable!)
+  const [viewMode, setViewMode] = useState<'landing' | 'analyzing' | 'dashboard'>('dashboard');
   const [activeTab, setActiveTab] = useState<NavigationTab>('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   
-  // Dynamic Repository Dataset State
+  // Built-in Demo Repository Dataset State ("RepoMind Demo Store")
   const [analysisData, setAnalysisData] = useState<FullRepoAnalysisData>(
-    generateDynamicRepoData('Abhilanshu/Repo-Mind-Ai')
+    generateDynamicRepoData('RepoMind Demo Store')
   );
 
   // WhatsApp Configuration State
@@ -87,16 +89,16 @@ export function App() {
     triggerToast(`✓ Analysis complete for ${analysisData.metadata.name}!`);
     if (whatsAppConfig.enabled && whatsAppConfig.notifyOnAnalysis) {
       setTimeout(() => {
-        triggerToast(`📱 WhatsApp Alert Sent to ${whatsAppConfig.phoneNumber}: Analysis Completed!`);
+        triggerToast(`📱 WhatsApp Alert Dispatched to ${whatsAppConfig.phoneNumber}: Analysis Completed!`);
       }, 1500);
     }
   };
 
   const handleExploreDemo = () => {
-    const demoData = generateDynamicRepoData('Abhilanshu/Repo-Mind-Ai');
+    const demoData = generateDynamicRepoData('RepoMind Demo Store');
     setAnalysisData(demoData);
     setViewMode('dashboard');
-    triggerToast(`⚡ Loaded Repository Intelligence for Abhilanshu/Repo-Mind-Ai`);
+    triggerToast(`⚡ Loaded Repository Intelligence for RepoMind Demo Store`);
   };
 
   const handleGenerateFixPatch = (findingOrIssue: SecurityFinding | TechnicalDebtIssue) => {
@@ -131,7 +133,7 @@ export function App() {
   } = analysisData;
 
   return (
-    <div className="min-h-screen bg-[#090611] text-[#F8F7FF] flex flex-col font-sans selection:bg-[#7C3AED] selection:text-white">
+    <div className="min-h-screen bg-[#F7F7F4] text-[#181816] flex flex-col font-sans selection:bg-[#171717] selection:text-white">
       
       {/* View Mode 1: Landing Page */}
       {viewMode === 'landing' && (
@@ -290,15 +292,15 @@ export function App() {
 
               {/* TAB 10: REPORTS & EXPORT */}
               {activeTab === 'reports' && (
-                <div className="glass-panel rounded-3xl p-8 text-center max-w-xl mx-auto space-y-4 bg-[#110B1F] border border-[#2A1B42]">
-                  <div className="w-16 h-16 rounded-2xl bg-[#7C3AED]/20 text-[#C4B5FD] flex items-center justify-center mx-auto border border-[#7C3AED]/30 text-2xl">
+                <div className="glass-panel rounded-3xl p-8 text-center max-w-xl mx-auto space-y-4 bg-white border border-[#E4E4DE]">
+                  <div className="w-16 h-16 rounded-2xl bg-[#F1F1ED] text-[#171717] flex items-center justify-center mx-auto border border-[#E4E4DE] text-2xl">
                     📄
                   </div>
-                  <h2 className="text-xl font-extrabold text-white">Engineering Health Reports</h2>
-                  <p className="text-xs text-[#A9A1B8]">Generate executive stakeholder PDF/HTML, JSON, or Markdown reports.</p>
+                  <h2 className="text-xl font-extrabold text-[#181816]">Engineering Health Reports</h2>
+                  <p className="text-xs text-[#686862]">Generate executive stakeholder PDF/HTML, JSON, or Markdown reports.</p>
                   <button
                     onClick={() => setReportModalOpen(true)}
-                    className="px-6 py-3 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white font-extrabold text-xs transition shadow-lg shadow-[#7C3AED]/30"
+                    className="px-6 py-3 rounded-xl bg-[#171717] hover:bg-[#313131] text-white font-extrabold text-xs transition shadow-md"
                   >
                     Open Report Generator Modal →
                   </button>
@@ -372,7 +374,7 @@ export function App() {
 
       {/* Toast Notification Banner */}
       {toastText && (
-        <div className="fixed bottom-5 right-5 z-50 px-4 py-2.5 rounded-xl bg-[#171026] text-white border border-[#7C3AED] text-xs font-mono font-bold shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-5 right-5 z-50 px-4 py-2.5 rounded-xl bg-[#171717] text-white border border-[#313131] text-xs font-mono font-bold shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-200">
           {toastText}
         </div>
       )}

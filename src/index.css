@@ -2,16 +2,20 @@
 
 @layer base {
   :root {
-    --bg-dark: #0b0813;
-    --card-bg: #130d24;
-    --card-border: rgba(147, 51, 234, 0.18);
-    --purple-glow: rgba(168, 85, 247, 0.15);
+    --bg-app: #F7F7F4;
+    --surface-primary: #FFFFFF;
+    --surface-secondary: #F1F1ED;
+    --border-color: #E4E4DE;
+    --text-primary: #181816;
+    --text-secondary: #686862;
+    --text-muted: #96968E;
+    --accent-strong: #171717;
   }
 
   body {
-    background-color: #0b0813;
-    color: #f1f5f9;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #F7F7F4;
+    color: #181816;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   code, pre, kbd {
@@ -25,59 +29,33 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0813;
+  background: #F7F7F4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a1f47;
+  background: #E4E4DE;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4c1d95;
+  background: #96968E;
 }
 
-/* Glassmorphism helpers */
+/* Off-white Enterprise Card Helpers */
+.card-panel {
+  background: #FFFFFF;
+  border: 1px solid #E4E4DE;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+}
+
 .glass-panel {
-  background: rgba(19, 13, 36, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(168, 85, 247, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: #FFFFFF;
+  border: 1px solid #E4E4DE;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
 }
 
-.glass-panel-hover {
-  transition: all 0.25s ease;
+.card-hover {
+  transition: all 0.2s ease;
 }
-.glass-panel-hover:hover {
-  border-color: rgba(168, 85, 247, 0.35);
-  box-shadow: 0 12px 40px 0 rgba(168, 85, 247, 0.12);
-  transform: translateY(-2px);
-}
-
-.purple-gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 40%, #c084fc 70%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.purple-glow-effect {
-  box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.3);
-}
-
-.purple-glow-sm {
-  box-shadow: 0 0 15px -3px rgba(168, 85, 247, 0.25);
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s infinite ease-in-out;
+.card-hover:hover {
+  border-color: #171717;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 }

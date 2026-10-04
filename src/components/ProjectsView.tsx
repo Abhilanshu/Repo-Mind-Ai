@@ -1,5 +1,5 @@
 import React from 'react';
-import { FolderGit2, ArrowRight, GitBranch, AlertTriangle, ShieldCheck, TestTube2, Package, Plus } from 'lucide-react';
+import { FolderGit2, ArrowRight, GitBranch, Plus } from 'lucide-react';
 import { RepositoryMetadata } from '../types/repomind';
 
 interface ProjectsViewProps {
@@ -17,13 +17,13 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
     {
       id: 'p1',
       name: currentRepo.name,
-      techStack: 'React 19 • TypeScript • Python AST',
+      techStack: 'React • Node • Express • MongoDB • Python',
       health: currentRepo.healthScore,
       issues: currentRepo.totalIssues,
       outdatedDeps: 2,
-      coverage: 78,
+      coverage: 76,
       status: 'Active Project',
-      url: currentRepo.url || 'Abhilanshu/Repo-Mind-Ai'
+      url: currentRepo.url || 'RepoMind Demo Store'
     },
     {
       id: 'p2',
@@ -46,41 +46,30 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
       coverage: 81,
       status: 'Backend API',
       url: 'expressjs/express'
-    },
-    {
-      id: 'p4',
-      name: 'tailwindlabs/tailwindcss',
-      techStack: 'PostCSS • Rust Engine • TypeScript',
-      health: 95,
-      issues: 3,
-      outdatedDeps: 0,
-      coverage: 94,
-      status: 'Core Engine',
-      url: 'tailwindlabs/tailwindcss'
     }
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-sans">
       
       {/* Top Header */}
-      <div className="glass-panel rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="card-panel rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-[#E4E4DE]">
         <div>
           <div className="flex items-center space-x-2">
-            <FolderGit2 className="w-5 h-5 text-[#8B5CF6]" />
-            <h2 className="text-lg font-extrabold text-white">📁 Software Projects & Repository Registry</h2>
+            <FolderGit2 className="w-5 h-5 text-[#171717]" />
+            <h2 className="text-lg font-extrabold text-[#181816]">📁 Software Projects & Repository Registry</h2>
           </div>
-          <p className="text-xs text-[#A9A1B8] mt-1">
+          <p className="text-xs text-[#686862] mt-1">
             Manage analyzed engineering codebases, repository health, and automated debt tracking.
           </p>
         </div>
 
         <button
           onClick={onOpenNewRepoModal}
-          className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#4C1D95] hover:from-[#8B5CF6] hover:to-[#7C3AED] text-white font-extrabold text-xs transition shadow-lg shadow-[#7C3AED]/25 flex items-center space-x-1.5 shrink-0"
+          className="px-4 py-2 rounded-xl bg-[#171717] hover:bg-[#313131] text-white font-extrabold text-xs transition shadow-sm flex items-center space-x-1.5 shrink-0"
         >
           <Plus className="w-4 h-4" />
-          <span>Analyze New Project →</span>
+          <span>Add Project / Upload Folder →</span>
         </button>
       </div>
 
@@ -91,70 +80,70 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
           return (
             <div
               key={proj.id}
-              className={`glass-panel rounded-3xl p-6 transition-all duration-200 border flex flex-col justify-between space-y-4 ${
+              className={`card-panel rounded-3xl p-6 transition-all duration-200 flex flex-col justify-between space-y-4 bg-white ${
                 isCurrent 
-                  ? 'border-[#7C3AED] bg-[#171026] shadow-xl shadow-[#7C3AED]/10' 
-                  : 'hover:border-[#7C3AED]/50 bg-[#110B1F]'
+                  ? 'border-[#171717] shadow-md' 
+                  : 'hover:border-[#96968E]'
               }`}
             >
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2.5">
-                    <span className="w-3 h-3 rounded-full bg-[#8B5CF6]" />
-                    <h3 className="text-base font-extrabold text-white flex items-center space-x-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#16803C]" />
+                    <h3 className="text-base font-extrabold text-[#181816] flex items-center space-x-2">
                       <span>{proj.name}</span>
                     </h3>
                   </div>
 
                   <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
                     isCurrent 
-                      ? 'bg-[#7C3AED]/20 text-[#C4B5FD] border border-[#7C3AED]/40' 
-                      : 'bg-[#171026] text-[#A9A1B8] border border-[#2A1B42]'
+                      ? 'bg-[#171717] text-white' 
+                      : 'bg-[#F1F1ED] text-[#686862] border border-[#E4E4DE]'
                   }`}>
                     {isCurrent ? 'Active Project' : proj.status}
                   </span>
                 </div>
 
-                <p className="text-xs text-[#A9A1B8] font-mono mt-1">
+                <p className="text-xs text-[#686862] font-mono mt-1">
                   {proj.techStack}
                 </p>
               </div>
 
               {/* Metrics Grid inside card */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 rounded-2xl bg-[#171026] border border-[#2A1B42] text-xs font-mono">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 rounded-2xl bg-[#F7F7F4] border border-[#E4E4DE] text-xs font-mono">
                 <div>
-                  <div className="text-[10px] text-[#A9A1B8]">Health</div>
-                  <div className="font-bold text-white text-sm mt-0.5 flex items-center space-x-1">
+                  <div className="text-[10px] text-[#96968E]">Health</div>
+                  <div className="font-bold text-[#181816] text-sm mt-0.5 flex items-center space-x-1">
                     <span>{proj.health}%</span>
-                    <span className="text-emerald-400 text-xs">🟢</span>
+                    <span className="text-[#16803C] text-xs">🟢</span>
                   </div>
                 </div>
 
                 <div>
-                  <div className="text-[10px] text-[#A9A1B8]">Issues</div>
-                  <div className="font-bold text-[#F8F7FF] text-sm mt-0.5">{proj.issues}</div>
+                  <div className="text-[10px] text-[#96968E]">Issues</div>
+                  <div className="font-bold text-[#181816] text-sm mt-0.5">{proj.issues}</div>
                 </div>
 
                 <div>
-                  <div className="text-[10px] text-[#A9A1B8]">Dependencies</div>
-                  <div className="font-bold text-[#F8F7FF] text-sm mt-0.5">{proj.outdatedDeps} outdated</div>
+                  <div className="text-[10px] text-[#96968E]">Dependencies</div>
+                  <div className="font-bold text-[#181816] text-sm mt-0.5">{proj.outdatedDeps} outdated</div>
                 </div>
 
                 <div>
-                  <div className="text-[10px] text-[#A9A1B8]">Coverage</div>
-                  <div className="font-bold text-[#F8F7FF] text-sm mt-0.5">{proj.coverage}%</div>
+                  <div className="text-[10px] text-[#96968E]">Coverage</div>
+                  <div className="font-bold text-[#181816] text-sm mt-0.5">{proj.coverage}%</div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-[#2A1B42]">
-                <span className="text-[11px] text-[#A9A1B8]">Updated 10m ago</span>
+              <div className="flex items-center justify-between pt-2 border-t border-[#E4E4DE]">
+                <span className="text-[11px] text-[#96968E]">Indexed & Active</span>
                 
                 <button
                   onClick={() => onSelectProject(proj.url)}
                   className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 ${
                     isCurrent
-                      ? 'bg-[#7C3AED] text-white shadow-md shadow-[#7C3AED]/30'
-                      : 'bg-[#171026] hover:bg-[#2A1B42] text-[#C4B5FD] border border-[#2A1B42]'
+                      ? 'bg-[#171717] text-white shadow-sm'
+                      : 'bg-[#F1F1ED] hover:bg-[#E4E4DE] text-[#181816] border border-[#E4E4DE]'
                   }`}
                 >
                   <span>{isCurrent ? 'Viewing Active' : 'Open Project'}</span>

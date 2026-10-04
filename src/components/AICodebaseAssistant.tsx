@@ -86,7 +86,6 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
     if (!textToSend) setInput('');
     setIsTyping(true);
 
-    // RepoMind AI Code Agent response logic
     setTimeout(() => {
       let aiText = "I am **RepoMind Code Agent**, assisting you with repository intelligence and codebase refactoring.";
       let codeSnippet: string | undefined = undefined;
@@ -94,7 +93,6 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
 
       const q = query.toLowerCase();
 
-      // Query Path 1: "What changes were made?" / "Show changes"
       if (q.includes('change') || q.includes('commit') || q.includes('update') || q.includes('history') || q.includes('what did you do')) {
         aiText = "Here is a complete summary of recent repository changes (`Abhilanshu/Repo-Mind-Ai`):\n\n" +
           "1. 🧠 **RepoMind Agent Permission System**: Added explicit approval requests (`[✅ Approve & Apply Fix]`) before modifying repository files.\n" +
@@ -109,7 +107,6 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
 - Commit 3a6c082: docs: Update README.md clean formatting
 - Commit 4fbc637: feat: Build RepoMind SaaS Dashboard & AST Engine`;
       } 
-      // Query Path 2: Diagnose errors & bugs
       else if (q.includes('diagnose') || q.includes('error') || q.includes('bug') || q.includes('fix')) {
         aiText = "I have inspected the repository static analysis trace logs. I detected a **high cyclomatic complexity and parameter validation risk** in `src/controllers/coreController.ts` at Line 114.\n\nI have prepared an optimized refactoring patch that cleans up nested callback branches. **Before applying any edits to your codebase, I am requesting your explicit approval.**";
         codeSnippet = `// Proposed Fix for src/controllers/coreController.ts (Line 114)
@@ -130,7 +127,6 @@ export async function executeSafeStep(payload: ProcessPayload): Promise<Result> 
           status: 'pending'
         };
       } 
-      // Query Path 3: WhatsApp Bot query
       else if (q.includes('whatsapp') || q.includes('notify') || q.includes('phone')) {
         aiText = "The **WhatsApp AI Mobile Notifier** is configured to send real-time push alerts to your mobile phone.\n\n" +
           "It notifies you when:\n" +
@@ -140,11 +136,9 @@ export async function executeSafeStep(payload: ProcessPayload): Promise<Result> 
           "• 📅 Sprint Action Plans are generated\n\n" +
           "You can test or configure your phone number by clicking **WhatsApp Notifier** in the header or in Settings!";
       } 
-      // Query Path 4: Architecture
       else if (q.includes('architecture') || q.includes('structure') || q.includes('topology')) {
         aiText = "The repository follows a clean 3-tier architecture:\n1. **Frontend Dashboard Layer**: React 19 + TypeScript + Tailwind CSS\n2. **REST API Gateway**: Python `repomind_server.py`\n3. **Static Analysis Engine**: Python AST parser `scratch/analyze_repo.py`.\n\nThe system has an overall stability score of **87/100**.";
       } 
-      // Query Path 5: Security
       else if (q.includes('security') || q.includes('risk') || q.includes('cve') || q.includes('vulnerability')) {
         aiText = "Security Audit Findings:\n1. **CORS Wildcard Warning**: `repomind_server.py` line 14 permits `*` origin.\n\nWould you like me to generate a fix and request permission to update `repomind_server.py`?";
         codeSnippet = `# Proposed Security Fix for repomind_server.py (Line 14)
@@ -152,7 +146,6 @@ ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:3001']
 if self.headers.get('Origin') in ALLOWED_ORIGINS:
     self.send_header('Access-Control-Allow-Origin', self.headers.get('Origin'))`;
       } 
-      // Query Path 6: Generic default fallback
       else {
         aiText = `I am **RepoMind Code Agent**, pair programming with you on \`${query}\`. The static analysis engine parsed your codebase components cleanly.\n\nAsk me to **diagnose errors**, **show changes made**, **check security risks**, or **generate refactoring patches** for your repository!`;
       }
@@ -178,25 +171,25 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
   };
 
   return (
-    <div className="glass-panel rounded-3xl p-6 h-[calc(100vh-10rem)] flex flex-col justify-between relative overflow-hidden bg-[#110B1F] border border-[#2A1B42] font-sans">
+    <div className="card-panel rounded-3xl p-6 h-[calc(100vh-10rem)] flex flex-col justify-between relative overflow-hidden bg-white border border-[#E4E4DE] font-sans text-[#181816]">
       
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#2A1B42] shrink-0">
+      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#E4E4DE] shrink-0">
         <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#7C3AED] to-[#4C1D95] flex items-center justify-center text-white shadow-md shadow-[#7C3AED]/20 border border-[#8B5CF6]/30">
-            <Bot className="w-5 h-5 text-[#C4B5FD]" />
+          <div className="w-9 h-9 rounded-xl bg-[#171717] flex items-center justify-center text-white shadow-md">
+            <Bot className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h2 className="text-base font-extrabold text-white flex items-center space-x-2">
+            <h2 className="text-base font-extrabold text-[#181816] flex items-center space-x-2">
               <span>🤖 RepoMind Code Agent</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#7C3AED]/20 text-[#C4B5FD] border border-[#7C3AED]/30">Active Agent</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F1F1ED] text-[#181816] border border-[#E4E4DE]">Active Agent</span>
             </h2>
-            <p className="text-xs text-[#A9A1B8]">Empirical error diagnosis, step-by-step reasoning, and permission-based code editing.</p>
+            <p className="text-xs text-[#686862]">Empirical error diagnosis, step-by-step reasoning, and permission-based code editing.</p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-1.5 text-xs font-mono text-emerald-300 bg-emerald-950/60 px-3 py-1.5 rounded-xl border border-emerald-800/40">
-          <ShieldAlert className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="flex items-center space-x-1.5 text-xs font-mono text-[#16803C] bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 font-bold">
+          <ShieldAlert className="w-3.5 h-3.5 text-[#16803C]" />
           <span>Approval Required Before Code Edits</span>
         </div>
       </div>
@@ -210,25 +203,25 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
               key={msg.id}
               className={`flex items-start space-x-3 ${isAI ? '' : 'flex-row-reverse space-x-reverse'}`}
             >
-              <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+              <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border ${
                 isAI 
-                  ? 'bg-[#7C3AED] text-white border border-[#8B5CF6]/40 shadow-md shadow-[#7C3AED]/20' 
-                  : 'bg-[#4C1D95] text-white font-bold text-xs'
+                  ? 'bg-[#171717] text-white border-[#171717]' 
+                  : 'bg-[#F1F1ED] text-[#181816] border-[#E4E4DE] font-bold text-xs'
               }`}>
                 {isAI ? <Bot className="w-4 h-4" /> : <User className="w-4 h-4" />}
               </div>
 
               <div className={`max-w-2xl rounded-2xl p-4 text-xs leading-relaxed ${
                 isAI 
-                  ? 'bg-[#171026] border border-[#2A1B42] text-slate-200' 
-                  : 'bg-gradient-to-r from-[#7C3AED] to-[#4C1D95] text-white font-medium shadow-md'
+                  ? 'bg-[#F7F7F4] border border-[#E4E4DE] text-[#181816]' 
+                  : 'bg-[#171717] text-white font-medium shadow-sm'
               }`}>
                 <div className="whitespace-pre-wrap">{msg.text}</div>
 
                 {msg.codeSnippet && (
                   <div className="mt-3 relative group">
-                    <div className="flex items-center justify-between px-3 py-1.5 bg-[#090611] rounded-t-xl border-t border-x border-[#2A1B42] text-[10px] font-mono text-[#C4B5FD]">
-                      <span className="flex items-center space-x-1"><Code2 className="w-3 h-3 text-[#8B5CF6]" /><span>Proposed Refactoring Patch</span></span>
+                    <div className="flex items-center justify-between px-3 py-1.5 bg-[#181816] rounded-t-xl border-t border-x border-[#181816] text-[10px] font-mono text-slate-200">
+                      <span className="flex items-center space-x-1"><Code2 className="w-3 h-3 text-emerald-400" /><span>Proposed Refactoring Patch</span></span>
                       <button
                         onClick={() => copyCode(msg.codeSnippet!, msg.id)}
                         className="hover:text-white transition flex items-center space-x-1"
@@ -237,7 +230,7 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
                         <span>{copiedId === msg.id ? 'Copied!' : 'Copy Code'}</span>
                       </button>
                     </div>
-                    <pre className="p-3 bg-[#090611] text-[#C4B5FD] font-mono text-[11px] rounded-b-xl border border-[#2A1B42] overflow-x-auto">
+                    <pre className="p-3 bg-[#181816] text-emerald-300 font-mono text-[11px] rounded-b-xl border border-[#181816] overflow-x-auto">
                       {msg.codeSnippet}
                     </pre>
                   </div>
@@ -245,50 +238,50 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
 
                 {/* Professional Permission Request Card */}
                 {msg.permissionRequest && (
-                  <div className="mt-4 p-4 rounded-2xl bg-[#110B1F] border border-[#7C3AED]/50 shadow-xl space-y-3">
+                  <div className="mt-4 p-4 rounded-2xl bg-white border border-[#E4E4DE] shadow-md space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono font-bold uppercase text-[#C4B5FD] flex items-center space-x-1.5">
-                        <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-[10px] font-mono font-bold uppercase text-[#B7791F] flex items-center space-x-1.5">
+                        <AlertTriangle className="w-3.5 h-3.5 text-[#B7791F]" />
                         <span>⚠️ Approval Required</span>
                       </span>
                       <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded capitalize ${
-                        msg.permissionRequest.status === 'pending' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
-                        msg.permissionRequest.status === 'approved' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
-                        'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                        msg.permissionRequest.status === 'pending' ? 'bg-amber-50 text-[#B7791F] border border-amber-200' :
+                        msg.permissionRequest.status === 'approved' ? 'bg-emerald-50 text-[#16803C] border border-emerald-200' :
+                        'bg-rose-50 text-[#C53030] border border-rose-200'
                       }`}>
                         Status: {msg.permissionRequest.status}
                       </span>
                     </div>
 
-                    <div className="text-xs text-white font-bold">
+                    <div className="text-xs text-[#181816] font-bold">
                       {msg.permissionRequest.issueTitle}
                     </div>
 
-                    <div className="text-[11px] font-mono text-[#A9A1B8] space-y-1">
-                      <div>File: <span className="text-[#C4B5FD] font-bold">{msg.permissionRequest.file}</span> (Line {msg.permissionRequest.line})</div>
-                      <div>Risk: <span className="text-emerald-400 font-bold">Low</span></div>
-                      <div>Expected Result: <span className="text-slate-200">Prevent potential runtime exception & improve maintainability</span></div>
+                    <div className="text-[11px] font-mono text-[#686862] space-y-1">
+                      <div>File: <span className="text-[#181816] font-bold">{msg.permissionRequest.file}</span> (Line {msg.permissionRequest.line})</div>
+                      <div>Risk: <span className="text-[#16803C] font-bold">Low</span></div>
+                      <div>Expected Result: <span className="text-[#181816]">Prevent potential runtime exception & improve maintainability</span></div>
                     </div>
 
                     {msg.permissionRequest.status === 'pending' ? (
                       <div className="flex items-center space-x-2 pt-2">
                         <button
                           onClick={() => handlePermissionDecision(msg.id, 'approved')}
-                          className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition shadow-md shadow-emerald-600/30 flex items-center space-x-1.5"
+                          className="px-4 py-2 rounded-xl bg-[#16803C] hover:bg-[#11642f] text-white font-extrabold text-xs transition shadow-md flex items-center space-x-1.5"
                         >
                           <CheckCircle2 className="w-4 h-4" />
                           <span>✅ Approve & Apply Fix</span>
                         </button>
                         <button
                           onClick={() => handlePermissionDecision(msg.id, 'rejected')}
-                          className="px-3 py-2 rounded-xl bg-[#171026] hover:bg-[#2A1B42] border border-[#2A1B42] text-slate-300 text-xs font-bold transition flex items-center space-x-1"
+                          className="px-3 py-2 rounded-xl bg-[#F7F7F4] hover:bg-[#E4E4DE] border border-[#E4E4DE] text-[#181816] text-xs font-bold transition flex items-center space-x-1"
                         >
-                          <XCircle className="w-4 h-4 text-rose-400" />
+                          <XCircle className="w-4 h-4 text-[#C53030]" />
                           <span>Cancel</span>
                         </button>
                       </div>
                     ) : (
-                      <div className="text-[11px] font-mono text-emerald-400 font-bold flex items-center space-x-1 pt-1">
+                      <div className="text-[11px] font-mono text-[#16803C] font-bold flex items-center space-x-1 pt-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Decision recorded: {msg.permissionRequest.status.toUpperCase()}</span>
                       </div>
@@ -296,7 +289,7 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
                   </div>
                 )}
 
-                <div className="text-[9px] font-mono text-[#A9A1B8] mt-2 text-right">
+                <div className="text-[9px] font-mono text-[#96968E] mt-2 text-right">
                   {msg.timestamp}
                 </div>
               </div>
@@ -305,9 +298,9 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
         })}
 
         {isTyping && (
-          <div className="flex items-center space-x-3 text-xs text-[#C4B5FD] font-mono">
-            <div className="w-8 h-8 rounded-xl bg-[#171026] border border-[#2A1B42] flex items-center justify-center">
-              <Bot className="w-4 h-4 animate-spin text-[#8B5CF6]" />
+          <div className="flex items-center space-x-3 text-xs text-[#686862] font-mono">
+            <div className="w-8 h-8 rounded-xl bg-[#F7F7F4] border border-[#E4E4DE] flex items-center justify-center">
+              <Bot className="w-4 h-4 animate-spin text-[#171717]" />
             </div>
             <span>Analyzing repository & preparing response...</span>
           </div>
@@ -317,12 +310,12 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
       </div>
 
       {/* Suggested Prompt Chips */}
-      <div className="pt-3 border-t border-[#2A1B42] overflow-x-auto flex items-center space-x-2 shrink-0 py-2">
+      <div className="pt-3 border-t border-[#E4E4DE] overflow-x-auto flex items-center space-x-2 shrink-0 py-2">
         {promptChips.map((chip, idx) => (
           <button
             key={idx}
             onClick={() => handleSend(chip)}
-            className="px-3 py-1.5 rounded-full bg-[#171026] hover:bg-[#2A1B42] border border-[#2A1B42] text-[11px] font-semibold text-[#C4B5FD] hover:text-white shrink-0 transition"
+            className="px-3 py-1.5 rounded-full bg-[#F7F7F4] hover:bg-[#F1F1ED] border border-[#E4E4DE] text-[11px] font-semibold text-[#181816] shrink-0 transition"
           >
             💬 {chip}
           </button>
@@ -336,18 +329,18 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-center space-x-2 bg-[#090611] p-2 rounded-2xl border border-[#2A1B42] focus-within:border-[#7C3AED] transition"
+          className="flex items-center space-x-2 bg-[#F7F7F4] p-2 rounded-2xl border border-[#E4E4DE] focus-within:border-[#171717] transition"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask RepoMind Code Agent to diagnose errors, explain architecture, or generate refactoring patches..."
-            className="flex-1 bg-transparent px-3 py-1.5 text-xs text-slate-100 placeholder-[#A9A1B8] focus:outline-none"
+            className="flex-1 bg-transparent px-3 py-1.5 text-xs text-[#181816] placeholder-[#96968E] focus:outline-none"
           />
           <button
             type="submit"
-            className="p-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white transition shadow-md shadow-[#7C3AED]/30"
+            className="p-2.5 rounded-xl bg-[#171717] hover:bg-[#313131] text-white transition shadow-md"
             aria-label="Send message"
           >
             <Send className="w-4 h-4" />

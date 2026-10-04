@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GitBranch, Link2, Zap, X, Check, ArrowRight, FolderArchive } from 'lucide-react';
+import { GitBranch, Link2, Zap, X, Check, Folder, FolderArchive, Upload } from 'lucide-react';
 
 interface RepoInputModalProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export const RepoInputModal: React.FC<RepoInputModalProps> = ({
   onExploreDemo
 }) => {
   const [githubUrl, setGithubUrl] = useState('');
-  const [genericUrl, setGenericUrl] = useState('');
+  const [gitlabUrl, setGitlabUrl] = useState('');
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -40,121 +40,130 @@ export const RepoInputModal: React.FC<RepoInputModalProps> = ({
     }
   };
 
+  const handleFolderSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const firstFile = e.target.files[0];
+      const folderName = firstFile.webkitRelativePath.split('/')[0] || 'local-project';
+      onStartAnalysis(`workspace/${folderName}`);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-[#130d24] border border-purple-500/40 rounded-3xl shadow-2xl overflow-hidden relative p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 font-sans">
+      <div className="w-full max-w-2xl bg-white border border-[#E4E4DE] rounded-3xl shadow-2xl overflow-hidden relative p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200 text-[#181816]">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-xl bg-purple-950/40 hover:bg-purple-900/40 text-slate-400 hover:text-white transition"
+          className="absolute top-5 right-5 p-2 rounded-xl bg-[#F1F1ED] hover:bg-[#E4E4DE] text-[#686862] hover:text-[#181816] transition"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
         <div className="flex items-center space-x-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-purple-500/30">
-            <Zap className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-[#171717] flex items-center justify-center text-white shadow-md">
+            <Upload className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-white">🔍 Analyze Any Repository</h2>
-            <p className="text-xs text-slate-300">Connect any GitHub repository URL or upload source zip for instant AI code intelligence.</p>
+            <h2 className="text-xl font-extrabold text-[#181816]">➕ Add Repository / Project</h2>
+            <p className="text-xs text-[#686862]">Analyze a local folder, upload a ZIP, or connect a GitHub/GitLab repository.</p>
           </div>
         </div>
 
         {/* Options Grid */}
-        <div className="space-y-5">
+        <div className="space-y-4">
           
-          {/* Option 1: GitHub Repository */}
-          <div className="p-4 rounded-2xl bg-purple-950/30 border border-purple-800/40 hover:border-purple-500/50 transition">
-            <div className="flex items-center space-x-2 text-xs font-bold text-white mb-2">
-              <GitBranch className="w-4 h-4 text-purple-400" />
-              <span>Option 1: Connect GitHub Repository</span>
+          {/* Option A: Upload Folder */}
+          <div className="p-4 rounded-2xl bg-[#F7F7F4] border border-[#E4E4DE] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center space-x-3">
+              <Folder className="w-5 h-5 text-[#171717]" />
+              <div>
+                <div className="text-xs font-bold text-[#181816]">📂 Upload Folder (Local Project)</div>
+                <div className="text-[11px] text-[#686862]">Analyze source files locally without external connection</div>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <input
-                type="text"
-                value={githubUrl}
-                onChange={(e) => setGithubUrl(e.target.value)}
-                placeholder="https://github.com/Abhilanshu/Repo-Mind-Ai"
-                className="flex-1 bg-[#0b0813] border border-purple-900/50 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition"
+
+            <label className="px-4 py-2 rounded-xl bg-[#171717] hover:bg-[#313131] text-white text-xs font-bold transition cursor-pointer shrink-0 text-center">
+              Choose Folder
+              <input 
+                type="file" 
+                // @ts-ignore
+                webkitdirectory="" 
+                directory="" 
+                className="hidden" 
+                onChange={handleFolderSelect}
               />
-              <button
-                onClick={() => onStartAnalysis(githubUrl || 'https://github.com/Abhilanshu/Repo-Mind-Ai')}
-                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition flex items-center space-x-1 shrink-0"
-              >
-                <span>Connect GitHub →</span>
-              </button>
-            </div>
+            </label>
           </div>
 
-          {/* Option 2: Upload Repository */}
+          {/* Option B: Upload ZIP */}
           <div 
             onDragEnter={handleDrag}
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-            className={`p-6 rounded-2xl border-2 border-dashed transition text-center ${
+            className={`p-5 rounded-2xl border-2 border-dashed transition text-center ${
               dragActive 
-                ? 'border-purple-400 bg-purple-900/30' 
-                : 'border-purple-800/50 bg-purple-950/20 hover:border-purple-500/40'
+                ? 'border-[#171717] bg-[#F1F1ED]' 
+                : 'border-[#E4E4DE] bg-[#F7F7F4] hover:border-[#171717]'
             }`}
           >
-            <FolderArchive className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-            <div className="text-xs font-bold text-white">Option 2: Drop your repository here</div>
-            <div className="text-[11px] text-slate-400 mt-1">ZIP, TAR.GZ • Max 500 MB</div>
+            <FolderArchive className="w-6 h-6 text-[#171717] mx-auto mb-1.5" />
+            <div className="text-xs font-bold text-[#181816]">📦 Upload ZIP Archive</div>
+            <div className="text-[11px] text-[#686862]">Drop your project .zip archive here</div>
             
             {selectedFile ? (
-              <div className="mt-3 inline-flex items-center space-x-2 px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 text-xs font-mono border border-purple-500/40">
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="mt-2 inline-flex items-center space-x-2 px-3 py-1 rounded-lg bg-[#E4E4DE] text-[#181816] text-xs font-mono">
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
                 <span>{selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(1)} MB)</span>
               </div>
             ) : null}
 
-            <div className="mt-3">
+            <div className="mt-2">
               <button
-                onClick={() => onStartAnalysis(selectedFile ? selectedFile.name : 'uploaded_codebase.zip')}
-                className="px-4 py-2 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-purple-700/50 text-purple-200 text-xs font-semibold transition"
+                onClick={() => onStartAnalysis(selectedFile ? selectedFile.name : 'uploaded_project.zip')}
+                className="px-4 py-2 rounded-xl bg-[#F1F1ED] hover:bg-[#E4E4DE] text-[#181816] text-xs font-bold transition border border-[#E4E4DE]"
               >
-                Upload File & Analyze
+                Analyze ZIP File
               </button>
             </div>
           </div>
 
-          {/* Option 3: Repository URL */}
-          <div className="p-4 rounded-2xl bg-purple-950/30 border border-purple-800/40 hover:border-purple-500/50 transition">
-            <div className="flex items-center space-x-2 text-xs font-bold text-white mb-2">
-              <Link2 className="w-4 h-4 text-indigo-400" />
-              <span>Option 3: Repository URL</span>
+          {/* Option C: GitHub / GitLab URL */}
+          <div className="p-4 rounded-2xl bg-[#F7F7F4] border border-[#E4E4DE] space-y-3">
+            <div className="flex items-center space-x-2 text-xs font-bold text-[#181816]">
+              <GitBranch className="w-4 h-4 text-[#171717]" />
+              <span>🔗 Connect GitHub / GitLab Repository</span>
             </div>
+            
             <div className="flex items-center space-x-2">
               <input
                 type="text"
-                value={genericUrl}
-                onChange={(e) => setGenericUrl(e.target.value)}
+                value={githubUrl}
+                onChange={(e) => setGithubUrl(e.target.value)}
                 placeholder="https://github.com/facebook/react"
-                className="flex-1 bg-[#0b0813] border border-purple-900/50 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition"
+                className="flex-1 bg-white border border-[#E4E4DE] rounded-xl px-3.5 py-2 text-xs text-[#181816] placeholder-[#96968E] focus:outline-none focus:border-[#171717] transition"
               />
               <button
-                onClick={() => onStartAnalysis(genericUrl || 'https://github.com/facebook/react')}
-                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shrink-0"
+                onClick={() => onStartAnalysis(githubUrl || 'https://github.com/facebook/react')}
+                className="px-4 py-2 rounded-xl bg-[#171717] hover:bg-[#313131] text-white text-xs font-bold transition shrink-0"
               >
-                Start Analysis
+                Connect & Analyze →
               </button>
             </div>
           </div>
 
-          {/* Instant Demo Option */}
-          <div className="pt-2 text-center border-t border-purple-900/30">
+          {/* Built-in Demo Shortcut */}
+          <div className="pt-2 text-center border-t border-[#E4E4DE]">
             <button
               onClick={() => {
                 onClose();
                 onExploreDemo();
               }}
-              className="text-xs font-bold text-purple-300 hover:text-purple-200 underline decoration-purple-500/50 underline-offset-4 transition"
+              className="text-xs font-bold text-[#686862] hover:text-[#181816] underline underline-offset-4 transition"
             >
-              ⚡ Or load RepoMind AI Repository (Abhilanshu/Repo-Mind-Ai) →
+              ⚡ Return to built-in RepoMind Demo Store →
             </button>
           </div>
 

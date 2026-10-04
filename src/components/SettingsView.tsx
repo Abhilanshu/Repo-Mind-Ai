@@ -23,36 +23,36 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   };
 
   return (
-    <div className="space-y-6 max-w-5xl font-sans">
+    <div className="space-y-6 max-w-5xl font-sans text-[#181816]">
       
       {/* Top Banner */}
-      <div className="glass-panel rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#110B1F] border border-[#2A1B42]">
+      <div className="card-panel rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-[#E4E4DE]">
         <div>
           <div className="flex items-center space-x-2">
-            <Settings className="w-5 h-5 text-[#8B5CF6]" />
-            <h2 className="text-lg font-extrabold text-white">⚙️ Platform & Enterprise Settings</h2>
+            <Settings className="w-5 h-5 text-[#171717]" />
+            <h2 className="text-lg font-extrabold text-[#181816]">⚙️ Platform & Enterprise Settings</h2>
           </div>
-          <p className="text-xs text-[#A9A1B8] mt-1">
+          <p className="text-xs text-[#686862] mt-1">
             Configure AST static analysis depth, Multi-LLM provider models, webhooks, and WhatsApp alerts.
           </p>
         </div>
 
         <button
           onClick={handleSave}
-          className="px-5 py-2 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white font-extrabold text-xs transition shadow-lg shadow-[#7C3AED]/20 shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#171717] hover:bg-[#313131] text-white font-extrabold text-xs transition shadow-md shrink-0"
         >
           {savedToast ? '✓ Saved Changes' : 'Save Settings'}
         </button>
       </div>
 
       {/* Commercial Plans & Billing Tier Selection */}
-      <div className="glass-panel rounded-3xl p-6 bg-[#110B1F] border border-[#2A1B42] space-y-4">
+      <div className="card-panel rounded-3xl p-6 bg-white border border-[#E4E4DE] space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <CreditCard className="w-5 h-5 text-[#8B5CF6]" />
-            <h3 className="text-sm font-extrabold text-white">Commercial Subscription Tiers</h3>
+            <CreditCard className="w-5 h-5 text-[#171717]" />
+            <h3 className="text-sm font-extrabold text-[#181816]">Commercial Subscription Tiers</h3>
           </div>
-          <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#7C3AED]/20 text-[#C4B5FD] border border-[#7C3AED]/30 font-bold">
+          <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#F1F1ED] text-[#181816] border border-[#E4E4DE] font-bold">
             Current Tier: Pro Plan
           </span>
         </div>
@@ -69,17 +69,17 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               onClick={() => setSelectedPlan(plan.id)}
               className={`p-4 rounded-2xl border transition cursor-pointer flex flex-col justify-between ${
                 selectedPlan === plan.id
-                  ? 'bg-[#171026] border-[#7C3AED] text-white shadow-lg'
-                  : 'bg-[#090611] border-[#2A1B42] text-[#A9A1B8] hover:text-white'
+                  ? 'bg-[#171717] border-[#171717] text-white shadow-md'
+                  : 'bg-[#F7F7F4] border-[#E4E4DE] text-[#686862] hover:text-[#181816] hover:bg-[#F1F1ED]'
               }`}
             >
               <div>
-                <div className="font-bold text-white flex items-center justify-between">
+                <div className={`font-bold flex items-center justify-between ${selectedPlan === plan.id ? 'text-white' : 'text-[#181816]'}`}>
                   <span>{plan.name}</span>
-                  {selectedPlan === plan.id && <Check className="w-4 h-4 text-[#C4B5FD]" />}
+                  {selectedPlan === plan.id && <Check className="w-4 h-4 text-white" />}
                 </div>
-                <div className="text-base font-extrabold text-purple-300 mt-1">{plan.price}</div>
-                <p className="text-[10px] text-[#A9A1B8] mt-1.5 leading-snug">{plan.desc}</p>
+                <div className={`text-base font-extrabold mt-1 ${selectedPlan === plan.id ? 'text-white' : 'text-[#181816]'}`}>{plan.price}</div>
+                <p className={`text-[10px] mt-1.5 leading-snug ${selectedPlan === plan.id ? 'text-slate-300' : 'text-[#686862]'}`}>{plan.desc}</p>
               </div>
             </div>
           ))}
@@ -87,9 +87,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </div>
 
       {/* Multi-LLM Backend Provider Abstraction */}
-      <div className="glass-panel rounded-3xl p-6 bg-[#110B1F] border border-[#2A1B42] space-y-4">
-        <h3 className="text-sm font-extrabold text-white flex items-center space-x-2">
-          <Bot className="w-4 h-4 text-[#8B5CF6]" />
+      <div className="card-panel rounded-3xl p-6 bg-white border border-[#E4E4DE] space-y-4">
+        <h3 className="text-sm font-extrabold text-[#181816] flex items-center space-x-2">
+          <Bot className="w-4 h-4 text-[#171717]" />
           <span>Multi-LLM Provider & Model Selection</span>
         </h3>
 
@@ -105,48 +105,48 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               onClick={() => setLlmProvider(item.id)}
               className={`p-4 rounded-2xl border transition text-left ${
                 llmProvider === item.id
-                  ? 'bg-[#171026] border-[#7C3AED] text-white shadow-lg'
-                  : 'bg-[#090611] border-[#2A1B42] text-[#A9A1B8] hover:text-white'
+                  ? 'bg-[#171717] border-[#171717] text-white shadow-md'
+                  : 'bg-[#F7F7F4] border-[#E4E4DE] text-[#686862] hover:text-[#181816] hover:bg-[#F1F1ED]'
               }`}
             >
-              <div className="font-bold text-white flex items-center justify-between">
+              <div className={`font-bold flex items-center justify-between ${llmProvider === item.id ? 'text-white' : 'text-[#181816]'}`}>
                 <span>{item.provider}</span>
-                <span className="text-[9px] font-mono px-1.5 py-0.2 bg-[#7C3AED]/20 text-[#C4B5FD] rounded">{item.tag}</span>
+                <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded ${llmProvider === item.id ? 'bg-white/20 text-white' : 'bg-[#E4E4DE] text-[#181816]'}`}>{item.tag}</span>
               </div>
-              <div className="text-[11px] text-[#C4B5FD] mt-1">{item.model}</div>
+              <div className={`text-[11px] mt-1 ${llmProvider === item.id ? 'text-slate-300' : 'text-[#686862]'}`}>{item.model}</div>
             </button>
           ))}
         </div>
       </div>
 
       {/* WhatsApp Notifier Card */}
-      <div className="glass-panel rounded-3xl p-6 bg-[#110B1F] border border-[#2A1B42] space-y-4">
+      <div className="card-panel rounded-3xl p-6 bg-white border border-[#E4E4DE] space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <div className="p-2 rounded-xl bg-emerald-50 text-[#16803C] border border-emerald-200">
               <MessageSquare className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm font-extrabold text-white flex items-center space-x-2">
+              <h3 className="text-sm font-extrabold text-[#181816] flex items-center space-x-2">
                 <span>📱 WhatsApp AI Mobile Notifier</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold">Active</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-[#16803C] border border-emerald-200 font-bold">Active</span>
               </h3>
-              <p className="text-xs text-[#A9A1B8]">Receive instant WhatsApp notifications when analysis completes or code fixes are applied.</p>
+              <p className="text-xs text-[#686862]">Receive instant WhatsApp notifications when analysis completes or code fixes are applied.</p>
             </div>
           </div>
 
           <button
             onClick={onOpenWhatsAppModal}
-            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition shadow-lg shadow-emerald-600/30 flex items-center space-x-1.5 shrink-0"
+            className="px-4 py-2 rounded-xl bg-[#171717] hover:bg-[#313131] text-white font-extrabold text-xs transition shadow-md flex items-center space-x-1.5 shrink-0"
           >
             <Smartphone className="w-4 h-4" />
             <span>Configure WhatsApp Notifier →</span>
           </button>
         </div>
 
-        <div className="p-3.5 rounded-2xl bg-[#171026] border border-[#2A1B42] flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#A9A1B8] font-mono gap-2">
+        <div className="p-3.5 rounded-2xl bg-[#F7F7F4] border border-[#E4E4DE] flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#686862] font-mono gap-2">
           <div>
-            Registered Phone: <span className="text-emerald-300 font-bold">{whatsAppConfig?.phoneNumber || '+91 98765 43210'}</span>
+            Registered Phone: <span className="text-[#16803C] font-bold">{whatsAppConfig?.phoneNumber || '+91 98765 43210'}</span>
           </div>
           <div className="flex items-center space-x-3 text-[11px]">
             <span>Analysis: {whatsAppConfig?.notifyOnAnalysis ? '✓ Enabled' : 'Disabled'}</span>
@@ -156,9 +156,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </div>
 
       {/* AST Analysis Depth */}
-      <div className="glass-panel rounded-3xl p-6 bg-[#110B1F] border border-[#2A1B42] space-y-4">
-        <h3 className="text-sm font-extrabold text-white flex items-center space-x-2">
-          <Cpu className="w-4 h-4 text-[#8B5CF6]" />
+      <div className="card-panel rounded-3xl p-6 bg-white border border-[#E4E4DE] space-y-4">
+        <h3 className="text-sm font-extrabold text-[#181816] flex items-center space-x-2">
+          <Cpu className="w-4 h-4 text-[#171717]" />
           <span>AST Analysis Depth & Scan Controls</span>
         </h3>
 
@@ -169,12 +169,12 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               onClick={() => setAnalysisDepth(depth)}
               className={`p-4 rounded-2xl border transition text-left capitalize ${
                 analysisDepth === depth
-                  ? 'bg-[#171026] border-[#7C3AED] text-white shadow-lg'
-                  : 'bg-[#090611] border-[#2A1B42] text-[#A9A1B8] hover:text-white'
+                  ? 'bg-[#171717] border-[#171717] text-white shadow-md'
+                  : 'bg-[#F7F7F4] border-[#E4E4DE] text-[#686862] hover:text-[#181816] hover:bg-[#F1F1ED]'
               }`}
             >
-              <div className="text-xs font-bold">{depth} Scan</div>
-              <div className="text-[10px] text-[#A9A1B8] mt-1">
+              <div className={`text-xs font-bold ${analysisDepth === depth ? 'text-white' : 'text-[#181816]'}`}>{depth} Scan</div>
+              <div className={`text-[10px] mt-1 ${analysisDepth === depth ? 'text-slate-300' : 'text-[#686862]'}`}>
                 {depth === 'quick' ? 'Basic LOC & Cyclomatic check (< 10s)' :
                  depth === 'standard' ? 'Full AST, Call Graph & Security scan (15s)' :
                  'Deep AST, Saturation & Flow graph (45s)'}
@@ -188,33 +188,33 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         
         {/* GitHub Webhooks */}
-        <div className="glass-panel rounded-2xl p-4 bg-[#110B1F] border border-[#2A1B42] space-y-2">
-          <div className="flex items-center space-x-2 text-xs font-bold text-white">
-            <GitBranch className="w-4 h-4 text-[#8B5CF6]" />
+        <div className="card-panel rounded-2xl p-4 bg-white border border-[#E4E4DE] space-y-2">
+          <div className="flex items-center space-x-2 text-xs font-bold text-[#181816]">
+            <GitBranch className="w-4 h-4 text-[#171717]" />
             <span>GitHub Webhooks</span>
           </div>
-          <p className="text-[11px] text-[#A9A1B8]">Auto-trigger scans on git push & pull request events.</p>
-          <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 inline-block font-bold">Coming Soon</span>
+          <p className="text-[11px] text-[#686862]">Auto-trigger scans on git push & pull request events.</p>
+          <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-50 text-[#B7791F] border border-amber-200 inline-block font-bold">Coming Soon</span>
         </div>
 
         {/* Enterprise RBAC */}
-        <div className="glass-panel rounded-2xl p-4 bg-[#110B1F] border border-[#2A1B42] space-y-2">
-          <div className="flex items-center space-x-2 text-xs font-bold text-white">
-            <Lock className="w-4 h-4 text-[#8B5CF6]" />
+        <div className="card-panel rounded-2xl p-4 bg-white border border-[#E4E4DE] space-y-2">
+          <div className="flex items-center space-x-2 text-xs font-bold text-[#181816]">
+            <Lock className="w-4 h-4 text-[#171717]" />
             <span>Enterprise RBAC Roles</span>
           </div>
-          <p className="text-[11px] text-[#A9A1B8]">Manage Admin, Lead Engineer, and Viewer permissions.</p>
-          <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 inline-block font-bold">Coming Soon</span>
+          <p className="text-[11px] text-[#686862]">Manage Admin, Lead Engineer, and Viewer permissions.</p>
+          <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-50 text-[#B7791F] border border-amber-200 inline-block font-bold">Coming Soon</span>
         </div>
 
         {/* Custom Rule Builder */}
-        <div className="glass-panel rounded-2xl p-4 bg-[#110B1F] border border-[#2A1B42] space-y-2">
-          <div className="flex items-center space-x-2 text-xs font-bold text-white">
-            <Sliders className="w-4 h-4 text-[#8B5CF6]" />
+        <div className="card-panel rounded-2xl p-4 bg-white border border-[#E4E4DE] space-y-2">
+          <div className="flex items-center space-x-2 text-xs font-bold text-[#181816]">
+            <Sliders className="w-4 h-4 text-[#171717]" />
             <span>Custom AST Rule Builder</span>
           </div>
-          <p className="text-[11px] text-[#A9A1B8]">Define project-specific AST static rules and security lints.</p>
-          <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 inline-block font-bold">Coming Soon</span>
+          <p className="text-[11px] text-[#686862]">Define project-specific AST static rules and security lints.</p>
+          <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-50 text-[#B7791F] border border-amber-200 inline-block font-bold">Coming Soon</span>
         </div>
 
       </div>

@@ -11,14 +11,14 @@ export const AnalysisProgressScreen: React.FC<AnalysisProgressScreenProps> = ({
   onComplete
 }) => {
   const steps = [
-    { label: 'Repository connected', icon: <CheckCircle2 className="w-4 h-4 text-emerald-400" /> },
-    { label: 'File structure analyzed (183 files parsed)', icon: <Code2 className="w-4 h-4 text-purple-400" /> },
-    { label: 'Dependencies detected (requirements.txt & packages mapped)', icon: <Cpu className="w-4 h-4 text-indigo-400" /> },
-    { label: 'Architecture mapped (6 components & service graph)', icon: <Sparkles className="w-4 h-4 text-purple-300" /> },
-    { label: 'Code complexity calculated (Cyclomatic & AST metrics computed)', icon: <Code2 className="w-4 h-4 text-violet-400" /> },
-    { label: 'Security patterns scanned (Subprocess & SHA-256 checks)', icon: <ShieldAlert className="w-4 h-4 text-rose-400" /> },
-    { label: 'Technical debt detected (147 issues categorized)', icon: <Sparkles className="w-4 h-4 text-amber-400" /> },
-    { label: 'AI generating recommendations & sprint action plan...', icon: <Loader2 className="w-4 h-4 text-purple-400 animate-spin" /> },
+    { label: 'Repository connected', icon: <CheckCircle2 className="w-4 h-4 text-[#16803C]" /> },
+    { label: 'File structure analyzed (183 files parsed)', icon: <Code2 className="w-4 h-4 text-[#171717]" /> },
+    { label: 'Dependencies detected (requirements.txt & packages mapped)', icon: <Cpu className="w-4 h-4 text-[#171717]" /> },
+    { label: 'Architecture mapped (6 components & service graph)', icon: <Sparkles className="w-4 h-4 text-[#171717]" /> },
+    { label: 'Code complexity calculated (Cyclomatic & AST metrics computed)', icon: <Code2 className="w-4 h-4 text-[#B7791F]" /> },
+    { label: 'Security patterns scanned (Subprocess & SHA-256 checks)', icon: <ShieldAlert className="w-4 h-4 text-[#C53030]" /> },
+    { label: 'Technical debt detected (147 issues categorized)', icon: <Sparkles className="w-4 h-4 text-[#B7791F]" /> },
+    { label: 'AI generating recommendations & sprint action plan...', icon: <Loader2 className="w-4 h-4 text-[#171717] animate-spin" /> },
   ];
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -40,33 +40,30 @@ export const AnalysisProgressScreen: React.FC<AnalysisProgressScreenProps> = ({
   const progressPercent = Math.min(100, Math.round(((currentStep + 1) / steps.length) * 100));
 
   return (
-    <div className="min-h-screen bg-[#0b0813] text-slate-100 flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#F7F7F4] text-[#181816] flex flex-col items-center justify-center p-6 relative overflow-hidden font-sans">
       
-      {/* Glow Effects */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none" />
-
-      <div className="w-full max-w-xl bg-[#130d24] border border-purple-500/40 rounded-3xl p-8 shadow-2xl backdrop-blur-xl relative z-10 text-left">
+      <div className="w-full max-w-xl bg-white border border-[#E4E4DE] rounded-3xl p-8 shadow-xl relative z-10 text-left">
         
         {/* Header */}
         <div className="flex items-center space-x-3 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-violet-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
-            <span className="text-2xl animate-pulse">🧠</span>
+          <div className="w-12 h-12 rounded-2xl bg-[#171717] flex items-center justify-center text-white shadow-md">
+            <span className="text-2xl">🧠</span>
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-white">RepoMind AI is analyzing repository</h2>
-            <p className="text-xs font-mono text-purple-300 mt-0.5">{repoName}</p>
+            <h2 className="text-xl font-extrabold text-[#181816]">RepoMind AI is analyzing repository</h2>
+            <p className="text-xs font-mono text-[#686862] mt-0.5">{repoName}</p>
           </div>
         </div>
 
         {/* Progress Bar */}
         <div className="mb-6">
           <div className="flex justify-between items-center text-xs font-mono mb-2">
-            <span className="text-slate-400">Analysis Progress</span>
-            <span className="text-purple-300 font-bold">{progressPercent}%</span>
+            <span className="text-[#686862]">Analysis Progress</span>
+            <span className="text-[#181816] font-bold">{progressPercent}%</span>
           </div>
-          <div className="w-full h-2.5 bg-purple-950/80 rounded-full overflow-hidden border border-purple-900/50 p-0.5">
+          <div className="w-full h-2.5 bg-[#E4E4DE] rounded-full overflow-hidden p-0.5">
             <div 
-              className="h-full bg-gradient-to-r from-purple-600 via-violet-500 to-indigo-500 rounded-full transition-all duration-300 shadow-md shadow-purple-500/40"
+              className="h-full bg-[#171717] rounded-full transition-all duration-300 shadow-sm"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -83,19 +80,19 @@ export const AnalysisProgressScreen: React.FC<AnalysisProgressScreenProps> = ({
                 key={idx}
                 className={`flex items-center space-x-3 p-2.5 rounded-xl border transition-all duration-200 ${
                   isDone 
-                    ? 'bg-purple-950/30 border-purple-800/30 text-slate-200' 
+                    ? 'bg-emerald-50 border-emerald-200 text-[#181816]' 
                     : isCurrent 
-                    ? 'bg-purple-900/40 border-purple-500/50 text-white shadow-md shadow-purple-900/30' 
-                    : 'opacity-40 border-transparent text-slate-500'
+                    ? 'bg-[#F7F7F4] border-[#171717] text-[#181816] font-bold' 
+                    : 'opacity-40 border-transparent text-[#96968E]'
                 }`}
               >
                 <div className="shrink-0">
                   {isDone ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    <CheckCircle2 className="w-4 h-4 text-[#16803C]" />
                   ) : isCurrent ? (
-                    <Loader2 className="w-4 h-4 text-purple-400 animate-spin" />
+                    <Loader2 className="w-4 h-4 text-[#171717] animate-spin" />
                   ) : (
-                    <div className="w-4 h-4 rounded-full border border-slate-700" />
+                    <div className="w-4 h-4 rounded-full border border-[#E4E4DE]" />
                   )}
                 </div>
                 <span className={isCurrent ? 'font-bold' : ''}>{step.label}</span>
@@ -105,9 +102,9 @@ export const AnalysisProgressScreen: React.FC<AnalysisProgressScreenProps> = ({
         </div>
 
         {/* Log Subtext */}
-        <div className="mt-6 pt-4 border-t border-purple-900/40 text-[11px] font-mono text-slate-400 flex items-center justify-between">
-          <span>Parsing Python AST AST parsing engine...</span>
-          <span className="text-purple-400">18,912 LOC</span>
+        <div className="mt-6 pt-4 border-t border-[#E4E4DE] text-[11px] font-mono text-[#686862] flex items-center justify-between">
+          <span>Parsing Python AST static engine...</span>
+          <span className="text-[#181816] font-bold">18,912 LOC</span>
         </div>
 
       </div>
