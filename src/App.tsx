@@ -30,7 +30,8 @@ import { NavigationTab, TechnicalDebtIssue, SecurityFinding, FullRepoAnalysisDat
 import { generateDynamicRepoData } from './mockData/repoData';
 
 export function App() {
-  const [loading, setLoading] = useState(true);
+  // Instant Dashboard Opening (Default loading to false so app opens directly with zero delay)
+  const [loading, setLoading] = useState(false);
   
   // Instant Dashboard Opening Requirement (Default to 'dashboard' so app is immediately usable!)
   const [viewMode, setViewMode] = useState<'landing' | 'analyzing' | 'dashboard'>('dashboard');
@@ -79,9 +80,11 @@ export function App() {
 
   const handleStartAnalysis = (repoUrl: string) => {
     setRepoInputModalOpen(false);
-    const newDataset = generateDynamicRepoData(repoUrl);
+    const targetName = repoUrl && repoUrl.trim() ? repoUrl : 'RepoMind Demo Store';
+    const newDataset = generateDynamicRepoData(targetName);
     setAnalysisData(newDataset);
-    setViewMode('analyzing');
+    setViewMode('dashboard');
+    triggerToast(`⚡ Repository Intelligence active for ${newDataset.metadata.name}`);
   };
 
   const handleAnalysisComplete = () => {
