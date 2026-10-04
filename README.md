@@ -1,6 +1,6 @@
-# 🧠 RepoMind AI — AI Software Repository Intelligence & Technical Debt Analyzer
+# 🧠 RepoMind — Repository Intelligence & Engineering Productivity Platform
 
-> **Turn complex software codebases into actionable engineering intelligence with Antigravity Agentic AI & Real Mobile WhatsApp Alerts.**
+> **Turn complex software codebases into actionable engineering intelligence with RepoMind AI & Real Mobile WhatsApp Alerts.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE.md)
 [![React](https://img.shields.io/badge/React-19.0-61dafb.svg)](https://react.dev/)
@@ -13,7 +13,7 @@
 
 ## 📌 Executive Overview
 
-**RepoMind AI** is a modern, production-grade SaaS engineering intelligence platform designed for software engineers, tech leads, engineering managers, and dev teams. It transforms thousands of lines of code into clear, prioritized technical debt remediations, architectural insights, and automated AI fix patches.
+**RepoMind** is a modern, production-grade SaaS engineering intelligence platform designed for software engineers, tech leads, engineering managers, and dev teams. It transforms thousands of lines of code into clear, prioritized technical debt remediations, architectural insights, and automated AI fix patches.
 
 ---
 
@@ -29,10 +29,10 @@ Here is the complete breakdown of all completed features, modules, and infrastru
   - Maintainability Index (0–100)
   - Bare exception detection & missing docstrings.
 
-### 2. 🤖 Antigravity Agentic AI Pair Programmer
-- [x] **Permission Request Workflow**: Asks for explicit user approval (`[✅ Approve & Apply Fix]`) before modifying codebase files.
+### 2. 🤖 RepoMind Permission-Based Code Agent
+- [x] **Approval Workflow**: Asks for explicit engineer approval (`[✅ Approve & Apply Fix]`) before modifying codebase files.
 - [x] **Empirical Error Diagnosis**: Inspects trace logs and generates refactoring patches.
-- [x] **Commit History & Change Reporting**: Accurately answers query prompts like *"What changes did you make?"* and lists full commit history.
+- [x] **Commit History & Change Reporting**: Accurately answers query prompts like *"What changes were made to this repo?"* and lists full commit history.
 
 ### 3. 📱 Real Mobile WhatsApp AI Chatbot Notifier
 - [x] **CallMeBot API Integration**: Delivers real WhatsApp notification alerts directly to the user's mobile phone number.
@@ -43,8 +43,8 @@ Here is the complete breakdown of all completed features, modules, and infrastru
   - 🧹 Code fix patches are applied by AI
   - 📅 Sprint Action Plan is generated.
 
-### 4. 🎨 SaaS Engineering Intelligence Dashboard
-- [x] **Cyberpunk Preloader**: Neural core HUD animation with telemetry loading sequence.
+### 4. 🎨 Commercial Engineering Intelligence Dashboard
+- [x] **Software Projects Registry**: Project management grid (`ProjectsView.tsx`) displaying analyzed repositories, health scores, coverage %, and active status.
 - [x] **Health Scorecard**: 0–100 stability index with 6-pillar breakdown (*Code Quality, Architecture, Security, Testing, Dependencies, Documentation*).
 - [x] **Technical Debt Explorer**: Searchable issue catalog with severity filters, category selectors, and effort hours.
 - [x] **AI Prioritization Engine**: Algorithmic ROI ranking formula:
@@ -61,12 +61,10 @@ Here is the complete breakdown of all completed features, modules, and infrastru
 
 ## ⏳ WHAT IS LEFT (Future Roadmap & Outstanding Tasks)
 
-The following items represent the planned roadmap enhancements for future releases:
-
-1. 🔄 **Multi-LLM Backend Provider Options**: Add support for switching AI model backends between Ollama (local offline LLM), Anthropic Claude 3.5 Sonnet, and OpenAI GPT-4o in `SettingsView.tsx`.
+1. 🔄 **Multi-LLM Backend Provider Options**: Provider abstraction between Ollama (local offline LLM), Anthropic Claude 3.5 Sonnet, OpenAI GPT-4o, and Google Gemini.
 2. 🪝 **Real-time GitHub Webhook Integration**: Auto-trigger repository analysis on `git push` or Pull Request creation via GitHub Webhooks.
 3. 👥 **Role-Based Access Control (RBAC)**: Enterprise team permissions (Admin, Lead Engineer, Developer, Viewer).
-4. ⚙️ **Custom Static Linting Rule Engine**: Allow teams to write custom AST rules and project-specific linting policies in Python/TypeScript.
+4. ⚙️ **Custom Static Linting Rule Engine**: Custom AST rules and project-specific linting policies in Python/TypeScript.
 
 ---
 
@@ -74,8 +72,8 @@ The following items represent the planned roadmap enhancements for future releas
 
 ```
 +-------------------------------------------------------------------------+
-|                  Vite + React 19 Glassmorphic Dashboard                 |
-|       (Header, Sidebar, Preloader, Health Scorecard, Command Palette)   |
+|                Vite + React 19 Engineering Dashboard                    |
+|       (Header, Sidebar, Health Scorecard, Command Palette, Projects)    |
 +-------------------------------------------------------------------------+
                                     |
                                     v
@@ -128,10 +126,10 @@ Backend API will listen on **[http://localhost:5000](http://localhost:5000)**.
 
 | Team Member | Role / Domain | Primary Files Owned | Core Responsibilities |
 | :--- | :--- | :--- | :--- |
-| **Member 1** | **Frontend Architect & UI Lead** | `Preloader.tsx`, `LandingPage.tsx`, `Header.tsx`, `Sidebar.tsx`, `CommandPalette.tsx`, `HealthScoreCard.tsx` | Design system, AI Preloader, responsive glassmorphism layout & dashboard navigation |
+| **Member 1** | **Frontend Architect & UI Lead** | `ProjectsView.tsx`, `LandingPage.tsx`, `Header.tsx`, `Sidebar.tsx`, `CommandPalette.tsx`, `HealthScoreCard.tsx` | Design system, responsive layout, Projects Registry & dashboard navigation |
 | **Member 2** | **Static Analysis Lead** | `analyze_repo.py`, `CodeQualityView.tsx`, `DependencyGraphView.tsx`, `FileIntelligenceModal.tsx` | Python AST parser, cyclomatic complexity metrics & Maintainability Index |
 | **Member 3** | **Security & Debt Lead** | `SecurityDashboard.tsx`, `TechnicalDebtExplorer.tsx`, `PrioritizationEngine.tsx`, `SprintPlannerView.tsx` | Static vulnerability scanner, ROI prioritization formula & sprint planning |
-| **Member 4** | **AI & Backend Lead** | `ArchitectureView.tsx`, `AICodebaseAssistant.tsx`, `WhatsAppNotificationModal.tsx`, `ReportGeneratorModal.tsx`, `repomind_server.py` | Antigravity AI Agent permission system, WhatsApp Bot backend API & PDF report generator |
+| **Member 4** | **AI & Backend Lead** | `ArchitectureView.tsx`, `AICodebaseAssistant.tsx`, `WhatsAppNotificationModal.tsx`, `ReportGeneratorModal.tsx`, `repomind_server.py` | RepoMind Code Agent permission system, WhatsApp Bot backend API & PDF report generator |
 
 ---
 

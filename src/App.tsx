@@ -7,6 +7,7 @@ import { RepoInputModal } from './components/RepoInputModal';
 import { AnalysisProgressScreen } from './components/AnalysisProgressScreen';
 import { Preloader } from './components/Preloader';
 
+import { ProjectsView } from './components/ProjectsView';
 import { HealthScoreCard } from './components/HealthScoreCard';
 import { TechnicalDebtCard } from './components/TechnicalDebtCard';
 import { ExecutiveSummaryCard } from './components/ExecutiveSummaryCard';
@@ -100,11 +101,11 @@ export function App() {
 
   const handleGenerateFixPatch = (findingOrIssue: SecurityFinding | TechnicalDebtIssue) => {
     setActiveTab('ai_assistant');
-    triggerToast(`✨ Antigravity AI generated fix patch for ${findingOrIssue.id}! Asking permission...`);
+    triggerToast(`✨ RepoMind AI generated fix patch for ${findingOrIssue.id}! Asking permission...`);
   };
 
   const handleApplyFixSuccess = (issueTitle: string) => {
-    triggerToast(`✅ Antigravity AI applied fix to codebase: ${issueTitle}`);
+    triggerToast(`✅ RepoMind AI applied fix to codebase: ${issueTitle}`);
     if (whatsAppConfig.enabled && whatsAppConfig.notifyOnFixApplied) {
       setTimeout(() => {
         triggerToast(`📱 WhatsApp Notification Sent: Code Patch Applied!`);
@@ -130,7 +131,7 @@ export function App() {
   } = analysisData;
 
   return (
-    <div className="min-h-screen bg-[#0b0813] text-slate-100 flex flex-col font-sans selection:bg-purple-500 selection:text-white">
+    <div className="min-h-screen bg-[#090611] text-[#F8F7FF] flex flex-col font-sans selection:bg-[#7C3AED] selection:text-white">
       
       {/* View Mode 1: Landing Page */}
       {viewMode === 'landing' && (
@@ -140,7 +141,7 @@ export function App() {
         />
       )}
 
-      {/* View Mode 2: Cinematic Analysis Screen */}
+      {/* View Mode 2: Analysis Screen */}
       {viewMode === 'analyzing' && (
         <AnalysisProgressScreen
           repoName={repoData.name}
@@ -160,6 +161,7 @@ export function App() {
             onOpenRepoInput={() => setRepoInputModalOpen(true)}
             onOpenReportModal={() => setReportModalOpen(true)}
             onOpenWhatsAppModal={() => setWhatsAppModalOpen(true)}
+            onNavigateTab={(tab) => setActiveTab(tab)}
           />
 
           <div className="flex flex-1 relative">
@@ -174,6 +176,15 @@ export function App() {
             {/* Main Content Viewport */}
             <main className="flex-1 p-4 md:p-8 max-w-7xl mx-auto w-full space-y-8 overflow-y-auto">
               
+              {/* TAB 0: PROJECTS */}
+              {activeTab === 'projects' && (
+                <ProjectsView
+                  currentRepo={repoData}
+                  onSelectProject={(url) => handleStartAnalysis(url)}
+                  onOpenNewRepoModal={() => setRepoInputModalOpen(true)}
+                />
+              )}
+
               {/* TAB 1: OVERVIEW */}
               {activeTab === 'overview' && (
                 <div className="space-y-8">
@@ -261,7 +272,7 @@ export function App() {
                 <TestingIntelligenceView onSelectFile={(f) => setSelectedFileForModal(f)} />
               )}
 
-              {/* TAB 8: AI CODEBASE ASSISTANT (ANTIGRAVITY PAIR PROGRAMMER) */}
+              {/* TAB 8: REPOMIND CODE AGENT */}
               {activeTab === 'ai_assistant' && (
                 <AICodebaseAssistant 
                   initialMessages={initialMessages}
@@ -279,15 +290,15 @@ export function App() {
 
               {/* TAB 10: REPORTS & EXPORT */}
               {activeTab === 'reports' && (
-                <div className="glass-panel rounded-3xl p-8 text-center max-w-xl mx-auto space-y-4">
-                  <div className="w-16 h-16 rounded-2xl bg-purple-600/20 text-purple-300 flex items-center justify-center mx-auto border border-purple-500/30 text-2xl">
+                <div className="glass-panel rounded-3xl p-8 text-center max-w-xl mx-auto space-y-4 bg-[#110B1F] border border-[#2A1B42]">
+                  <div className="w-16 h-16 rounded-2xl bg-[#7C3AED]/20 text-[#C4B5FD] flex items-center justify-center mx-auto border border-[#7C3AED]/30 text-2xl">
                     📄
                   </div>
                   <h2 className="text-xl font-extrabold text-white">Engineering Health Reports</h2>
-                  <p className="text-xs text-slate-300">Generate executive stakeholder PDF, JSON, or Markdown reports.</p>
+                  <p className="text-xs text-[#A9A1B8]">Generate executive stakeholder PDF/HTML, JSON, or Markdown reports.</p>
                   <button
                     onClick={() => setReportModalOpen(true)}
-                    className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-extrabold text-xs transition shadow-lg shadow-purple-600/30"
+                    className="px-6 py-3 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white font-extrabold text-xs transition shadow-lg shadow-[#7C3AED]/30"
                   >
                     Open Report Generator Modal →
                   </button>
@@ -333,7 +344,7 @@ export function App() {
           onGenerateRefactor={(f) => {
             setSelectedFileForModal(null);
             setActiveTab('ai_assistant');
-            triggerToast(`✨ Antigravity AI prepared refactoring patch for ${f}. Asking permission...`);
+            triggerToast(`✨ RepoMind AI prepared refactoring patch for ${f}. Asking permission...`);
           }}
         />
       )}
@@ -355,13 +366,13 @@ export function App() {
           triggerToast(`📱 WhatsApp notification settings saved for ${newConfig.phoneNumber}!`);
         }}
         onTriggerTestNotification={(msg) => {
-          triggerToast(`📱 WhatsApp Alert Sent: ${msg.split('\n')[0]}`);
+          triggerToast(`📱 WhatsApp Alert Dispatched: ${msg.split('\n')[0]}`);
         }}
       />
 
       {/* Toast Notification Banner */}
       {toastText && (
-        <div className="fixed bottom-5 right-5 z-50 px-4 py-2.5 rounded-xl bg-purple-900 text-white border border-purple-400 text-xs font-mono font-bold shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-5 right-5 z-50 px-4 py-2.5 rounded-xl bg-[#171026] text-white border border-[#7C3AED] text-xs font-mono font-bold shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-200">
           {toastText}
         </div>
       )}

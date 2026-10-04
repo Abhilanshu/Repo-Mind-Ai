@@ -1,5 +1,6 @@
 export type NavigationTab = 
   | 'overview' 
+  | 'projects'
   | 'architecture' 
   | 'debt' 
   | 'security' 
