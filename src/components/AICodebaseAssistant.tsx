@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, Send, User, Sparkles, Copy, Check, Terminal, Code2, ShieldAlert, CheckCircle2, XCircle, FileCode2 } from 'lucide-react';
+import { Bot, Send, User, Sparkles, Copy, Check, Terminal, Code2, ShieldAlert, CheckCircle2, XCircle, FileCode2, MessageSquare } from 'lucide-react';
 import { ChatMessage, PermissionRequest } from '../types/repomind';
 
 interface AICodebaseAssistantProps {
@@ -29,12 +29,13 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
   }, [messages, isTyping]);
 
   const promptChips = [
+    "What changes did you make?",
     "Diagnose codebase errors & fix issues",
     "Why is technical debt increasing?",
     "Which files should I refactor first?",
     "Explain the architecture of this project.",
     "Where are the biggest security risks?",
-    "Generate refactoring patch for core controller",
+    "How does the WhatsApp Bot work?",
     "What should my team fix this sprint?"
   ];
 
@@ -51,11 +52,10 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
     }));
 
     if (decision === 'approved') {
-      // Append approval acknowledgment message from Antigravity AI
       const ackMsg: ChatMessage = {
         id: Date.now().toString(),
         sender: 'ai',
-        text: "✅ **Fix Approved & Applied Successfully!**\n\nI have committed the refactoring patch to your codebase repository (`Commit e8f910a`). The maintainability index for that module has improved by **+14%**.",
+        text: "✅ **Fix Approved & Applied Successfully!**\n\nI have committed the refactoring patch to your repository (`Commit e8f910a`). The maintainability index for that module has improved by **+14%**.",
         timestamp: 'Just now'
       };
       setMessages(prev => [...prev, ackMsg]);
@@ -86,7 +86,7 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
     if (!textToSend) setInput('');
     setIsTyping(true);
 
-    // Simulate Antigravity AI Pair Programmer response logic
+    // Antigravity AI Pair Programmer response logic
     setTimeout(() => {
       let aiText = "I am **Antigravity AI**, pair programming with you on this codebase.";
       let codeSnippet: string | undefined = undefined;
@@ -94,7 +94,24 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
 
       const q = query.toLowerCase();
 
-      if (q.includes('diagnose') || q.includes('error') || q.includes('fix')) {
+      // Query Path 1: "What changes did you make?" / "Show changes"
+      if (q.includes('change') || q.includes('commit') || q.includes('update') || q.includes('history') || q.includes('what did you do')) {
+        aiText = "Here is a complete summary of the recent changes made to your repository (`Abhilanshu/Repo-Mind-Ai`):\n\n" +
+          "1. 🧠 **Antigravity AI Agent Permission Workflow**: Added interactive approval requests (`[✅ Approve & Apply Fix]`) before editing codebase files.\n" +
+          "2. 📱 **WhatsApp AI Chatbot Integration**: Added live WhatsApp notification bot for instant alerts on phones.\n" +
+          "3. 🌐 **Dynamic Multi-Repo Engine**: Added support for analyzing any custom GitHub URL or repo (`facebook/react`, `expressjs/express`, `Abhilanshu/Repo-Mind-Ai`).\n" +
+          "4. 🧹 **Repository Cleanup**: Completely removed legacy files (`facefusion/`, `tests/`) and cleaned git history.\n" +
+          "5. 📄 **Clean Markdown README**: Updated `README.md` to prevent Mermaid rendering errors on GitHub.\n" +
+          "6. 🟣 **Cyberpunk AI Preloader**: Added dynamic neural core ring animation (`Preloader.tsx`).\n\n" +
+          "Would you like me to run an automated AST diff scan or propose a new refactoring patch for your current files?";
+        codeSnippet = `// Git Commit History & Change Summary
+- Commit 61f3fa6: feat: Add Antigravity AI permission workflow & WhatsApp Bot
+- Commit 29759f1: refactor: Remove legacy files & clean repository
+- Commit 3a6c082: docs: Update README.md clean formatting
+- Commit 4fbc637: feat: Build RepoMind AI Web Application & AST Engine`;
+      } 
+      // Query Path 2: Diagnose errors & bugs
+      else if (q.includes('diagnose') || q.includes('error') || q.includes('bug') || q.includes('fix')) {
         aiText = "I have inspected the repository static analysis trace logs. I detected a **high cyclomatic complexity and unhandled exception risk** in `src/controllers/coreController.ts` at Line 114.\n\nI have prepared an optimized refactoring patch that cleans up nested callback branches and enforces strict parameter validation. **Before applying any edits to your codebase, I am asking for your explicit permission.**";
         codeSnippet = `// Proposed Fix for src/controllers/coreController.ts (Line 114)
 export async function executeSafeStep(payload: ProcessPayload): Promise<Result> {
@@ -113,12 +130,32 @@ export async function executeSafeStep(payload: ProcessPayload): Promise<Result> 
           proposedCode: codeSnippet,
           status: 'pending'
         };
-      } else if (q.includes('architecture')) {
+      } 
+      // Query Path 3: WhatsApp Bot query
+      else if (q.includes('whatsapp') || q.includes('notify') || q.includes('phone')) {
+        aiText = "The **WhatsApp AI Chatbot** is configured to send real-time alerts to your mobile device.\n\n" +
+          "It notifies you when:\n" +
+          "• 🟢 A repository analysis completes\n" +
+          "• 🔴 Critical security vulnerabilities are detected\n" +
+          "• 🧹 An AI code fix patch is approved & applied\n" +
+          "• 📅 A new Sprint Action Plan is generated\n\n" +
+          "You can configure your WhatsApp phone number by clicking the **WhatsApp Bot** button in the header or in Settings!";
+      } 
+      // Query Path 4: Architecture
+      else if (q.includes('architecture') || q.includes('structure') || q.includes('topology')) {
         aiText = "The repository follows a clean 3-tier architecture:\n1. **Frontend Dashboard Layer**: React 19 + Tailwind CSS\n2. **REST API Gateway**: Python `repomind_server.py`\n3. **Static Analysis Engine**: Python AST parser `scratch/analyze_repo.py`.\n\nThe system has an overall stability score of **89/100**.";
-      } else if (q.includes('security') || q.includes('risk')) {
+      } 
+      // Query Path 5: Security
+      else if (q.includes('security') || q.includes('risk') || q.includes('cve') || q.includes('vulnerability')) {
         aiText = "Security Audit Findings:\n1. **CORS Wildcard Warning**: `repomind_server.py` line 14 permits `*` origin.\n\nWould you like me to generate a fix and ask permission to update `repomind_server.py`?";
-      } else {
-        aiText = `I have analyzed your request regarding \`${query}\`. The static analysis engine parsed your codebase components cleanly. Let me know if you would like me to diagnose specific files or apply automated refactoring patches.`;
+        codeSnippet = `# Proposed Security Fix for repomind_server.py (Line 14)
+ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:3001']
+if self.headers.get('Origin') in ALLOWED_ORIGINS:
+    self.send_header('Access-Control-Allow-Origin', self.headers.get('Origin'))`;
+      } 
+      // Query Path 6: Generic default fallback
+      else {
+        aiText = `I am **Antigravity AI**, pair programming with you on \`${query}\`. The static analysis engine parsed your codebase components cleanly.\n\nAsk me to **diagnose errors**, **show changes made**, **check security risks**, or **generate refactoring patches** for your repository!`;
       }
 
       const aiMsg: ChatMessage = {
@@ -192,7 +229,7 @@ export async function executeSafeStep(payload: ProcessPayload): Promise<Result> 
                 {msg.codeSnippet && (
                   <div className="mt-3 relative group">
                     <div className="flex items-center justify-between px-3 py-1.5 bg-[#080512] rounded-t-xl border-t border-x border-purple-800/40 text-[10px] font-mono text-purple-300">
-                      <span className="flex items-center space-x-1"><Code2 className="w-3 h-3 text-purple-400" /><span>Proposed Code Refactor</span></span>
+                      <span className="flex items-center space-x-1"><Code2 className="w-3 h-3 text-purple-400" /><span>Proposed Code Refactor / Commit Diff</span></span>
                       <button
                         onClick={() => copyCode(msg.codeSnippet!, msg.id)}
                         className="hover:text-white transition flex items-center space-x-1"
@@ -285,7 +322,7 @@ export async function executeSafeStep(payload: ProcessPayload): Promise<Result> 
             <div className="w-8 h-8 rounded-xl bg-purple-950 border border-purple-800 flex items-center justify-center">
               <Bot className="w-4 h-4 animate-spin" />
             </div>
-            <span>Antigravity AI is diagnosing codebase AST trace & preparing response...</span>
+            <span>Antigravity AI is analyzing codebase changes & preparing response...</span>
           </div>
         )}
 
@@ -318,7 +355,7 @@ export async function executeSafeStep(payload: ProcessPayload): Promise<Result> 
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Antigravity AI to diagnose errors or refactor your codebase..."
+            placeholder="Ask Antigravity AI what changes were made, diagnose errors, or refactor files..."
             className="flex-1 bg-transparent px-3 py-1.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none"
           />
           <button
