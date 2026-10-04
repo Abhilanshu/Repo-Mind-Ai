@@ -11,7 +11,8 @@ import {
   Check, 
   GitBranch, 
   Zap,
-  FolderGit2
+  FolderGit2,
+  MessageSquare
 } from 'lucide-react';
 import { RepositoryMetadata } from '../types/repomind';
 
@@ -21,6 +22,7 @@ interface HeaderProps {
   onSwitchRepo: (repoName: string) => void;
   onOpenRepoInput: () => void;
   onOpenReportModal: () => void;
+  onOpenWhatsAppModal: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -28,23 +30,31 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCommandPalette,
   onSwitchRepo,
   onOpenRepoInput,
-  onOpenReportModal
+  onOpenReportModal,
+  onOpenWhatsAppModal
 }) => {
   const [showRepoDropdown, setShowRepoDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
 
   const notifications = [
-    { id: 1, type: 'critical', text: 'Critical command injection vulnerability in program_helper.py', time: '10m ago' },
-    { id: 2, type: 'warning', text: '3 new high-complexity functions detected in core.py', time: '1h ago' },
-    { id: 3, type: 'info', text: 'Analysis completed for branch master', time: '2h ago' }
+    { id: 1, type: 'critical', text: `Analysis complete for ${repo.name}`, time: '10m ago' },
+    { id: 2, type: 'warning', text: '3 high-complexity functions flagged for refactoring', time: '1h ago' },
+    { id: 3, type: 'info', text: 'WhatsApp AI Chatbot active & ready', time: '2h ago' }
+  ];
+
+  const presetRepos = [
+    { name: 'Abhilanshu/Repo-Mind-Ai', tag: 'React / TS' },
+    { name: 'facebook/react', tag: 'Monorepo' },
+    { name: 'expressjs/express', tag: 'Node.js' },
+    { name: 'tailwindlabs/tailwindcss', tag: 'CSS Engine' },
   ];
 
   return (
     <header className="h-16 border-b border-purple-900/30 bg-[#0e0a1c]/80 backdrop-blur-md sticky top-0 z-30 px-4 md:px-6 flex items-center justify-between">
       {/* Left: Logo & Repo Switcher */}
       <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.location.reload()}>
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-700 via-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-500/20 border border-purple-400/30">
             <span className="text-lg">🧠</span>
           </div>
@@ -71,30 +81,26 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           {showRepoDropdown && (
-            <div className="absolute left-0 mt-2 w-64 rounded-xl bg-[#140f2b] border border-purple-500/30 shadow-2xl p-2 z-50">
-              <div className="text-[10px] font-semibold text-purple-300/70 uppercase px-2 py-1">Active Repositories</div>
+            <div className="absolute left-0 mt-2 w-72 rounded-xl bg-[#140f2b] border border-purple-500/30 shadow-2xl p-2 z-50">
+              <div className="text-[10px] font-semibold text-purple-300/70 uppercase px-2 py-1">Analyzed Repositories</div>
               
-              <button
-                onClick={() => { onSwitchRepo('facefusion/facefusion'); setShowRepoDropdown(false); }}
-                className="w-full text-left flex items-center justify-between p-2 rounded-lg hover:bg-purple-900/30 text-xs transition"
-              >
-                <div className="flex items-center space-x-2">
-                  <GitBranch className="w-3.5 h-3.5 text-purple-400" />
-                  <span className="text-white font-medium">facefusion/facefusion</span>
-                </div>
-                {repo.name.includes('facefusion') && <Check className="w-3.5 h-3.5 text-purple-400" />}
-              </button>
-
-              <button
-                onClick={() => { onSwitchRepo('acme-corp/project-alpha'); setShowRepoDropdown(false); }}
-                className="w-full text-left flex items-center justify-between p-2 rounded-lg hover:bg-purple-900/30 text-xs transition"
-              >
-                <div className="flex items-center space-x-2">
-                  <GitBranch className="w-3.5 h-3.5 text-indigo-400" />
-                  <span className="text-slate-300 font-medium">acme-corp/project-alpha</span>
-                </div>
-                {repo.name.includes('project-alpha') && <Check className="w-3.5 h-3.5 text-purple-400" />}
-              </button>
+              {presetRepos.map((r, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => { onSwitchRepo(r.name); setShowRepoDropdown(false); }}
+                  className="w-full text-left flex items-center justify-between p-2 rounded-lg hover:bg-purple-900/30 text-xs transition"
+                >
+                  <div className="flex items-center space-x-2">
+                    <GitBranch className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                    <span className="text-white font-medium truncate">{r.name}</span>
+                  </div>
+                  {repo.name.toLowerCase() === r.name.toLowerCase() ? (
+                    <Check className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                  ) : (
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-purple-950 text-purple-400 border border-purple-800/40">{r.tag}</span>
+                  )}
+                </button>
+              ))}
 
               <div className="my-1 border-t border-purple-900/40" />
 
@@ -103,7 +109,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className="w-full text-left flex items-center space-x-2 p-2 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-semibold transition"
               >
                 <Zap className="w-3.5 h-3.5" />
-                <span>+ Analyze New Repository</span>
+                <span>+ Analyze Any GitHub Repository</span>
               </button>
             </div>
           )}
@@ -129,6 +135,16 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Right: Actions, Notifications, Profile */}
       <div className="flex items-center space-x-3">
+        
+        {/* WhatsApp Bot Trigger Button */}
+        <button
+          onClick={onOpenWhatsAppModal}
+          className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-500/40 text-emerald-300 text-xs font-semibold transition shadow-md shadow-emerald-900/20"
+        >
+          <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+          <span>WhatsApp Bot</span>
+        </button>
+
         <button
           onClick={onOpenReportModal}
           className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-md shadow-purple-600/20 transition"

@@ -58,8 +58,8 @@ export const RepoInputModal: React.FC<RepoInputModalProps> = ({
             <Zap className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-white">🔍 Analyze Your Repository</h2>
-            <p className="text-xs text-slate-300">Connect a public or private repository for deep AI code intelligence.</p>
+            <h2 className="text-xl font-extrabold text-white">🔍 Analyze Any Repository</h2>
+            <p className="text-xs text-slate-300">Connect any GitHub repository URL or upload source zip for instant AI code intelligence.</p>
           </div>
         </div>
 
@@ -77,11 +77,11 @@ export const RepoInputModal: React.FC<RepoInputModalProps> = ({
                 type="text"
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
-                placeholder="https://github.com/username/repository"
+                placeholder="https://github.com/Abhilanshu/Repo-Mind-Ai"
                 className="flex-1 bg-[#0b0813] border border-purple-900/50 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition"
               />
               <button
-                onClick={() => onStartAnalysis(githubUrl || 'https://github.com/facefusion/facefusion')}
+                onClick={() => onStartAnalysis(githubUrl || 'https://github.com/Abhilanshu/Repo-Mind-Ai')}
                 className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition flex items-center space-x-1 shrink-0"
               >
                 <span>Connect GitHub →</span>
@@ -133,11 +133,11 @@ export const RepoInputModal: React.FC<RepoInputModalProps> = ({
                 type="text"
                 value={genericUrl}
                 onChange={(e) => setGenericUrl(e.target.value)}
-                placeholder="https://github.com/company/project"
+                placeholder="https://github.com/facebook/react"
                 className="flex-1 bg-[#0b0813] border border-purple-900/50 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition"
               />
               <button
-                onClick={() => onStartAnalysis(genericUrl || 'https://github.com/facefusion/facefusion')}
+                onClick={() => onStartAnalysis(genericUrl || 'https://github.com/facebook/react')}
                 className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shrink-0"
               >
                 Start Analysis
@@ -154,7 +154,7 @@ export const RepoInputModal: React.FC<RepoInputModalProps> = ({
               }}
               className="text-xs font-bold text-purple-300 hover:text-purple-200 underline decoration-purple-500/50 underline-offset-4 transition"
             >
-              ⚡ Or load Demo Repository (facefusion/facefusion) instantly →
+              ⚡ Or load RepoMind AI Repository (Abhilanshu/Repo-Mind-Ai) →
             </button>
           </div>
 

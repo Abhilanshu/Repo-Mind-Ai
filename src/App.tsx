@@ -22,34 +22,39 @@ import { AICodebaseAssistant } from './components/AICodebaseAssistant';
 import { SprintPlannerView } from './components/SprintPlannerView';
 import { FileIntelligenceModal } from './components/FileIntelligenceModal';
 import { ReportGeneratorModal } from './components/ReportGeneratorModal';
+import { WhatsAppNotificationModal } from './components/WhatsAppNotificationModal';
 import { SettingsView } from './components/SettingsView';
 
-import { NavigationTab, TechnicalDebtIssue, SecurityFinding } from './types/repomind';
-import { 
-  mockRepository, 
-  mockTechnicalDebtIssues, 
-  mockSecurityFindings, 
-  mockDependencies, 
-  mockCodeQualityFiles, 
-  mockArchNodes, 
-  mockArchEdges, 
-  mockPrioritizedActions, 
-  mockSprintTasks, 
-  mockInitialChatMessages 
-} from './mockData/repoData';
+import { NavigationTab, TechnicalDebtIssue, SecurityFinding, FullRepoAnalysisData, WhatsAppConfig } from './types/repomind';
+import { generateDynamicRepoData } from './mockData/repoData';
 
 export function App() {
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'landing' | 'analyzing' | 'dashboard'>('landing');
   const [activeTab, setActiveTab] = useState<NavigationTab>('overview');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [repoData, setRepoData] = useState(mockRepository);
+  
+  // Dynamic Repository Dataset State
+  const [analysisData, setAnalysisData] = useState<FullRepoAnalysisData>(
+    generateDynamicRepoData('Abhilanshu/Repo-Mind-Ai')
+  );
+
+  // WhatsApp Configuration State
+  const [whatsAppConfig, setWhatsAppConfig] = useState<WhatsAppConfig>({
+    phoneNumber: '+91 98765 43210',
+    enabled: true,
+    notifyOnAnalysis: true,
+    notifyOnCriticalSec: true,
+    notifyOnFixApplied: true,
+    notifyOnSprintReady: true
+  });
 
   // Modals
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [repoInputModalOpen, setRepoInputModalOpen] = useState(false);
   const [selectedFileForModal, setSelectedFileForModal] = useState<string | null>(null);
   const [reportModalOpen, setReportModalOpen] = useState(false);
+  const [whatsAppModalOpen, setWhatsAppModalOpen] = useState(false);
   const [toastText, setToastText] = useState<string | null>(null);
 
   // Keyboard shortcut for Cmd+K / Ctrl+K
@@ -66,42 +71,63 @@ export function App() {
 
   const triggerToast = (msg: string) => {
     setToastText(msg);
-    setTimeout(() => setToastText(null), 3000);
+    setTimeout(() => setToastText(null), 3500);
   };
 
   const handleStartAnalysis = (repoUrl: string) => {
     setRepoInputModalOpen(false);
+    const newDataset = generateDynamicRepoData(repoUrl);
+    setAnalysisData(newDataset);
     setViewMode('analyzing');
-    if (repoUrl.includes('project-alpha')) {
-      setRepoData({
-        ...mockRepository,
-        name: 'acme-corp/project-alpha',
-        repositoryType: 'React/TypeScript'
-      });
-    } else {
-      setRepoData(mockRepository);
-    }
   };
 
   const handleAnalysisComplete = () => {
     setViewMode('dashboard');
-    triggerToast('✓ Repository analysis completed successfully!');
+    triggerToast(`✓ Analysis complete for ${analysisData.metadata.name}!`);
+    if (whatsAppConfig.enabled && whatsAppConfig.notifyOnAnalysis) {
+      setTimeout(() => {
+        triggerToast(`📱 WhatsApp Alert Sent to ${whatsAppConfig.phoneNumber}: Analysis Completed!`);
+      }, 1500);
+    }
   };
 
   const handleExploreDemo = () => {
-    setRepoData(mockRepository);
+    const demoData = generateDynamicRepoData('Abhilanshu/Repo-Mind-Ai');
+    setAnalysisData(demoData);
     setViewMode('dashboard');
-    triggerToast('⚡ Loaded Demo Repository: facefusion/facefusion');
+    triggerToast(`⚡ Loaded Repository Intelligence for Abhilanshu/Repo-Mind-Ai`);
   };
 
   const handleGenerateFixPatch = (findingOrIssue: SecurityFinding | TechnicalDebtIssue) => {
     setActiveTab('ai_assistant');
-    triggerToast(`✨ AI fix patch generated for ${findingOrIssue.id}!`);
+    triggerToast(`✨ Antigravity AI generated fix patch for ${findingOrIssue.id}! Asking permission...`);
+  };
+
+  const handleApplyFixSuccess = (issueTitle: string) => {
+    triggerToast(`✅ Antigravity AI applied fix to codebase: ${issueTitle}`);
+    if (whatsAppConfig.enabled && whatsAppConfig.notifyOnFixApplied) {
+      setTimeout(() => {
+        triggerToast(`📱 WhatsApp Notification Sent: Code Patch Applied!`);
+      }, 1200);
+    }
   };
 
   if (loading) {
     return <Preloader onFinish={() => setLoading(false)} />;
   }
+
+  const {
+    metadata: repoData,
+    debtIssues,
+    securityFindings,
+    dependencies,
+    codeQualityFiles,
+    archNodes,
+    archEdges,
+    prioritizedActions,
+    sprintTasks,
+    initialMessages
+  } = analysisData;
 
   return (
     <div className="min-h-screen bg-[#0b0813] text-slate-100 flex flex-col font-sans selection:bg-purple-500 selection:text-white">
@@ -133,6 +159,7 @@ export function App() {
             }}
             onOpenRepoInput={() => setRepoInputModalOpen(true)}
             onOpenReportModal={() => setReportModalOpen(true)}
+            onOpenWhatsAppModal={() => setWhatsAppModalOpen(true)}
           />
 
           <div className="flex flex-1 relative">
@@ -141,7 +168,7 @@ export function App() {
               onTabChange={(tab) => setActiveTab(tab)}
               collapsed={sidebarCollapsed}
               onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
-              criticalIssueCount={mockRepository.issuesBreakdown.critical}
+              criticalIssueCount={repoData.issuesBreakdown.critical}
             />
 
             {/* Main Content Viewport */}
@@ -174,10 +201,10 @@ export function App() {
 
                   {/* Prioritization Engine ("What Should I Fix First?") */}
                   <PrioritizationEngine
-                    actions={mockPrioritizedActions}
+                    actions={prioritizedActions}
                     onGenerateSprintPlan={() => setActiveTab('sprint')}
                     onViewIssue={(id) => {
-                      const found = mockTechnicalDebtIssues.find(i => i.id === id);
+                      const found = debtIssues.find(i => i.id === id);
                       if (found) setSelectedFileForModal(found.file);
                       else setActiveTab('debt');
                     }}
@@ -189,12 +216,12 @@ export function App() {
               {activeTab === 'architecture' && (
                 <div className="space-y-8">
                   <ArchitectureView 
-                    nodes={mockArchNodes}
-                    edges={mockArchEdges}
+                    nodes={archNodes}
+                    edges={archEdges}
                     onSelectFile={(f) => setSelectedFileForModal(f)}
                   />
                   <DependencyGraphView 
-                    files={mockCodeQualityFiles}
+                    files={codeQualityFiles}
                     onSelectFile={(f) => setSelectedFileForModal(f)}
                   />
                 </div>
@@ -203,7 +230,7 @@ export function App() {
               {/* TAB 3: TECHNICAL DEBT */}
               {activeTab === 'debt' && (
                 <TechnicalDebtExplorer
-                  issues={mockTechnicalDebtIssues}
+                  issues={debtIssues}
                   onSelectIssue={(issue) => setSelectedFileForModal(issue.file)}
                 />
               )}
@@ -211,20 +238,20 @@ export function App() {
               {/* TAB 4: SECURITY CENTER */}
               {activeTab === 'security' && (
                 <SecurityDashboard
-                  findings={mockSecurityFindings}
+                  findings={securityFindings}
                   onGenerateFix={(finding) => handleGenerateFixPatch(finding)}
                 />
               )}
 
               {/* TAB 5: DEPENDENCIES */}
               {activeTab === 'dependencies' && (
-                <DependencyIntelligence dependencies={mockDependencies} />
+                <DependencyIntelligence dependencies={dependencies} />
               )}
 
               {/* TAB 6: CODE QUALITY */}
               {activeTab === 'quality' && (
                 <CodeQualityView
-                  files={mockCodeQualityFiles}
+                  files={codeQualityFiles}
                   onSelectFile={(f) => setSelectedFileForModal(f)}
                 />
               )}
@@ -234,15 +261,18 @@ export function App() {
                 <TestingIntelligenceView />
               )}
 
-              {/* TAB 8: AI CODEBASE ASSISTANT */}
+              {/* TAB 8: AI CODEBASE ASSISTANT (ANTIGRAVITY PAIR PROGRAMMER) */}
               {activeTab === 'ai_assistant' && (
-                <AICodebaseAssistant initialMessages={mockInitialChatMessages} />
+                <AICodebaseAssistant 
+                  initialMessages={initialMessages}
+                  onApplyFixSuccess={handleApplyFixSuccess}
+                />
               )}
 
               {/* TAB 9: AI SPRINT PLANNER */}
               {activeTab === 'sprint' && (
                 <SprintPlannerView 
-                  initialTasks={mockSprintTasks}
+                  initialTasks={sprintTasks}
                   onViewIssue={(id) => setActiveTab('debt')}
                 />
               )}
@@ -266,7 +296,10 @@ export function App() {
 
               {/* TAB 11: SETTINGS */}
               {activeTab === 'settings' && (
-                <SettingsView />
+                <SettingsView 
+                  whatsAppConfig={whatsAppConfig}
+                  onOpenWhatsAppModal={() => setWhatsAppModalOpen(true)}
+                />
               )}
 
             </main>
@@ -300,7 +333,7 @@ export function App() {
           onGenerateRefactor={(f) => {
             setSelectedFileForModal(null);
             setActiveTab('ai_assistant');
-            triggerToast(`✨ Generated refactoring plan for ${f}!`);
+            triggerToast(`✨ Antigravity AI prepared refactoring patch for ${f}. Asking permission...`);
           }}
         />
       )}
@@ -310,6 +343,20 @@ export function App() {
         isOpen={reportModalOpen}
         onClose={() => setReportModalOpen(false)}
         repo={repoData}
+      />
+
+      {/* WhatsApp Notification Configuration Modal */}
+      <WhatsAppNotificationModal
+        isOpen={whatsAppModalOpen}
+        onClose={() => setWhatsAppModalOpen(false)}
+        config={whatsAppConfig}
+        onSaveConfig={(newConfig) => {
+          setWhatsAppConfig(newConfig);
+          triggerToast(`📱 WhatsApp notification settings saved for ${newConfig.phoneNumber}!`);
+        }}
+        onTriggerTestNotification={(msg) => {
+          triggerToast(`📱 WhatsApp Alert Sent: ${msg.split('\n')[0]}`);
+        }}
       />
 
       {/* Toast Notification Banner */}

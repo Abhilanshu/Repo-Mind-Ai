@@ -119,13 +119,32 @@ export interface SprintTask {
   assignee?: string;
 }
 
+export interface PermissionRequest {
+  id: string;
+  file: string;
+  line: number;
+  issueTitle: string;
+  proposedCode: string;
+  status: 'pending' | 'approved' | 'rejected';
+}
+
 export interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
   text: string;
   timestamp: string;
   codeSnippet?: string;
+  permissionRequest?: PermissionRequest;
   suggestedActions?: { label: string; action: string }[];
+}
+
+export interface WhatsAppConfig {
+  phoneNumber: string;
+  enabled: boolean;
+  notifyOnAnalysis: boolean;
+  notifyOnCriticalSec: boolean;
+  notifyOnFixApplied: boolean;
+  notifyOnSprintReady: boolean;
 }
 
 export interface RepositoryMetadata {
@@ -140,8 +159,21 @@ export interface RepositoryMetadata {
   totalIssues: number;
   issuesBreakdown: Record<Severity, number>;
   totalDebtHours: number;
-  debtHoursTrendDelta: number; // e.g. -12 for -12%
+  debtHoursTrendDelta: number;
   aiSummary: string;
   lastAnalyzed: string;
-  repositoryType: 'Python/Gradio' | 'React/TypeScript' | 'Node/Express' | 'Multi-Module';
+  repositoryType: string;
+}
+
+export interface FullRepoAnalysisData {
+  metadata: RepositoryMetadata;
+  debtIssues: TechnicalDebtIssue[];
+  securityFindings: SecurityFinding[];
+  dependencies: DependencyItem[];
+  codeQualityFiles: CodeQualityFile[];
+  archNodes: ArchNode[];
+  archEdges: ArchEdge[];
+  prioritizedActions: PrioritizedAction[];
+  sprintTasks: SprintTask[];
+  initialMessages: ChatMessage[];
 }
