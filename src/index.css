@@ -2,19 +2,38 @@
 
 @layer base {
   :root {
-    --bg-app: #F8FAFC;
-    --surface-primary: #FFFFFF;
-    --surface-secondary: #F1F5F9;
-    --border-color: #E2E8F0;
-    --text-primary: #0F172A;
-    --text-secondary: #475569;
-    --text-muted: #94A3B8;
-    --accent-primary: #2563EB;
+    --bg-app: #F7F5F2;
+    --surface-card: #FFFFFF;
+    --surface-sidebar: #FBFAF8;
+    --surface-secondary: #F1F3F6;
+    --border-subtle: #E8E5DF;
+    
+    --text-primary: #1F2937;
+    --text-secondary: #4B5563;
+    --text-muted: #9CA3AF;
+    
+    --brand-accent: #6D4AFF;
+    
+    /* Functional Domain Colors */
+    --domain-health: #EAF7EF;
+    --domain-health-text: #16803C;
+    
+    --domain-testing: #EAF2FF;
+    --domain-testing-text: #1D4ED8;
+    
+    --domain-deps: #FFF5DD;
+    --domain-deps-text: #B7791F;
+    
+    --domain-security: #FDECEE;
+    --domain-security-text: #C53030;
+    
+    --domain-ai: #EEE9FF;
+    --domain-ai-text: #6D4AFF;
   }
 
   body {
-    background-color: #F8FAFC;
-    color: #0F172A;
+    background-color: #F7F5F2;
+    color: #1F2937;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
@@ -23,39 +42,67 @@
   }
 }
 
-/* Custom scrollbars */
+/* Custom Smooth Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #F7F5F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #DDD9D2;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #9CA3AF;
 }
 
-/* Modern SaaS Light Card Helpers */
+/* Layered Card Systems with Soft Shadows */
 .card-panel {
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px 0 rgba(15, 23, 42, 0.02);
+  border: 1px solid #E8E5DF;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(30, 30, 40, 0.04), 0 12px 32px rgba(30, 30, 40, 0.06);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-panel:hover {
+  transform: translateY(-2px);
+  border-color: #D8CAFF;
+  box-shadow: 0 6px 16px rgba(30, 30, 40, 0.06), 0 16px 40px rgba(109, 74, 255, 0.08);
 }
 
 .glass-panel {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px 0 rgba(15, 23, 42, 0.02);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid #E8E5DF;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(30, 30, 40, 0.04), 0 12px 32px rgba(30, 30, 40, 0.06);
 }
 
-.card-hover {
-  transition: all 0.2s ease;
+.modal-card {
+  background: #FFFFFF;
+  border: 1px solid #E8E5DF;
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(30, 30, 40, 0.14);
 }
-.card-hover:hover {
-  border-color: #3B82F6;
-  box-shadow: 0 4px 12px 0 rgba(37, 99, 235, 0.08);
+
+.modal-overlay {
+  background: rgba(40, 35, 30, 0.25);
+  backdrop-filter: blur(6px);
 }
+
+/* Domain Tint Helpers */
+.bg-domain-health { background-color: #EAF7EF; border-color: #C6ECD3; color: #16803C; }
+.bg-domain-testing { background-color: #EAF2FF; border-color: #C8D9F5; color: #1D4ED8; }
+.bg-domain-deps { background-color: #FFF5DD; border-color: #F3D29A; color: #B7791F; }
+.bg-domain-security { background-color: #FDECEE; border-color: #F5C6C6; color: #C53030; }
+.bg-domain-ai { background-color: #EEE9FF; border-color: #D8CAFF; color: #6D4AFF; }
+
+/* Subtle Gradients */
+.bg-grad-health { background: linear-gradient(135deg, #EFFAF3 0%, #FFFFFF 100%); }
+.bg-grad-testing { background: linear-gradient(135deg, #EFF5FF 0%, #FFFFFF 100%); }
+.bg-grad-security { background: linear-gradient(135deg, #FFF1F1 0%, #FFFFFF 100%); }
+.bg-grad-ai { background: linear-gradient(135deg, #F4F0FF 0%, #FFFFFF 100%); }
+.bg-grad-deps { background: linear-gradient(135deg, #FFFBF0 0%, #FFFFFF 100%); }

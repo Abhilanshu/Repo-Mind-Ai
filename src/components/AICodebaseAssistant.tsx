@@ -171,24 +171,24 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
   };
 
   return (
-    <div className="card-panel rounded-3xl p-6 h-[calc(100vh-10rem)] flex flex-col justify-between relative overflow-hidden bg-white border border-[#E4E4DE] font-sans text-[#181816]">
+    <div className="card-panel rounded-3xl p-6 h-[calc(100vh-10rem)] flex flex-col justify-between relative overflow-hidden bg-[#F2EDFF] border border-[#D8CAFF] font-sans text-[#1F2937]">
       
       {/* Header */}
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#E4E4DE] shrink-0">
+      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#D8CAFF] shrink-0">
         <div className="flex items-center space-x-3">
-          <div className="w-9 h-9 rounded-xl bg-[#171717] flex items-center justify-center text-white shadow-md">
+          <div className="w-9 h-9 rounded-xl bg-[#6D4AFF] flex items-center justify-center text-white shadow-md shadow-[#6D4AFF]/20">
             <Bot className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h2 className="text-base font-extrabold text-[#181816] flex items-center space-x-2">
+            <h2 className="text-base font-extrabold text-[#1F2937] flex items-center space-x-2">
               <span>🤖 RepoMind Code Agent</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F1F1ED] text-[#181816] border border-[#E4E4DE]">Active Agent</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EEE9FF] text-[#6D4AFF] border border-[#D8CAFF] font-bold">Active Agent</span>
             </h2>
-            <p className="text-xs text-[#686862]">Empirical error diagnosis, step-by-step reasoning, and permission-based code editing.</p>
+            <p className="text-xs text-[#4B5563]">Empirical error diagnosis, step-by-step reasoning, and permission-based code editing.</p>
           </div>
         </div>
 
-        <div className="flex items-center space-x-1.5 text-xs font-mono text-[#16803C] bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 font-bold">
+        <div className="flex items-center space-x-1.5 text-xs font-mono text-[#16803C] bg-[#EAF7EF] px-3 py-1.5 rounded-xl border border-[#C6ECD3] font-bold">
           <ShieldAlert className="w-3.5 h-3.5 text-[#16803C]" />
           <span>Approval Required Before Code Edits</span>
         </div>
@@ -205,32 +205,32 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
             >
               <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border ${
                 isAI 
-                  ? 'bg-[#171717] text-white border-[#171717]' 
-                  : 'bg-[#F1F1ED] text-[#181816] border-[#E4E4DE] font-bold text-xs'
+                  ? 'bg-[#6D4AFF] text-white border-[#6D4AFF] shadow-xs' 
+                  : 'bg-white text-[#1F2937] border-[#E8E5DF] font-bold text-xs shadow-xs'
               }`}>
                 {isAI ? <Bot className="w-4 h-4" /> : <User className="w-4 h-4" />}
               </div>
 
               <div className={`max-w-2xl rounded-2xl p-4 text-xs leading-relaxed ${
                 isAI 
-                  ? 'bg-[#F7F7F4] border border-[#E4E4DE] text-[#181816]' 
-                  : 'bg-[#171717] text-white font-medium shadow-sm'
+                  ? 'bg-white border border-[#D8CAFF] text-[#1F2937] shadow-xs' 
+                  : 'bg-[#6D4AFF] text-white font-medium shadow-md shadow-[#6D4AFF]/20'
               }`}>
                 <div className="whitespace-pre-wrap">{msg.text}</div>
 
                 {msg.codeSnippet && (
                   <div className="mt-3 relative group">
-                    <div className="flex items-center justify-between px-3 py-1.5 bg-[#181816] rounded-t-xl border-t border-x border-[#181816] text-[10px] font-mono text-slate-200">
-                      <span className="flex items-center space-x-1"><Code2 className="w-3 h-3 text-emerald-400" /><span>Proposed Refactoring Patch</span></span>
+                    <div className="flex items-center justify-between px-3 py-1.5 bg-[#1F2937] rounded-t-xl border-t border-x border-[#1F2937] text-[10px] font-mono text-slate-200">
+                      <span className="flex items-center space-x-1"><Code2 className="w-3 h-3 text-[#10B981]" /><span>Proposed Refactoring Patch</span></span>
                       <button
                         onClick={() => copyCode(msg.codeSnippet!, msg.id)}
                         className="hover:text-white transition flex items-center space-x-1"
                       >
-                        {copiedId === msg.id ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                        {copiedId === msg.id ? <Check className="w-3 h-3 text-[#10B981]" /> : <Copy className="w-3 h-3" />}
                         <span>{copiedId === msg.id ? 'Copied!' : 'Copy Code'}</span>
                       </button>
                     </div>
-                    <pre className="p-3 bg-[#181816] text-emerald-300 font-mono text-[11px] rounded-b-xl border border-[#181816] overflow-x-auto">
+                    <pre className="p-3 bg-[#1F2937] text-[#34D399] font-mono text-[11px] rounded-b-xl border border-[#1F2937] overflow-x-auto">
                       {msg.codeSnippet}
                     </pre>
                   </div>
@@ -238,29 +238,29 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
 
                 {/* Professional Permission Request Card */}
                 {msg.permissionRequest && (
-                  <div className="mt-4 p-4 rounded-2xl bg-white border border-[#E4E4DE] shadow-md space-y-3">
+                  <div className="mt-4 p-4 rounded-2xl bg-[#FFF5E6] border border-[#F3D29A] shadow-xs space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-mono font-bold uppercase text-[#B7791F] flex items-center space-x-1.5">
                         <AlertTriangle className="w-3.5 h-3.5 text-[#B7791F]" />
                         <span>⚠️ Approval Required</span>
                       </span>
                       <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded capitalize ${
-                        msg.permissionRequest.status === 'pending' ? 'bg-amber-50 text-[#B7791F] border border-amber-200' :
-                        msg.permissionRequest.status === 'approved' ? 'bg-emerald-50 text-[#16803C] border border-emerald-200' :
-                        'bg-rose-50 text-[#C53030] border border-rose-200'
+                        msg.permissionRequest.status === 'pending' ? 'bg-[#FFF5DD] text-[#B7791F] border border-[#F3D29A]' :
+                        msg.permissionRequest.status === 'approved' ? 'bg-[#EAF7EF] text-[#16803C] border border-[#C6ECD3]' :
+                        'bg-[#FDECEE] text-[#C53030] border border-[#F5C6C6]'
                       }`}>
                         Status: {msg.permissionRequest.status}
                       </span>
                     </div>
 
-                    <div className="text-xs text-[#181816] font-bold">
+                    <div className="text-xs text-[#1F2937] font-bold">
                       {msg.permissionRequest.issueTitle}
                     </div>
 
-                    <div className="text-[11px] font-mono text-[#686862] space-y-1">
-                      <div>File: <span className="text-[#181816] font-bold">{msg.permissionRequest.file}</span> (Line {msg.permissionRequest.line})</div>
+                    <div className="text-[11px] font-mono text-[#4B5563] space-y-1">
+                      <div>File: <span className="text-[#1F2937] font-bold">{msg.permissionRequest.file}</span> (Line {msg.permissionRequest.line})</div>
                       <div>Risk: <span className="text-[#16803C] font-bold">Low</span></div>
-                      <div>Expected Result: <span className="text-[#181816]">Prevent potential runtime exception & improve maintainability</span></div>
+                      <div>Expected Result: <span className="text-[#1F2937]">Prevent potential runtime exception & improve maintainability</span></div>
                     </div>
 
                     {msg.permissionRequest.status === 'pending' ? (
@@ -274,7 +274,7 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
                         </button>
                         <button
                           onClick={() => handlePermissionDecision(msg.id, 'rejected')}
-                          className="px-3 py-2 rounded-xl bg-[#F7F7F4] hover:bg-[#E4E4DE] border border-[#E4E4DE] text-[#181816] text-xs font-bold transition flex items-center space-x-1"
+                          className="px-3 py-2 rounded-xl bg-white hover:bg-[#F1F3F6] border border-[#E8E5DF] text-[#1F2937] text-xs font-bold transition flex items-center space-x-1"
                         >
                           <XCircle className="w-4 h-4 text-[#C53030]" />
                           <span>Cancel</span>
@@ -289,7 +289,7 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
                   </div>
                 )}
 
-                <div className="text-[9px] font-mono text-[#96968E] mt-2 text-right">
+                <div className="text-[9px] font-mono text-[#9CA3AF] mt-2 text-right">
                   {msg.timestamp}
                 </div>
               </div>
@@ -298,9 +298,9 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
         })}
 
         {isTyping && (
-          <div className="flex items-center space-x-3 text-xs text-[#686862] font-mono">
-            <div className="w-8 h-8 rounded-xl bg-[#F7F7F4] border border-[#E4E4DE] flex items-center justify-center">
-              <Bot className="w-4 h-4 animate-spin text-[#171717]" />
+          <div className="flex items-center space-x-3 text-xs text-[#6D4AFF] font-mono">
+            <div className="w-8 h-8 rounded-xl bg-white border border-[#D8CAFF] flex items-center justify-center shadow-xs">
+              <Bot className="w-4 h-4 animate-spin text-[#6D4AFF]" />
             </div>
             <span>Analyzing repository & preparing response...</span>
           </div>
@@ -310,12 +310,12 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
       </div>
 
       {/* Suggested Prompt Chips */}
-      <div className="pt-3 border-t border-[#E4E4DE] overflow-x-auto flex items-center space-x-2 shrink-0 py-2">
+      <div className="pt-3 border-t border-[#D8CAFF] overflow-x-auto flex items-center space-x-2 shrink-0 py-2">
         {promptChips.map((chip, idx) => (
           <button
             key={idx}
             onClick={() => handleSend(chip)}
-            className="px-3 py-1.5 rounded-full bg-[#F7F7F4] hover:bg-[#F1F1ED] border border-[#E4E4DE] text-[11px] font-semibold text-[#181816] shrink-0 transition"
+            className="px-3 py-1.5 rounded-full bg-white hover:bg-[#EEE9FF] border border-[#D8CAFF] text-[11px] font-semibold text-[#6D4AFF] shrink-0 transition shadow-2xs"
           >
             💬 {chip}
           </button>
@@ -329,18 +329,18 @@ if self.headers.get('Origin') in ALLOWED_ORIGINS:
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-center space-x-2 bg-[#F7F7F4] p-2 rounded-2xl border border-[#E4E4DE] focus-within:border-[#171717] transition"
+          className="flex items-center space-x-2 bg-white p-2 rounded-2xl border border-[#D8CAFF] focus-within:border-[#6D4AFF] shadow-xs transition"
         >
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask RepoMind Code Agent to diagnose errors, explain architecture, or generate refactoring patches..."
-            className="flex-1 bg-transparent px-3 py-1.5 text-xs text-[#181816] placeholder-[#96968E] focus:outline-none"
+            className="flex-1 bg-transparent px-3 py-1.5 text-xs text-[#1F2937] placeholder-[#9CA3AF] focus:outline-none font-medium"
           />
           <button
             type="submit"
-            className="p-2.5 rounded-xl bg-[#171717] hover:bg-[#313131] text-white transition shadow-md"
+            className="p-2.5 rounded-xl bg-[#6D4AFF] hover:bg-[#5B3BE5] text-white transition shadow-md shadow-[#6D4AFF]/25"
             aria-label="Send message"
           >
             <Send className="w-4 h-4" />

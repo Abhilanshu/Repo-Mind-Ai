@@ -18,18 +18,18 @@ export const TechnicalDebtCard: React.FC<TechnicalDebtCardProps> = ({
   onViewAll
 }) => {
   return (
-    <div className="card-panel rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between bg-white border border-[#E4E4DE] font-sans">
+    <div className="card-panel rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between bg-grad-deps border border-[#F3D29A] font-sans">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
-          <div className="p-2 rounded-xl bg-[#F7F7F4] border border-[#E4E4DE] text-[#B7791F]">
+          <div className="p-2 rounded-xl bg-[#FFF5DD] border border-[#F3D29A] text-[#B7791F]">
             <AlertTriangle className="w-4 h-4" />
           </div>
-          <h3 className="text-xs font-extrabold text-[#686862] uppercase tracking-wider">Technical Debt</h3>
+          <h3 className="text-xs font-extrabold text-[#B7791F] uppercase tracking-wider">Technical Debt</h3>
         </div>
         <button
           onClick={onViewAll}
-          className="text-xs font-semibold text-[#181816] hover:underline transition"
+          className="text-xs font-bold text-[#6D4AFF] hover:underline transition"
         >
           Explore All Issues →
         </button>
@@ -38,23 +38,23 @@ export const TechnicalDebtCard: React.FC<TechnicalDebtCardProps> = ({
       {/* Main Count & Hours */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-2">
         
-        <div className="p-4 rounded-2xl bg-[#F7F7F4] border border-[#E4E4DE]">
-          <div className="text-xs text-[#686862] font-medium">Total Detected Issues</div>
-          <div className="text-3xl font-extrabold text-[#181816] mt-1">{totalIssues}</div>
-          <div className="text-[11px] text-[#686862] mt-1 font-mono">
+        <div className="p-4 rounded-2xl bg-white/90 border border-[#E8E5DF] shadow-2xs">
+          <div className="text-xs text-[#4B5563] font-medium">Total Detected Issues</div>
+          <div className="text-3xl font-extrabold text-[#1F2937] mt-1">{totalIssues}</div>
+          <div className="text-[11px] text-[#4B5563] mt-1 font-mono">
             Across 42 parsed repository files
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#F7F7F4] border border-[#E4E4DE]">
-          <div className="text-xs text-[#686862] font-medium flex items-center justify-between">
+        <div className="p-4 rounded-2xl bg-white/90 border border-[#E8E5DF] shadow-2xs">
+          <div className="text-xs text-[#4B5563] font-medium flex items-center justify-between">
             <span>Estimated Payback Effort</span>
-            <Clock className="w-3.5 h-3.5 text-[#686862]" />
+            <Clock className="w-3.5 h-3.5 text-[#B7791F]" />
           </div>
-          <div className="text-3xl font-extrabold text-[#181816] mt-1">
-            {debtHours} <span className="text-sm font-normal text-[#686862]">hours</span>
+          <div className="text-3xl font-extrabold text-[#1F2937] mt-1">
+            {debtHours} <span className="text-sm font-normal text-[#4B5563]">hours</span>
           </div>
-          <div className="text-[11px] text-[#16803C] mt-1 flex items-center space-x-1 font-mono">
+          <div className="text-[11px] text-[#16803C] mt-1 flex items-center space-x-1 font-mono font-semibold">
             <TrendingDown className="w-3 h-3" />
             <span>{Math.abs(trendDelta)}% reduction from previous audit</span>
           </div>
@@ -63,49 +63,49 @@ export const TechnicalDebtCard: React.FC<TechnicalDebtCardProps> = ({
       </div>
 
       {/* Severity Breakdown Bar & Cards */}
-      <div className="mt-4 pt-4 border-t border-[#E4E4DE] space-y-3">
+      <div className="mt-4 pt-4 border-t border-[#F3D29A] space-y-3">
         
         {/* Visual Bar */}
-        <div className="w-full h-2.5 bg-[#F1F1ED] rounded-full overflow-hidden flex p-0.5 border border-[#E4E4DE]">
+        <div className="w-full h-2.5 bg-[#F1F3F6] rounded-full overflow-hidden flex p-0.5 border border-[#E8E5DF]">
           <div style={{ width: `${(breakdown.critical / Math.max(1, totalIssues)) * 100}%` }} className="h-full bg-[#C53030] rounded-l-full" title="Critical" />
           <div style={{ width: `${(breakdown.high / Math.max(1, totalIssues)) * 100}%` }} className="h-full bg-[#B7791F]" title="High" />
-          <div style={{ width: `${(breakdown.medium / Math.max(1, totalIssues)) * 100}%` }} className="h-full bg-[#315EFB]" title="Medium" />
-          <div style={{ width: `${(breakdown.low / Math.max(1, totalIssues)) * 100}%` }} className="h-full bg-[#686862] rounded-r-full" title="Low" />
+          <div style={{ width: `${(breakdown.medium / Math.max(1, totalIssues)) * 100}%` }} className="h-full bg-[#1D4ED8]" title="Medium" />
+          <div style={{ width: `${(breakdown.low / Math.max(1, totalIssues)) * 100}%` }} className="h-full bg-[#4B5563] rounded-r-full" title="Low" />
         </div>
 
         {/* Breakdown Items */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
           
-          <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-between">
+          <div className="p-2.5 rounded-xl bg-[#FFF0F0] border border-[#F5C6C6] flex items-center justify-between">
             <div className="flex items-center space-x-1.5 font-semibold text-[#C53030]">
               <span className="w-2 h-2 rounded-full bg-[#C53030]" />
               <span>Critical</span>
             </div>
-            <span className="font-mono font-bold text-[#181816]">{breakdown.critical}</span>
+            <span className="font-mono font-bold text-[#C53030]">{breakdown.critical}</span>
           </div>
 
-          <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between">
+          <div className="p-2.5 rounded-xl bg-[#FFF5E6] border border-[#F3D29A] flex items-center justify-between">
             <div className="flex items-center space-x-1.5 font-semibold text-[#B7791F]">
               <span className="w-2 h-2 rounded-full bg-[#B7791F]" />
               <span>High</span>
             </div>
-            <span className="font-mono font-bold text-[#181816]">{breakdown.high}</span>
+            <span className="font-mono font-bold text-[#B7791F]">{breakdown.high}</span>
           </div>
 
-          <div className="p-2.5 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-between">
-            <div className="flex items-center space-x-1.5 font-semibold text-[#315EFB]">
-              <span className="w-2 h-2 rounded-full bg-[#315EFB]" />
+          <div className="p-2.5 rounded-xl bg-[#EEF5FF] border border-[#C8D9F5] flex items-center justify-between">
+            <div className="flex items-center space-x-1.5 font-semibold text-[#1D4ED8]">
+              <span className="w-2 h-2 rounded-full bg-[#1D4ED8]" />
               <span>Medium</span>
             </div>
-            <span className="font-mono font-bold text-[#181816]">{breakdown.medium}</span>
+            <span className="font-mono font-bold text-[#1D4ED8]">{breakdown.medium}</span>
           </div>
 
-          <div className="p-2.5 rounded-xl bg-[#F7F7F4] border border-[#E4E4DE] flex items-center justify-between">
-            <div className="flex items-center space-x-1.5 font-semibold text-[#686862]">
-              <span className="w-2 h-2 rounded-full bg-[#686862]" />
+          <div className="p-2.5 rounded-xl bg-white border border-[#E8E5DF] flex items-center justify-between">
+            <div className="flex items-center space-x-1.5 font-semibold text-[#4B5563]">
+              <span className="w-2 h-2 rounded-full bg-[#4B5563]" />
               <span>Low</span>
             </div>
-            <span className="font-mono font-bold text-[#181816]">{breakdown.low}</span>
+            <span className="font-mono font-bold text-[#1F2937]">{breakdown.low}</span>
           </div>
 
         </div>
