@@ -136,7 +136,7 @@ export function App() {
   } = analysisData;
 
   return (
-    <div className="min-h-screen bg-[#F7F7F4] text-[#181816] flex flex-col font-sans selection:bg-[#171717] selection:text-white">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans selection:bg-blue-600 selection:text-white">
       
       {/* View Mode 1: Landing Page */}
       {viewMode === 'landing' && (

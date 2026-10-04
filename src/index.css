@@ -2,19 +2,19 @@
 
 @layer base {
   :root {
-    --bg-app: #F7F7F4;
+    --bg-app: #F8FAFC;
     --surface-primary: #FFFFFF;
-    --surface-secondary: #F1F1ED;
-    --border-color: #E4E4DE;
-    --text-primary: #181816;
-    --text-secondary: #686862;
-    --text-muted: #96968E;
-    --accent-strong: #171717;
+    --surface-secondary: #F1F5F9;
+    --border-color: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+    --accent-primary: #2563EB;
   }
 
   body {
-    background-color: #F7F7F4;
-    color: #181816;
+    background-color: #F8FAFC;
+    color: #0F172A;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
@@ -29,33 +29,33 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F7F7F4;
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E4E4DE;
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #96968E;
+  background: #94A3B8;
 }
 
-/* Off-white Enterprise Card Helpers */
+/* Modern SaaS Light Card Helpers */
 .card-panel {
   background: #FFFFFF;
-  border: 1px solid #E4E4DE;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px 0 rgba(15, 23, 42, 0.02);
 }
 
 .glass-panel {
   background: #FFFFFF;
-  border: 1px solid #E4E4DE;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px 0 rgba(0, 0, 0, 0.02);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px 0 rgba(15, 23, 42, 0.02);
 }
 
 .card-hover {
   transition: all 0.2s ease;
 }
 .card-hover:hover {
-  border-color: #171717;
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  border-color: #3B82F6;
+  box-shadow: 0 4px 12px 0 rgba(37, 99, 235, 0.08);
 }

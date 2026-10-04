@@ -35,21 +35,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const navItems: { id: NavigationTab; label: string; icon: React.ReactNode; badge?: string | number; badgeColor?: string }[] = [
     { id: 'overview', label: 'Overview', icon: <LayoutDashboard className="w-4 h-4" /> },
-    { id: 'projects', label: 'Projects', icon: <FolderGit2 className="w-4 h-4 text-[#171717]" /> },
+    { id: 'projects', label: 'Projects', icon: <FolderGit2 className="w-4 h-4 text-blue-600" /> },
     { id: 'architecture', label: 'Architecture', icon: <Network className="w-4 h-4" /> },
-    { id: 'debt', label: 'Technical Debt', icon: <AlertTriangle className="w-4 h-4" />, badge: 16, badgeColor: 'bg-[#F1F1ED] text-[#B7791F] border-[#E4E4DE]' },
-    { id: 'security', label: 'Security Center', icon: <ShieldCheck className="w-4 h-4" />, badge: criticalIssueCount, badgeColor: 'bg-rose-50 text-[#C53030] border-rose-200' },
-    { id: 'dependencies', label: 'Dependencies', icon: <Package className="w-4 h-4" />, badge: '2 Outdated', badgeColor: 'bg-[#F1F1ED] text-[#181816] border-[#E4E4DE]' },
+    { id: 'debt', label: 'Technical Debt', icon: <AlertTriangle className="w-4 h-4 text-amber-500" />, badge: 16, badgeColor: 'bg-amber-50 text-amber-700 border-amber-200' },
+    { id: 'security', label: 'Security Center', icon: <ShieldCheck className="w-4 h-4 text-rose-500" />, badge: criticalIssueCount, badgeColor: 'bg-rose-50 text-rose-700 border-rose-200' },
+    { id: 'dependencies', label: 'Dependencies', icon: <Package className="w-4 h-4" />, badge: '2 Outdated', badgeColor: 'bg-slate-100 text-slate-700 border-slate-200' },
     { id: 'quality', label: 'Code Quality', icon: <FileCode2 className="w-4 h-4" /> },
-    { id: 'testing', label: 'Testing Health', icon: <TestTube2 className="w-4 h-4" />, badge: '76%', badgeColor: 'bg-[#F1F1ED] text-[#16803C] border-[#E4E4DE]' },
-    { id: 'ai_assistant', label: 'RepoMind Code Agent', icon: <Bot className="w-4 h-4 text-[#171717]" /> },
-    { id: 'sprint', label: 'AI Sprint Planner', icon: <CalendarCheck2 className="w-4 h-4 text-[#315EFB]" /> },
+    { id: 'testing', label: 'Testing Health', icon: <TestTube2 className="w-4 h-4" />, badge: '76%', badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+    { id: 'ai_assistant', label: 'RepoMind Code Agent', icon: <Bot className="w-4 h-4 text-indigo-600" /> },
+    { id: 'sprint', label: 'AI Sprint Planner', icon: <CalendarCheck2 className="w-4 h-4 text-blue-600" /> },
     { id: 'reports', label: 'Reports & Export', icon: <FileSpreadsheet className="w-4 h-4" /> },
     { id: 'settings', label: 'Settings', icon: <Settings className="w-4 h-4" /> },
   ];
 
   return (
-    <aside className={`${collapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-white border-r border-[#E4E4DE] flex flex-col justify-between shrink-0 min-h-[calc(100vh-4rem)] sticky top-16 z-20 font-sans`}>
+    <aside className={`${collapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 min-h-[calc(100vh-4rem)] sticky top-16 z-20 font-sans`}>
       {/* Upper Navigation */}
       <div className="p-3 space-y-1">
         {navItems.map((item) => {
@@ -60,13 +60,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => onTabChange(item.id)}
               className={`w-full flex items-center ${collapsed ? 'justify-center px-0' : 'justify-between px-3'} py-2 rounded-xl text-xs font-semibold transition-all group ${
                 isActive
-                  ? 'bg-[#171717] text-white shadow-sm'
-                  : 'text-[#686862] hover:text-[#181816] hover:bg-[#F7F7F4] border border-transparent'
+                  ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/20'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-transparent'
               }`}
               title={collapsed ? item.label : undefined}
             >
               <div className="flex items-center space-x-3">
-                <span className={`${isActive ? 'text-white' : 'text-[#686862] group-hover:text-[#181816]'} transition`}>
+                <span className={`${isActive ? 'text-white' : 'text-slate-500 group-hover:text-slate-900'} transition`}>
                   {item.icon}
                 </span>
                 {!collapsed && <span>{item.label}</span>}
@@ -85,15 +85,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Pro Plan Card & Collapse */}
       <div className="p-3 space-y-3">
         {!collapsed && (
-          <div className="p-3.5 rounded-2xl bg-[#F7F7F4] border border-[#E4E4DE] relative overflow-hidden">
-            <div className="flex items-center space-x-2 text-[#181816] font-bold text-xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#171717]" />
+          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 relative overflow-hidden">
+            <div className="flex items-center space-x-2 text-slate-900 font-bold text-xs">
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
               <span>Pro Workspace</span>
             </div>
-            <p className="text-[11px] text-[#686862] mt-1 leading-tight">
+            <p className="text-[11px] text-slate-600 mt-1 leading-tight">
               Repository Intelligence active.
             </p>
-            <div className="mt-2 text-[10px] text-[#96968E] font-mono">
+            <div className="mt-2 text-[10px] text-slate-500 font-mono">
               Local & AST engine online
             </div>
           </div>
@@ -101,7 +101,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         <button
           onClick={onToggleCollapse}
-          className="w-full flex items-center justify-center p-2 rounded-xl bg-[#F7F7F4] hover:bg-[#F1F1ED] border border-[#E4E4DE] text-[#686862] hover:text-[#181816] text-xs transition"
+          className="w-full flex items-center justify-center p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 text-xs transition font-semibold"
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <div className="flex items-center space-x-2"><ChevronLeft className="w-4 h-4" /><span>Collapse Sidebar</span></div>}
