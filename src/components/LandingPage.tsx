@@ -1,71 +1,27 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
   ShieldCheck, 
-  AlertTriangle, 
-  Network, 
-  FileCode2, 
+  Cpu, 
   Bot, 
   CheckCircle2, 
   Zap, 
   FolderGit2, 
-  GitBranch, 
-  Layers, 
-  Lock,
-  Cpu,
-  TestTube2,
-  Package,
-  CalendarCheck2,
-  FileText
+  Network
 } from 'lucide-react';
 
 interface LandingPageProps {
-  onStartAnalysis: () => void;
-  onExploreDemo: () => void;
+  onStartAnalysis?: () => void;
+  onExploreDemo?: () => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({
-  onStartAnalysis,
-  onExploreDemo
-}) => {
+export const LandingPage: React.FC<LandingPageProps> = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-[#F7F5F2] text-[#1F2937] flex flex-col justify-between overflow-x-hidden font-sans">
       
-      {/* Navigation Bar */}
-      <nav className="h-20 border-b border-[#E8E5DF] px-6 lg:px-12 flex items-center justify-between max-w-7xl mx-auto w-full bg-white/95 backdrop-blur-md sticky top-0 z-50">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-2xl bg-[#6D4AFF] flex items-center justify-center text-white shadow-md shadow-[#6D4AFF]/20 font-bold text-xl">
-            🧠
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="font-extrabold text-xl tracking-tight text-[#1F2937]">RepoMind</span>
-            <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-[#EEE9FF] text-[#6D4AFF] border border-[#D8CAFF]">Platform v2.5</span>
-          </div>
-        </div>
-
-        <div className="hidden md:flex items-center space-x-8 text-xs font-semibold text-[#4B5563]">
-          <a href="#features" className="hover:text-[#6D4AFF] transition">Features</a>
-          <a href="#github-engines" className="hover:text-[#6D4AFF] transition">GitHub Engines</a>
-          <a href="#architecture" className="hover:text-[#6D4AFF] transition">AST Analysis</a>
-          <a href="#enterprise" className="hover:text-[#6D4AFF] transition">Enterprise SSO</a>
-        </div>
-
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={onExploreDemo}
-            className="px-4 py-2 rounded-xl text-xs font-bold text-[#1F2937] bg-[#F7F5F2] hover:bg-[#EEE9FF] border border-[#E8E5DF] transition flex items-center space-x-1.5"
-          >
-            <span>⚡ Open Dashboard</span>
-          </button>
-          <button
-            onClick={onStartAnalysis}
-            className="px-5 py-2.5 rounded-xl bg-[#6D4AFF] hover:bg-[#5B3BE5] text-white text-xs font-extrabold shadow-md shadow-[#6D4AFF]/25 transition flex items-center space-x-2"
-          >
-            <span>🚀 Start Analysis</span>
-          </button>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="pt-16 pb-20 px-6 max-w-5xl mx-auto text-center relative">
         {/* Category Pill */}
@@ -77,35 +33,71 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         {/* Primary Hero Headings */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-[#1F2937]">
-          Understand your codebase.<br />
-          <span className="text-[#6D4AFF]">Eliminate technical debt.</span><br />
+          Turn your codebase into an<br />
+          <span className="text-[#6D4AFF]">engineering roadmap.</span><br />
           Ship features with confidence.
         </h1>
 
         {/* Supporting Copy */}
         <p className="text-base sm:text-lg text-[#4B5563] max-w-3xl mx-auto font-normal leading-relaxed mb-10">
-          RepoMind synthesizes AST static analysis, dependency graphs, security vulnerability scanners, Pytest generators, and permission-based AI code refactoring into a unified engineering dashboard.
+          RepoMind analyzes your software repository, detects structural technical debt, scans for security risks, ranks remediation priorities by ROI, and provides a permission-gated AI refactoring agent.
         </p>
 
         {/* Primary CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <button
-            onClick={onExploreDemo}
+          <Link
+            to="/register"
             className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#6D4AFF] hover:bg-[#5B3BE5] text-white font-extrabold text-base shadow-xl shadow-[#6D4AFF]/30 transition-all duration-200 flex items-center justify-center space-x-2"
           >
-            <span>⚡ Open Live Engineering Dashboard</span>
+            <span>🚀 Start Free Analysis</span>
             <ArrowRight className="w-5 h-5" />
-          </button>
-          <button
-            onClick={onStartAnalysis}
+          </Link>
+          <Link
+            to="/app"
             className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-[#F1F3F6] text-[#1F2937] font-extrabold text-base border border-[#E8E5DF] shadow-xs transition flex items-center justify-center space-x-2"
           >
-            <span>📦 Add Custom GitHub Repo</span>
-          </button>
+            <span>⚡ Open Live Engineering App</span>
+          </Link>
+        </div>
+
+        {/* Interactive Demo Preview Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E5DF] shadow-xl text-left space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8E5DF] pb-4">
+            <div>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-1 rounded-md bg-[#EEE9FF] text-[#6D4AFF] border border-[#D8CAFF]">
+                Real-Time Analysis Preview
+              </span>
+              <h3 className="text-lg font-extrabold text-[#1F2937] mt-1">RepoMind Demo Store Analysis</h3>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-xs font-bold text-[#16803C] bg-[#EAF7EF] px-3 py-1 rounded-full border border-[#C6ECD3]">
+                Health Score: 87 / 100
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-mono">
+            <div className="p-3.5 rounded-2xl bg-[#F7F5F2] border border-[#E8E5DF]">
+              <div className="text-[#4B5563] text-[10px]">Technical Debt</div>
+              <div className="text-lg font-extrabold text-[#B7791F] mt-0.5">28 Hours</div>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-[#F7F5F2] border border-[#E8E5DF]">
+              <div className="text-[#4B5563] text-[10px]">Security Findings</div>
+              <div className="text-lg font-extrabold text-[#C53030] mt-0.5">1 Critical</div>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-[#F7F5F2] border border-[#E8E5DF]">
+              <div className="text-[#4B5563] text-[10px]">Test Coverage</div>
+              <div className="text-lg font-extrabold text-[#16803C] mt-0.5">76% Target</div>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-[#F7F5F2] border border-[#E8E5DF]">
+              <div className="text-[#4B5563] text-[10px]">Dependencies</div>
+              <div className="text-lg font-extrabold text-[#6D4AFF] mt-0.5">2 Outdated</div>
+            </div>
+          </div>
         </div>
 
         {/* GitHub Intelligence Engines Highlight Section */}
-        <div id="github-engines" className="my-12 text-left">
+        <div id="github-engines" className="my-16 text-left">
           <div className="text-center mb-8">
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-[#EEE9FF] text-[#6D4AFF] border border-[#D8CAFF]">
               Open-Source Architecture Foundation
@@ -116,11 +108,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Repowise Engine Box */}
-            <div className="p-6 rounded-3xl bg-white border border-[#E8E5DF] shadow-md hover:border-[#D8CAFF] transition space-y-3">
+            <div 
+              onClick={() => navigate('/app/architecture')}
+              className="p-6 rounded-3xl bg-white border border-[#E8E5DF] shadow-md hover:border-[#D8CAFF] transition space-y-3 cursor-pointer group"
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">🐙</span>
-                  <span className="font-mono font-extrabold text-[#1F2937] text-sm">repowise-dev / repowise</span>
+                  <span className="font-mono font-extrabold text-[#1F2937] group-hover:text-[#6D4AFF] text-sm">repowise-dev / repowise</span>
                 </div>
                 <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#EEE9FF] text-[#6D4AFF] font-bold">AST Engine</span>
               </div>
@@ -134,11 +129,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             {/* Codebase Intelligence Engine Box */}
-            <div className="p-6 rounded-3xl bg-white border border-[#E8E5DF] shadow-md hover:border-[#C6ECD3] transition space-y-3">
+            <div 
+              onClick={() => navigate('/app/agent')}
+              className="p-6 rounded-3xl bg-white border border-[#E8E5DF] shadow-md hover:border-[#C6ECD3] transition space-y-3 cursor-pointer group"
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <span className="text-xl">🧠</span>
-                  <span className="font-mono font-extrabold text-[#1F2937] text-sm">Oussamcsc / codebase-intelligence</span>
+                  <span className="font-mono font-extrabold text-[#1F2937] group-hover:text-[#6D4AFF] text-sm">Oussamcsc / codebase-intelligence</span>
                 </div>
                 <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#EAF7EF] text-[#16803C] font-bold">AI Agent</span>
               </div>
@@ -155,18 +153,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
 
       </section>
-
-      {/* Footer */}
-      <footer className="py-8 border-t border-[#E8E5DF] bg-white text-center text-xs text-[#4B5563] font-mono">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>© {new Date().getFullYear()} RepoMind Platform Inc. Software Repository Intelligence.</div>
-          <div className="flex items-center space-x-4">
-            <button onClick={onExploreDemo} className="hover:text-[#6D4AFF] font-bold">Open Dashboard</button>
-            <a href="#privacy" className="hover:text-[#1F2937]">Privacy</a>
-            <a href="#terms" className="hover:text-[#1F2937]">Terms</a>
-          </div>
-        </div>
-      </footer>
 
     </div>
   );

@@ -10,14 +10,17 @@
     "server": "node server/server.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "framer-motion": "^12.4.10",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^1.16.0",
     "mongoose": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.18.4",
     "recharts": "^2.15.1",
     "tailwind-merge": "^3.0.2"
   },

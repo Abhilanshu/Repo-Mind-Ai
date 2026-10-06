@@ -4,7 +4,8 @@ const https = require('https');
 const http = require('http');
 const connectDB = require('./config/db');
 
-// Import Mongoose Models
+// Import Routes & Mongoose Models
+const authRoutes = require('./routes/auth.routes');
 const Repository = require('./models/Repository');
 const TechnicalDebtIssue = require('./models/TechnicalDebtIssue');
 const SecurityFinding = require('./models/SecurityFinding');
@@ -18,6 +19,9 @@ app.use(express.json());
 
 // Initialize Mongoose Database Connection
 connectDB();
+
+// Authentication Router
+app.use('/api/auth', authRoutes);
 
 // 1. Health Check & Welcome Endpoint
 app.get('/api/health', (req, res) => {
