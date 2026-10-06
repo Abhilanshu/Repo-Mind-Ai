@@ -25,6 +25,7 @@ import { FileIntelligenceModal } from './components/FileIntelligenceModal';
 import { ReportGeneratorModal } from './components/ReportGeneratorModal';
 import { WhatsAppNotificationModal } from './components/WhatsAppNotificationModal';
 import { SettingsView } from './components/SettingsView';
+import { AuthModal } from './components/AuthModal';
 
 import { NavigationTab, TechnicalDebtIssue, SecurityFinding, FullRepoAnalysisData, WhatsAppConfig } from './types/repomind';
 import { generateDynamicRepoData } from './mockData/repoData';
@@ -53,7 +54,16 @@ export function App() {
     notifyOnSprintReady: true
   });
 
-  // Modals
+  // Modals & User State
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [user, setUser] = useState<{ name: string; email: string; role: string; plan: string } | null>(() => {
+    const saved = localStorage.getItem('repomind_user');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) { }
+    }
+    return { name: 'Abhilanshu', email: 'abhilanshu@repomind.io', role: 'Senior Architect', plan: 'Pro Plan' };
+  });
+
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [repoInputModalOpen, setRepoInputModalOpen] = useState(false);
   const [selectedFileForModal, setSelectedFileForModal] = useState<string | null>(null);
@@ -159,6 +169,8 @@ export function App() {
         <div className="flex flex-col min-h-screen">
           <Header
             repo={repoData}
+            user={user}
+            onOpenAuthModal={() => setAuthModalOpen(true)}
             onOpenCommandPalette={() => setCommandPaletteOpen(true)}
             onSwitchRepo={(name) => {
               handleStartAnalysis(name);
@@ -316,6 +328,8 @@ export function App() {
                 <SettingsView 
                   whatsAppConfig={whatsAppConfig}
                   onOpenWhatsAppModal={() => setWhatsAppModalOpen(true)}
+                  onOpenAuthModal={() => setAuthModalOpen(true)}
+                  user={user}
                 />
               )}
 
@@ -373,6 +387,16 @@ export function App() {
         }}
         onTriggerTestNotification={(msg) => {
           triggerToast(`📱 WhatsApp Alert Dispatched: ${msg.split('\n')[0]}`);
+        }}
+      />
+
+      {/* Enterprise Authentication & SAML SSO Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onLoginSuccess={(userData) => {
+          setUser(userData);
+          triggerToast(`🔒 Authenticated session established for ${userData.name} (${userData.role})`);
         }}
       />
 

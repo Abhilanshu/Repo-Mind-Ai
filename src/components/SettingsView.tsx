@@ -5,11 +5,15 @@ import { WhatsAppConfig } from '../types/repomind';
 interface SettingsViewProps {
   whatsAppConfig?: WhatsAppConfig;
   onOpenWhatsAppModal?: () => void;
+  onOpenAuthModal?: () => void;
+  user?: { name: string; email: string; role: string; plan: string } | null;
 }
 
 export const SettingsView: React.FC<SettingsViewProps> = ({
   whatsAppConfig,
-  onOpenWhatsAppModal
+  onOpenWhatsAppModal,
+  onOpenAuthModal,
+  user
 }) => {
   const [analysisDepth, setAnalysisDepth] = useState<'quick' | 'standard' | 'deep'>('standard');
   const [aiModel, setAiModel] = useState('repomind-code-agent');
@@ -43,6 +47,34 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
         >
           {savedToast ? '✓ Saved Changes' : 'Save Settings'}
         </button>
+      </div>
+
+      {/* Authenticated Developer Account Card */}
+      <div className="card-panel rounded-3xl p-6 bg-white border border-[#E8E5DF] space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#6D4AFF] text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-[#6D4AFF]/20">
+              {user?.name ? user.name.charAt(0).toUpperCase() : 'A'}
+            </div>
+            <div>
+              <div className="flex items-center space-x-2">
+                <h3 className="text-base font-extrabold text-[#1F2937]">{user?.name || 'Abhilanshu'}</h3>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#EEE9FF] text-[#6D4AFF] border border-[#D8CAFF]">
+                  {user?.plan || 'Pro Plan'}
+                </span>
+              </div>
+              <p className="text-xs text-[#4B5563] mt-0.5">{user?.email || 'abhilanshu@repomind.io'} • <span className="font-semibold text-[#1F2937]">{user?.role || 'Senior Architect'}</span></p>
+            </div>
+          </div>
+
+          <button
+            onClick={onOpenAuthModal}
+            className="px-4 py-2.5 rounded-xl bg-[#6D4AFF] hover:bg-[#5B3BE5] text-white font-extrabold text-xs transition shadow-md shadow-[#6D4AFF]/25 flex items-center space-x-1.5 shrink-0"
+          >
+            <Lock className="w-4 h-4" />
+            <span>Manage Authentication / SAML SSO →</span>
+          </button>
+        </div>
       </div>
 
       {/* Commercial Plans & Billing Tier Selection */}

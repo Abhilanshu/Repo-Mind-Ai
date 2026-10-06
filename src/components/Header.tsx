@@ -22,6 +22,8 @@ import { RepositoryMetadata } from '../types/repomind';
 
 interface HeaderProps {
   repo: RepositoryMetadata;
+  user?: { name: string; email: string; role: string; plan: string } | null;
+  onOpenAuthModal?: () => void;
   onOpenCommandPalette: () => void;
   onSwitchRepo: (repoName: string) => void;
   onOpenRepoInput: () => void;
@@ -33,6 +35,8 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   repo,
+  user,
+  onOpenAuthModal,
   onOpenCommandPalette,
   onSwitchRepo,
   onOpenRepoInput,
@@ -244,6 +248,28 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           )}
         </div>
+
+        {/* User Account / Enterprise SSO Trigger */}
+        <button
+          onClick={onOpenAuthModal}
+          className="flex items-center space-x-2 px-2.5 py-1.5 rounded-xl bg-[#F7F5F2] hover:bg-[#EEE9FF] border border-[#E8E5DF] hover:border-[#D8CAFF] text-xs font-semibold text-[#1F2937] transition group"
+          title="Sign In / SAML SSO / Manage Account"
+        >
+          <div className="w-6 h-6 rounded-lg bg-[#6D4AFF] text-white flex items-center justify-center text-xs font-extrabold shadow-xs">
+            {user?.name ? user.name.charAt(0).toUpperCase() : 'A'}
+          </div>
+          <div className="hidden xl:flex flex-col items-start leading-none">
+            <span className="text-xs font-bold text-[#1F2937] group-hover:text-[#6D4AFF]">
+              {user?.name || 'Abhilanshu'}
+            </span>
+            <span className="text-[9px] text-[#4B5563] font-medium mt-0.5">
+              {user?.role || 'Senior Architect'}
+            </span>
+          </div>
+          <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-[#EEE9FF] text-[#6D4AFF] border border-[#D8CAFF] font-bold uppercase tracking-wider">
+            {user?.plan || 'Pro'}
+          </span>
+        </button>
 
       </div>
     </header>
