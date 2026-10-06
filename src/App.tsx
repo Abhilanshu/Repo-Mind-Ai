@@ -228,6 +228,64 @@ export function App() {
                     onAskAI={() => setActiveTab('ai_assistant')}
                   />
 
+                  {/* GitHub Intelligence Engine Integration Card */}
+                  <div className="card-panel rounded-3xl p-6 bg-white border border-[#E8E5DF] space-y-4 font-sans">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8E5DF] pb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-2xl bg-[#6D4AFF] text-white flex items-center justify-center font-bold text-lg shadow-md shadow-[#6D4AFF]/20">
+                          🐙
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-extrabold text-[#1F2937] flex items-center space-x-2">
+                            <span>Integrated Open Source Intelligence Engines</span>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[#EAF7EF] text-[#16803C] border border-[#C6ECD3] font-bold">Active Engine</span>
+                          </h3>
+                          <p className="text-xs text-[#4B5563]">Synthesizing AST static analysis algorithms and AI refactoring agents from open-source GitHub repositories.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                      {/* Repowise Engine Card */}
+                      <div 
+                        onClick={() => setActiveTab('architecture')}
+                        className="p-4 rounded-2xl bg-[#F7F5F2] hover:bg-[#EEE9FF] border border-[#E8E5DF] hover:border-[#D8CAFF] transition cursor-pointer group"
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-mono font-extrabold text-[#1F2937] group-hover:text-[#6D4AFF] text-xs flex items-center space-x-1.5">
+                            <span>repowise-dev / repowise</span>
+                          </span>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EEE9FF] text-[#6D4AFF] font-bold">AST Engine</span>
+                        </div>
+                        <p className="text-[11px] text-[#4B5563] leading-relaxed mb-3">
+                          Multi-language AST static parser, cyclomatic complexity metrics, circular dependency grapher, and technical debt hour calculations.
+                        </p>
+                        <div className="flex items-center space-x-2 text-[10px] font-mono font-bold text-[#6D4AFF]">
+                          <span>Explore Architecture Topology Graph →</span>
+                        </div>
+                      </div>
+
+                      {/* Codebase Intelligence Engine Card */}
+                      <div 
+                        onClick={() => setActiveTab('ai_assistant')}
+                        className="p-4 rounded-2xl bg-[#F7F5F2] hover:bg-[#EEE9FF] border border-[#E8E5DF] hover:border-[#D8CAFF] transition cursor-pointer group"
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-mono font-extrabold text-[#1F2937] group-hover:text-[#6D4AFF] text-xs flex items-center space-x-1.5">
+                            <span>Oussamcsc / codebase-intelligence</span>
+                          </span>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EAF7EF] text-[#16803C] font-bold">AI Code Agent</span>
+                        </div>
+                        <p className="text-[11px] text-[#4B5563] leading-relaxed mb-3">
+                          Permission-gated AI refactoring agent ([Approve & Apply Fix]), Pytest coverage generator, OWASP security scanner, and sprint task planner.
+                        </p>
+                        <div className="flex items-center space-x-2 text-[10px] font-mono font-bold text-[#16803C]">
+                          <span>Launch AI Code Refactoring Agent →</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   {/* Prioritization Engine ("What Should I Fix First?") */}
                   <PrioritizationEngine
                     actions={prioritizedActions}
