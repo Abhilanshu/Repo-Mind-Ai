@@ -48,7 +48,7 @@ export function GetStartedButton({ className = "", style }: GetStartedButtonProp
       style={{
         position: "relative",
         overflow: "hidden",
-        background: "transparent",
+        background: "#18181b",
         pointerEvents: "auto",
         ...style,
       }}
@@ -67,7 +67,7 @@ export function GetStartedButton({ className = "", style }: GetStartedButtonProp
             width: "100%",
             height: "100%",
             border: 0,
-            background: "transparent",
+            background: "#18181b",
             opacity: ready ? 1 : 0,
             pointerEvents: ready ? "auto" : "none",
             transition: "opacity 240ms ease-out",
