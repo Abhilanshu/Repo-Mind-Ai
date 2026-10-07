@@ -29,14 +29,14 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
   }, [messages, isTyping]);
 
   const promptChips = [
+    "🔍 Detect Duplicate Code & Errors",
+    "⚡ Auto-Fix Payment Schema Vulnerability",
+    "🚀 Generate Full-Stack Component Code",
     "What changes were made to this repo?",
-    "Diagnose codebase errors & risks",
     "Why is technical debt increasing?",
     "Which modules should we refactor first?",
     "Explain project architecture topology",
-    "Where are the biggest security risks?",
-    "How do real WhatsApp alerts work?",
-    "What should the team fix this sprint?"
+    "How do real WhatsApp alerts work?"
   ];
 
   const handlePermissionDecision = (msgId: string, decision: 'approved' | 'rejected') => {
@@ -93,7 +93,66 @@ export const AICodebaseAssistant: React.FC<AICodebaseAssistantProps> = ({
 
       const q = query.toLowerCase();
 
-      if (q.includes('change') || q.includes('commit') || q.includes('update') || q.includes('history') || q.includes('what did you do')) {
+      if (q.includes('duplicate') || q.includes('detect duplicate')) {
+        aiText = "🔍 **AST Duplicate Code Analysis Complete**\n\n" +
+          "RepoMind scanned 42 source files and identified 2 redundant helper patterns:\n" +
+          "1. `formatCurrency` duplicated across `src/utils/formatters.ts` and `src/components/Pricing.tsx` (18 duplicated lines).\n" +
+          "2. `validateAuthToken` logic cloned in `server/routes/auth.routes.js` and `server/middleware/auth.js`.\n\n" +
+          "**Impact**: +1.2% code bloat, risk of inconsistent validation across frontend and backend.";
+        codeSnippet = `// Recommended Consolidation in src/utils/formatters.ts
+export const formatCurrency = (amount: number, currency: string = 'USD'): string => {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
+};`;
+      }
+      else if (q.includes('payment schema') || q.includes('vulnerability')) {
+        aiText = "⚡ **Critical Vulnerability Flagged in Payment Schema (`server/routes/payment.js`)**\n\n" +
+          "The checkout endpoint lacks server-side price validation, relying on client-supplied `amount` parameters.\n\n" +
+          "I have crafted a patch to strictly validate transaction amounts against the server price table. **Please review and approve to apply.**";
+        codeSnippet = `// Proposed Security Fix for server/routes/payment.js
+app.post('/api/checkout', async (req, res) => {
+  const { planId } = req.body;
+  const plan = PRICING_TIERS.find(p => p.id === planId);
+  if (!plan) return res.status(400).json({ error: 'Invalid plan' });
+  const chargeAmount = plan.priceInCents; // Verified server-side
+  const session = await stripe.checkout.sessions.create({ amount: chargeAmount });
+  res.json({ url: session.url });
+});`;
+        permissionRequest = {
+          id: `perm-${Date.now()}`,
+          file: 'server/routes/payment.js',
+          line: 42,
+          issueTitle: 'Client-Controlled Transaction Amount Vulnerability',
+          proposedCode: codeSnippet,
+          status: 'pending'
+        };
+      }
+      else if (q.includes('full-stack') || q.includes('generate full-stack')) {
+        aiText = "🚀 **Generated Full-Stack Component Code**\n\n" +
+          "Here is a complete, production-ready React component + API route for RepoMind Team Activity Feed:";
+        codeSnippet = `// React Component: ActivityFeed.tsx
+import React, { useEffect, useState } from 'react';
+
+export const ActivityFeed: React.FC = () => {
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    fetch('/api/team/activity')
+      .then(res => res.json())
+      .then(data => setEvents(data.events));
+  }, []);
+
+  return (
+    <div className="p-4 bg-white rounded-2xl border border-slate-200">
+      <h3 className="font-bold text-slate-800 mb-2">⚡ Live Activity Feed</h3>
+      {events.map((e: any) => (
+        <div key={e.id} className="text-xs py-1 border-b text-slate-600">
+          <span className="font-mono text-[#6D4AFF]">{e.user}</span> {e.action}
+        </div>
+      ))}
+    </div>
+  );
+};`;
+      }
+      else if (q.includes('change') || q.includes('commit') || q.includes('update') || q.includes('history') || q.includes('what did you do')) {
         aiText = "Here is a complete summary of recent repository changes (`Abhilanshu/Repo-Mind-Ai`):\n\n" +
           "1. 🧠 **RepoMind Agent Permission System**: Added explicit approval requests (`[✅ Approve & Apply Fix]`) before modifying repository files.\n" +
           "2. 📱 **Real WhatsApp Mobile Alerts**: Integrated CallMeBot API & WhatsApp Web deep-link dispatch for instant phone notifications.\n" +

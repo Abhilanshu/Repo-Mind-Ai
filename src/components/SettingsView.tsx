@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Settings, Shield, Bell, GitBranch, MessageSquare, Bot, Cpu, Check, Smartphone, Key, Layers, CreditCard, Lock, Sparkles, Sliders } from 'lucide-react';
+import { Settings, Shield, Bell, GitBranch, MessageSquare, Bot, Cpu, Check, Smartphone, Key, Layers, CreditCard, Lock, Sparkles, Sliders, ShieldCheck, UserCheck, Wrench } from 'lucide-react';
 import { WhatsAppConfig } from '../types/repomind';
+import { useAuth } from '../context/AuthContext';
 
 interface SettingsViewProps {
   whatsAppConfig?: WhatsAppConfig;
@@ -15,11 +16,30 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   onOpenAuthModal,
   user
 }) => {
+  const { isAdmin, activateAdminMode } = useAuth();
+  const [adminPin, setAdminPin] = useState('');
+  const [pinError, setPinError] = useState(false);
+  const [pinSuccess, setPinSuccess] = useState(false);
+
   const [analysisDepth, setAnalysisDepth] = useState<'quick' | 'standard' | 'deep'>('standard');
   const [aiModel, setAiModel] = useState('repomind-code-agent');
   const [llmProvider, setLlmProvider] = useState('anthropic');
   const [selectedPlan, setSelectedPlan] = useState('pro');
   const [savedToast, setSavedToast] = useState(false);
+
+  const handleAdminPinSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPinError(false);
+    setPinSuccess(false);
+
+    const success = activateAdminMode(adminPin);
+    if (success) {
+      setPinSuccess(true);
+      setAdminPin('');
+    } else {
+      setPinError(true);
+    }
+  };
 
   const handleSave = () => {
     setSavedToast(true);
@@ -75,6 +95,89 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             <span>Manage Authentication / SAML SSO →</span>
           </button>
         </div>
+      </div>
+
+      {/* Admin Mode Activation & Master Power Card */}
+      <div className="card-panel rounded-3xl p-6 bg-white border border-[#E8E5DF] space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E8E5DF] pb-4">
+          <div className="flex items-center space-x-3">
+            <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-lg shadow-md ${
+              isAdmin ? 'bg-amber-500 text-white shadow-amber-500/30' : 'bg-[#F7F5F2] text-[#1F2937]'
+            }`}>
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center space-x-2">
+                <h3 className="text-base font-extrabold text-[#1F2937]">Enterprise Admin Activation</h3>
+                <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border ${
+                  isAdmin ? 'bg-amber-50 text-amber-700 border-amber-300' : 'bg-gray-100 text-gray-600 border-gray-300'
+                }`}>
+                  {isAdmin ? '👑 Admin Mode Unlocked' : 'Normal User Mode'}
+                </span>
+              </div>
+              <p className="text-xs text-[#4B5563] mt-0.5">
+                {isAdmin
+                  ? 'You possess full Administrative Power: Manage security policies, team workspace access, and custom AST rules.'
+                  : 'Enter your special secret Admin PIN (e.g. 9999) to unlock Admin Master Powers.'}
+              </p>
+            </div>
+          </div>
+
+          {!isAdmin && (
+            <form onSubmit={handleAdminPinSubmit} className="flex items-center space-x-2 shrink-0">
+              <input
+                type="password"
+                value={adminPin}
+                onChange={(e) => setAdminPin(e.target.value)}
+                placeholder="Enter Admin PIN (9999)"
+                className="bg-[#F7F5F2] border border-[#E8E5DF] rounded-xl px-3 py-2 text-xs font-mono font-bold text-[#1F2937] focus:outline-none focus:border-[#6D4AFF] w-40"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 rounded-xl bg-[#1F2937] hover:bg-[#374151] text-white font-extrabold text-xs transition shadow-xs"
+              >
+                Unlock Admin
+              </button>
+            </form>
+          )}
+        </div>
+
+        {pinError && (
+          <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-[#C53030] text-xs font-semibold">
+            ⚠️ Invalid Admin Secret PIN. Contact your organization lead.
+          </div>
+        )}
+
+        {pinSuccess && (
+          <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold">
+            🎉 Admin Master Access Activated! You now hold full enterprise administrative powers.
+          </div>
+        )}
+
+        {/* Admin Powerful Tools (Unlocked ONLY for Admin) */}
+        {isAdmin && (
+          <div className="p-4 rounded-2xl bg-[#FFFBF0] border border-[#F6E05E] space-y-3">
+            <div className="flex items-center space-x-2 text-amber-800 font-extrabold text-xs uppercase tracking-wider">
+              <Wrench className="w-4 h-4 text-amber-600" />
+              <span>Admin Power Tools & Security Policies</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div className="p-3 rounded-xl bg-white border border-[#F6E05E] shadow-2xs">
+                <div className="font-bold text-[#1F2937]">🛡️ Master Security Rules</div>
+                <div className="text-[11px] text-[#4B5563] mt-1">Enforce mandatory OWASP blocking on PRs</div>
+              </div>
+              <div className="p-3 rounded-xl bg-white border border-[#F6E05E] shadow-2xs">
+                <div className="font-bold text-[#1F2937]">👥 Team Workspace Manager</div>
+                <div className="text-[11px] text-[#4B5563] mt-1">Add, promote, or revoke developer seats</div>
+              </div>
+              <div className="p-3 rounded-xl bg-white border border-[#F6E05E] shadow-2xs">
+                <div className="font-bold text-[#1F2937]">⚙️ Custom AST Engine Rules</div>
+                <div className="text-[11px] text-[#4B5563] mt-1">Define organization-wide AST lint limits</div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Commercial Plans & Billing Tier Selection */}

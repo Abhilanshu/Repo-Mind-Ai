@@ -16,7 +16,8 @@ import {
   ShieldCheck,
   Bot,
   Plus,
-  Globe
+  Globe,
+  Brain
 } from 'lucide-react';
 import { RepositoryMetadata } from '../types/repomind';
 
@@ -84,8 +85,8 @@ export const Header: React.FC<HeaderProps> = ({
           className="flex items-center space-x-2 cursor-pointer" 
           onClick={() => onNavigateTab && onNavigateTab('overview')}
         >
-          <div className="w-8 h-8 rounded-xl bg-[#6D4AFF] flex items-center justify-center text-white font-bold text-sm shadow-md shadow-[#6D4AFF]/20">
-            🧠
+          <div className="w-8 h-8 rounded-xl bg-[#6D4AFF] flex items-center justify-center text-white shadow-md shadow-[#6D4AFF]/20">
+            <Brain className="w-4 h-4 text-white" />
           </div>
           <div>
             <div className="flex items-center space-x-1.5">
@@ -99,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Greeting callout */}
         <div className="hidden xl:block text-xs font-semibold text-[#4B5563]">
-          {getGreeting()}, <span className="text-[#1F2937] font-bold">Abhilanshu 👋</span>
+          {getGreeting()}, <span className="text-[#1F2937] font-bold">{user?.name || 'Developer'}</span>
         </div>
 
         {/* Repository Selector */}

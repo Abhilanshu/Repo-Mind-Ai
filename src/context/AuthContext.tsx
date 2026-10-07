@@ -9,6 +9,7 @@ export interface User {
   phoneNumber?: string;
   avatar?: string;
   organizationId?: string;
+  isAdmin?: boolean;
 }
 
 interface AuthContextType {
@@ -16,8 +17,10 @@ interface AuthContextType {
   token: string | null;
   isLoading: boolean;
   error: string | null;
+  isAdmin: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   register: (name: string, email: string, password: string, role?: string, phoneNumber?: string) => Promise<boolean>;
+  activateAdminMode: (pin: string) => boolean;
   logout: () => void;
   clearError: () => void;
 }
@@ -181,18 +184,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const [isAdmin, setIsAdmin] = useState<boolean>(() => localStorage.getItem('repomind_admin_mode') === 'true');
+
+  const activateAdminMode = (pin: string): boolean => {
+    if (pin.trim() === '9999' || pin.trim() === '8888' || pin.trim().toLowerCase() === 'admin') {
+      setIsAdmin(true);
+      localStorage.setItem('repomind_admin_mode', 'true');
+      if (user) {
+        setUser({ ...user, role: 'Admin', isAdmin: true });
+      }
+      return true;
+    }
+    return false;
+  };
+
   const logout = () => {
     fetch(`${API_BASE_URL}/logout`, { method: 'POST' }).catch(() => {});
     setUser(null);
     setToken(null);
+    setIsAdmin(false);
     localStorage.removeItem('repomind_auth_token');
     localStorage.removeItem('repomind_auth_user_cache');
+    localStorage.removeItem('repomind_admin_mode');
   };
 
   const clearError = () => setError(null);
 
   return (
-    <AuthContext.Provider value={{ user, token, isLoading, error, login, register, logout, clearError }}>
+    <AuthContext.Provider value={{ user, token, isLoading, error, isAdmin, login, register, activateAdminMode, logout, clearError }}>
       {children}
     </AuthContext.Provider>
   );

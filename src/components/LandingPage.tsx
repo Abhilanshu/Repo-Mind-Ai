@@ -8,8 +8,11 @@ import {
   CheckCircle2, 
   Zap, 
   FolderGit2, 
-  Network
+  Network,
+  GitBranch,
+  Sparkles
 } from 'lucide-react';
+import { GetStartedButton } from './GetStartedButton';
 
 interface LandingPageProps {
   onStartAnalysis?: () => void;
@@ -43,20 +46,18 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
           RepoMind analyzes your software repository, detects structural technical debt, scans for security risks, ranks remediation priorities by ROI, and provides a permission-gated AI refactoring agent.
         </p>
 
-        {/* Primary CTAs */}
+        {/* Primary CTAs with tactile liquid-chrome GetStartedButton */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <Link
-            to="/register"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#6D4AFF] hover:bg-[#5B3BE5] text-white font-extrabold text-base shadow-xl shadow-[#6D4AFF]/30 transition-all duration-200 flex items-center justify-center space-x-2"
-          >
-            <span>🚀 Start Free Analysis</span>
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+          <GetStartedButton
+            onClick={() => navigate('/register')}
+            label="Get Started Free →"
+          />
           <Link
             to="/app"
             className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-[#F1F3F6] text-[#1F2937] font-extrabold text-base border border-[#E8E5DF] shadow-xs transition flex items-center justify-center space-x-2"
           >
-            <span>⚡ Open Live Engineering App</span>
+            <Sparkles className="w-4 h-4 text-[#6D4AFF]" />
+            <span>Open Live Engineering App</span>
           </Link>
         </div>
 
