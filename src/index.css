@@ -98,6 +98,65 @@
 .bg-domain-testing { background-color: #EAF2FF; border-color: #C8D9F5; color: #1D4ED8; }
 .bg-domain-deps { background-color: #FFF5DD; border-color: #F3D29A; color: #B7791F; }
 .bg-domain-security { background-color: #FDECEE; border-color: #F5C6C6; color: #C53030; }
+
+/* Fluxora Dark AI Infrastructure Design System Utilities */
+.border-gradient {
+  position: relative;
+  border-radius: inherit;
+}
+
+.border-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(225deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes marquee-ltr {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes marquee-rtl {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-ltr {
+  animation: marquee-ltr 32s linear infinite;
+}
+
+.animate-marquee-rtl {
+  animation: marquee-rtl 32s linear infinite;
+}
+
+.animate-marquee-ltr:hover,
+.animate-marquee-rtl:hover {
+  animation-play-state: paused;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
+.animate-fade-slide-in {
+  animation: fadeSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 .bg-domain-ai { background-color: #EEE9FF; border-color: #D8CAFF; color: #6D4AFF; }
 
 /* Subtle Gradients */
