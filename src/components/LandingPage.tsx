@@ -46,21 +46,32 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
           RepoMind analyzes your software repository, detects structural technical debt, scans for security risks, ranks remediation priorities by ROI, and provides a permission-gated AI refactoring agent.
         </p>
 
-        {/* Primary CTAs with tactile liquid-chrome GetStartedButton */}
+        {/* Primary CTAs styled cleanly matching Go to App Dashboard header style */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <Link
+            to="/app"
+            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#6D4AFF] hover:bg-[#5B3BE5] text-white font-extrabold text-base shadow-lg shadow-[#6D4AFF]/25 hover:shadow-xl hover:shadow-[#6D4AFF]/35 transition-all transform hover:-translate-y-0.5 flex items-center justify-center space-x-2.5"
+          >
+            <span>Go to App Dashboard</span>
+            <ArrowRight className="w-4.5 h-4.5 text-white" />
+          </Link>
+
+          <Link
+            to="/register"
+            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-[#F1F3F6] text-[#1F2937] font-extrabold text-base border border-[#E8E5DF] hover:border-[#D8CAFF] shadow-xs transition flex items-center justify-center space-x-2"
+          >
+            <Sparkles className="w-4 h-4 text-[#6D4AFF]" />
+            <span>Get Started Free</span>
+          </Link>
+
+          {/* Liquid-Chrome Tactile WebGL Pill (Transparent Background) */}
           <div 
             onClick={() => navigate('/register')}
-            className="cursor-pointer w-[280px] h-[90px] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="cursor-pointer w-[240px] h-[75px] transition-transform hover:scale-[1.03] active:scale-[0.97] hidden lg:block"
+            title="Interactive liquid-chrome WebGL button"
           >
             <GetStartedButton />
           </div>
-          <Link
-            to="/app"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-[#F1F3F6] text-[#1F2937] font-extrabold text-base border border-[#E8E5DF] shadow-xs transition flex items-center justify-center space-x-2"
-          >
-            <Sparkles className="w-4 h-4 text-[#6D4AFF]" />
-            <span>Open Live Engineering App</span>
-          </Link>
         </div>
 
         {/* Interactive Demo Preview Card */}
