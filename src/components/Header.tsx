@@ -170,17 +170,6 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Right: Actions, Notifications, User Menu */}
       <div className="flex items-center space-x-3">
-        
-        {/* Landing Page Button */}
-        {onOpenLandingPage && (
-          <button
-            onClick={onOpenLandingPage}
-            className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#EEE9FF] hover:bg-[#D8CAFF] text-[#6D4AFF] border border-[#D8CAFF] text-xs font-bold transition"
-          >
-            <Globe className="w-3.5 h-3.5 text-[#6D4AFF]" />
-            <span>Landing Page</span>
-          </button>
-        )}
 
         {/* WhatsApp Notifier Button */}
         <button
