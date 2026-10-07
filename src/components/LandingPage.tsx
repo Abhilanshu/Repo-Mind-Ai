@@ -48,10 +48,12 @@ export const LandingPage: React.FC<LandingPageProps> = () => {
 
         {/* Primary CTAs with tactile liquid-chrome GetStartedButton */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <GetStartedButton
+          <div 
             onClick={() => navigate('/register')}
-            label="Get Started Free →"
-          />
+            className="cursor-pointer w-[280px] h-[90px] transition-transform hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <GetStartedButton />
+          </div>
           <Link
             to="/app"
             className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white hover:bg-[#F1F3F6] text-[#1F2937] font-extrabold text-base border border-[#E8E5DF] shadow-xs transition flex items-center justify-center space-x-2"
